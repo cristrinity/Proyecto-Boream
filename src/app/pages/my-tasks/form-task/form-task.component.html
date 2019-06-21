@@ -1,0 +1,53 @@
+<main class="main">
+    <div class="main__top">
+        <div class="main__nav">
+            <div class="main__title">Nueva Tarea</div>
+            <div class="controls">
+            </div>
+        </div>
+    </div>
+    <div class="content">
+       
+        <div class="table">
+
+            <form [formGroup]="myForm" class="form-class">
+                <mat-form-field>
+                    <input matInput type="text" formControlName="name" required>
+                    <mat-label>Nombre de la tarea</mat-label>
+                    <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" formControlName="description" required>
+                    <mat-label>Descripción</mat-label>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="text" formControlName="tasks" required>
+                    <mat-label>Tareas</mat-label>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Proyecto asociado</mat-label>
+                    <mat-select formControlName="projects">
+                        <mat-option *ngFor="let proj of project" [value]="proj">{{proj}}
+                        </mat-option>
+                        <!-- <mat-error *ngIf="myForm.controls.genre.errors?.required">Campo Requerido</mat-error> -->
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="datelimit" placeholder="Fecha límite">
+                    <mat-datepicker-toggle matSuffix [for]="datelimit"></mat-datepicker-toggle>
+                    <mat-datepicker #datelimit></mat-datepicker>
+                </mat-form-field>
+
+
+                <button matButton type="button" class="btn btn--success"
+                    (click)="submit($event, myForm)">Guardar</button>
+                <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
+
+            </form>
+        </div>
+    </div>
+</main>

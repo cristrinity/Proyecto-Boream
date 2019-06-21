@@ -1,0 +1,71 @@
+@import "../../../../assets/styles/rem";
+
+.navbar {
+  font-size: var(--fdefault);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-top: rem(200px);
+  z-index: 51;
+  &__link{
+      text-transform: uppercase;
+      color:#426c6f;
+      &:hover, &:active, &:focus{
+          color: var(--green-hover);
+      }
+      &--active{
+          color: var(--green-hover);
+      }
+  }
+  &__link + &__link {
+      padding-top: rem(10px);
+  }
+}
+
+
+.hide {
+  visibility: hidden;
+}
+.show {
+  display: inherit;
+  visibility:  visible;
+}
+
+.total {
+  //width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.aside {
+  //background-color: #aaa;
+  width: 250px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  box-shadow:  1px 0 0 rgba(173, 249, 243, .1);
+  z-index: 10;
+  //background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+  background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
+  transition: left 250ms ease;
+}
+@media (max-width: 768px){
+  .aside {
+  left: -250px;
+  -webkit-transition: left 250ms ease;
+  -moz-transition: left 250ms ease;
+  -o-transition: left 250ms ease;
+  transition: left 250ms ease;
+  }
+}

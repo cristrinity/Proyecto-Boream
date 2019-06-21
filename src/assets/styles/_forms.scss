@@ -1,0 +1,20 @@
+.form-access {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-access input{
+    min-width: 300px;
+    border-radius: 10px;
+    border: .030rem solid #999;
+    padding: 10px;
+    margin: 5px;
+
+}
+
+.form-access__label {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;    
+}

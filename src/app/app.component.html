@@ -1,0 +1,10 @@
+<div class="total">
+    <header class="topbar">
+      <app-usernav userId userName *ngIf="hideComponent"></app-usernav>
+    </header>
+  <app-navbar-left *ngIf="hideComponent">
+  </app-navbar-left>
+<!-- <app-my-task></app-my-task> -->
+<!-- <app-form-tasks></app-form-tasks> -->
+</div>
+<router-outlet></router-outlet>

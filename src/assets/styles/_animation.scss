@@ -1,0 +1,57 @@
+
+@keyframes pelota {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+    100% {
+      -webkit-transform: translateY(-1000px);
+              transform: translateY(-1000px);
+    }
+  }
+
+.texture{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    // background-size: 22px 12px;
+    z-index: 50;
+    width: 250px;
+    height: 134px;
+    }
+
+.bg-lines-diagonales{
+    background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #fff 40px, #fff 50px);
+  }
+
+.bg-lines-diagonales--admin{
+    background: repeating-linear-gradient(-45deg, #0000 40px, #000 48px, #666 40px, #666 50px);
+  }
+
+.shadow-grey {
+  -webkit-box-shadow: -13px 8px 22px -5px rgba(153,153,153,0.59);
+-moz-box-shadow: -13px 8px 22px -5px rgba(153,153,153,0.59);
+box-shadow: -13px 8px 22px -5px rgba(153,153,153,0.59);
+}
+
+// .bg-lineas-diagonales{
+        // background: repeating-linear-gradient(
+      //   -45deg,
+      //   rgba(0, 0, 0, 0) 20px,
+      //   rgba(0, 0, 0, 0) 40px,
+      //   #fff 40px,
+      //   #fff 60px
+      // );
+// }
+
+  //   .ball {
+//     position: absolute;
+//     bottom: 0;
+//     top: 0;
+//     border-radius: 30px;
+//     width: 250px;
+//     height: 250px;
+//     background-image: linear-gradient(to top, #d9afd9 60%, #97d9e1 100%);
+//    //animation: pelota 5.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) infinite both;
+//     z-index: 999;
+// }

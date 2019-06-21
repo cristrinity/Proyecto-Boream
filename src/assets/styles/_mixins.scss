@@ -1,0 +1,38 @@
+.ff-default{
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    font-size: var(--fdefault);
+    font-weight: 300;
+}
+
+.ft-buttons {
+    font-family: var(--font-m);
+    font-size: var(--fdefault);
+    color: var(--green-dark);
+    background-color: var(--green-transp);
+}
+
+.mn-buttons {
+    font-weight: 300;
+    font-size: var(--fbutton);
+    color: var(--green-dark);
+    background-color: var(--grey-light);
+    border-radius: 5px;
+    padding: .75rem 1.5rem;
+    &:hover {
+        background-color: var(--green-hover);
+    }
+}
+
+.ftitle {
+    font-size: var(--fsection);
+    font-weight: 300;
+    text-transform: uppercase;
+    &::after {
+        content: '';
+        height: 1px;
+        width: 250px;
+        background-color: var(--grey-dark);
+        display: block;
+        margin-top: 5px;
+        }
+}

@@ -1,0 +1,20 @@
+<main class="main">
+        <div class="main__top">
+           <div class="main__nav">
+               <div class="main__title">Mis datos de cuenta</div>
+               <div class="controls">
+                   <a [routerLink]="['/edit-account']"><button type="button" class="controls__add">
+                       <i class="fas fa-plus-circle"></i>
+                       <span>Modificar datos</span>
+                   </button></a>
+               </div>
+           </div>
+       </div>
+       <app-table-account
+       [datos]="datos | async"
+       (delete)="onDelete($event)"
+       (edit)="onEdit($event)"
+       >
+       </app-table-account>
+
+</main>

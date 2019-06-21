@@ -1,0 +1,50 @@
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { PackService } from 'src/app/services/pack.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
+@Component({
+    selector: 'app-table-pack',
+    templateUrl: 'table-packs.component.html',
+    styleUrls: ['table-packs.component.scss']
+})
+
+export class TablePackComponent implements OnChanges, OnInit {
+
+    @Input() packs;
+    
+    dataSource;
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+
+    constructor(private packService: PackService) {
+        this.dataSource = new MatTableDataSource(this.packs);
+    }
+
+    ngOnChanges() {
+        if (Array.isArray(this.packs)) {
+            this.dataSource = new MatTableDataSource(this.packs);
+            this.dataSource.paginator = this.paginator;
+        }
+    }
+
+    columnsToDisplay = ['name', 'type', 'lefttime', 'date', 'tasks'];
+
+    ngOnInit() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
+
+
+
+}

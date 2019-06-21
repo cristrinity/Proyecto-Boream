@@ -1,0 +1,30 @@
+<table>
+  <thead>
+      <tr class="table__header">
+          <th>Alias</th>
+          <th>URL / Dominio principal</th>
+          <th>URL de administración</th>
+          <th class="border">Tareas realizadas</th>
+          <th class="nostyle"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>{{project.alias}}</td>
+        <td>{{project.UrlDominio}}</td>
+        <td>{{project.UrlAdministracion}}</td>
+        <td>{{project.tareasRealizadas}}</td>
+        <td class="table__ending">
+            <div class="iedit">
+                <span class="iedit__write"><i class="fas fa-eye"></i></span>
+                <span class="iedit__write" [routerLink]="['/edit']"><i class="fas fa-edit"></i></span>
+                <span class="iedti__delete" (click)="onDelete(project)"><i class="far fa-trash-alt"></i></span>
+            </div>
+        </td>
+
+      </tr>
+  </tbody>
+</table>
+
+
+

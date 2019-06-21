@@ -1,0 +1,29 @@
+@import '../../../../assets/styles/reset';
+@import '../../../../assets/styles/tables';
+@import '../../../../assets/styles/main-comun';
+
+.mat-cell{
+    height: rem(35px);
+    text-align: center;
+    vertical-align: middle;
+}
+tr.mat-header-row {
+    height: 30px;
+    text-align: center;
+}
+
+th.mat-header-cell{
+    padding: 0 20px 0 20px;
+}
+tr.mat-row{
+    height: 35px;
+
+}
+
+th .mat-calendar-table-header {
+    background-color: white;
+  }
+  
+  thead th {
+    background-color: white;
+  }

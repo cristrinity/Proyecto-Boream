@@ -1,0 +1,263 @@
+@import "../../../../assets/styles/rem";
+@import "../../../../assets/styles/main-comun";
+
+.total {
+  //width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.aside {
+  //background-color: #aaa;
+  width: rem(250px);
+  left: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  box-shadow: 1px 0 0 rgba(173, 249, 243, .1);
+  z-index: 10;
+  //background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+  background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
+  transition: left 250ms ease;
+}
+
+@media (max-width: 768px) {
+  .aside {
+    left: -250px;
+    -webkit-transition: left 250ms ease;
+    -moz-transition: left 250ms ease;
+    -o-transition: left 250ms ease;
+    transition: left 250ms ease;
+  }
+}
+
+.clock {
+  position: relative;
+  top: rem(42px);
+  left: -30px;
+  width: rem(100px);
+  height: rem(15px);
+  padding: rem(5px);
+  z-index: 100;
+  //border-radius: 100px;
+  background-color: #fff;
+  transform: rotate(-90deg);
+}
+.clock span {
+    font-size: .78rem;
+    font-weight: var(--font-m);
+  }
+
+  .clock::before {
+    content: '';
+    background-color: #fff;
+    width: rem(250px);
+    height: rem(5px);
+    z-index: 100;
+  }
+
+
+.clock--admin {
+  position: relative;
+  top: rem(42px);
+  left: rem(-30px);
+  width: rem(100px);
+  height: rem(15px);
+  padding: rem(5px);
+  z-index: 100;
+  color: #fff;
+  //border-radius: 100px;
+  background-color: #333;
+  transform: rotate(-90deg);
+
+  span {
+    font-size: .78rem;
+    font-weight: var(--font-m);
+  }
+
+  &::before {
+    content: '';
+    background-color: #fff;
+    width: rem(250px);
+    height: rem(5px);
+    z-index: 100;
+  }
+}
+
+.img-ecommerce {
+  position: absolute;
+  bottom: 0;
+
+  & img {
+    width: rem(150px);
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-top: rem(200px);
+  z-index: 51;
+
+  &__link {
+    text-transform: uppercase;
+    color: #426c6f;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--green-hover);
+    }
+
+    &--active {
+      color: var(--green-hover);
+    }
+  }
+
+  &__link+&__link {
+    padding-top: rem(10px);
+  }
+}
+
+.topbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  background-color: #fff;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: rem(240px);
+    padding: rem(10px);
+  }
+
+  &__company img {
+    max-height: rem(60px);
+    max-width: rem(300px);
+    margin-left: rem(50px);
+  }
+
+  &::after {
+    content: '';
+    height: 3px;
+    background-color: #333;
+    display: block;
+    border-bottom: rem(12px) solid #eef3f9;
+  }
+}
+
+.topbar--admin {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  background-color: #333;
+
+  &::after {
+    content: '';
+    height: rem(3px);
+    background-color: #333;
+    display: block;
+    border-bottom: rem(12px) solid #eef3f9;
+  }
+}
+
+
+.topbar__container i {
+  display: none;
+  align-self: center
+}
+
+.topbar__container--admin {
+  display: flex;
+  justify-content: flex-end;
+  color: #fff;
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .topbar__container {
+    margin-left: 0;
+    transition: left 250ms ease;
+  }
+
+  .topbar__container i {
+    display: inline;
+  }
+}
+
+.user__name {
+  font-weight: var(--font-l);
+  margin-bottom: 15px;
+}
+
+.user {
+  position: relative;
+  margin-right: rem(50px);
+}
+
+.user__login {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.user__name::before {
+  content: 'Hola,';
+  font-size: .7rem;
+  display: block;
+  font-weight: var(--font-b);
+  padding-bottom: rem(2px);
+}
+
+// .user__name::after {
+//   content: 'Salir';
+//   font-size: .79rem;
+//   display: block;
+//   font-weight: var(--font-l);
+//   padding-top: rem(5px);
+// }
+.user__checkout{
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  top: 17px;
+  right: 37px;
+  cursor: pointer;
+  &:hover{
+    color: var(--grey-default);
+  
+  }
+}
+.user__image {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: rem(11px);
+  width: (40px);
+  height: (40px);
+  border-radius: (30px);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
+
+.user__capitals {
+  color: #fff;
+  margin: 0 auto;
+  text-shadow: 0px 0px 2px var(--green-hover);
+}
+

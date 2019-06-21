@@ -1,0 +1,37 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="content">
+    <div class="table">
+        <table mat-table [dataSource]="dataSource" matSort class="">
+ 
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo  </th>
+                <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lefttime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiempo restante </th>
+                <td mat-cell *matCellDef="let row"> {{row.lefttime}} </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                <td mat-cell *matCellDef="let row" > {{row.date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="tasks">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tareas</th>
+                <td mat-cell *matCellDef="let row"> {{row.tasks}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;">
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</div>

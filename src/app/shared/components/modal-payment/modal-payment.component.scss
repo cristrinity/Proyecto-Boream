@@ -1,0 +1,41 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/rem";
+
+.show {
+  // transition: left .3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transform: translate3d(0px, 0, 0);
+}
+.hidden{
+  transform: translate3d(400px, 0, 0);
+  position: fixed;
+}
+.modal-aside {
+  transition: transform .3s linear;
+}
+// .btn__payment {
+//   //width: 75px;
+//   margin-left: 10px;
+//   border-radius: 100px;
+//   //background-color: #99d8e1;
+//   border: 1px solid transparent;
+//   height: auto;
+//   position: relative;
+//   display: inline-block;
+//   padding: .40rem .55rem;
+//   margin-left: -1px;
+//   cursor: pointer;
+//   background-color: #fff;
+//   border: 1px solid #99d8e1;
+//   color: var(--green-dark);
+//   font-size: .9rem;
+// }
+
+.btn__payment{
+padding: .45rem .9rem;
+margin-left:  10px;
+}
+
+.price {
+  font-size: var(--fbutton);
+  font-size: rem(17px);
+}

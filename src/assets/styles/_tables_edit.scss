@@ -1,0 +1,37 @@
+.oneline {
+    //background-color: red;
+    border: 1px solid #eee;
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 1px;
+    width: 400px;
+}
+textarea {
+    border: 1px solid #eee;
+}
+.data-table__section--editar {
+    display: block;
+    position: relative;
+}
+
+.data-table--editar {
+    width: 100%;
+}
+
+.leftside {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 100%;
+    flex-wrap: wrap;
+}
+// .bg-lines-diagonales-table {
+//         background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #eee 40px, #fff 50px);
+//         position: absolute;
+//         margin-right: 27px;
+//         left: 255px;
+//         width: 55px;
+//         height: 200px;
+//         border: 0;
+//     }

@@ -1,0 +1,19 @@
+<main class="main">
+        <div class="main__top">
+           <div class="main__nav">
+               <div class="main__title">Mis Tareas</div>
+               <div class="controls">
+                   <a [routerLink]="['/create-task']"><button type="button" class="controls__add">
+                       <i class="fas fa-plus-circle"></i>
+                       <span>Añadir tarea</span>
+                   </button></a>
+               </div>
+           </div>
+       </div>
+       <app-table-task  [tasks]="tasks | async"
+       (delete)="onDelete($event)"
+       (edit)="onEdit($event)"
+       >
+       </app-table-task>
+
+</main>

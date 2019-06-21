@@ -1,0 +1,21 @@
+<main class="main">
+             <div class="main__top">
+                <div class="main__nav">
+                    <div class="main__title">Mis proyectos</div>
+                    <div class="controls">
+                        <a [routerLink]="['/create-project']"><button type="button" class="controls__add">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Añadir proyecto</span>
+                        </button></a>
+                    </div>
+                </div>
+            </div>
+            <app-table-projects
+            [nuevo]="nuevo"
+            [projects]="projects | async"
+            (delete)="onDelete($event)"
+            (edit)="onEdit($event)"
+            >
+            </app-table-projects>
+
+</main>

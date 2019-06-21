@@ -1,0 +1,33 @@
+<div [ngClass]="{'show': event, 'hidden': !event}" class="modal-aside shadow-grey ">
+    <div class="modal-aside__content">
+        <div class="modal-aside__title">Selecciona una opción</div>
+        <div class="modal-aside__option" >
+           <div class="modal-aside__option--title">Pack de <br>{{packs[0].hours}} horas</div>
+            <small>(No están incluido cambios de plantillas ni cambio de versiones de Prestashop)</small>
+            <span class="price">{{packs[0].price}}€</span>
+            <div class="btn btn__payment"><a href="http://www.paypal.com" target="_blank">Comprar
+                <!-- <img src="../assets/images/img_btn-buy2x.png"> -->
+            </a></div>
+            <!-- <div class="btn btn__payment"><a href="http://www.paypal.com" target="_blank">Pagar</a></div> -->
+        </div>
+        <div class="modal-aside__option">
+            <div class="modal-aside__option--title">Pack de <br>{{packs[1].hours}} horas</div>
+            <small>(No están incluido cambios de plantillas ni cambio de versiones de Prestashop)</small>
+            <span class="price">{{packs[1].price}}€</span>
+            <div class="btn btn--sucess btn__payment"><a href="http://www.paypal.com" target="_blank">Comprar</a></div>
+            </div>
+        <div class="modal-aside__option">
+            <div class="modal-aside__option--title">Pack de <br>{{packs[2].hours}} horas</div>
+            <small>(No están incluido cambios de plantillas ni cambio de versiones de Prestashop)</small>
+            <span class="price">{{packs[2].price}}€</span>
+            <div class="btn btn__payment"><a href="http://www.paypal.com" target="_blank">Comprar</a></div>           
+        </div>
+        <div class="logo-paypal">
+            <img src="../assets/images/paypal-2.png">
+        </div>
+
+        <span><input type="checkbox" required>He leído y acepto las condiciones de compra</span>
+        <div (click)="modal($event)" class="close-modal">Cerrar</div>
+    </div>
+
+</div>
