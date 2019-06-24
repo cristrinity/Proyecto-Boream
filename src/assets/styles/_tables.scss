@@ -224,6 +224,10 @@ th.mat-header-cell{
     border-top-right-radius: 10px;
   }
 }
+.iedit__write, .iedit__delete {
+  margin-left: 5px;
+}
+
 .iedit {
   display: flex;
   justify-content: flex-end;
