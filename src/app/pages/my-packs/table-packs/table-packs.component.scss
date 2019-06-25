@@ -2,6 +2,21 @@
 @import '../../../../assets/styles/main-comun';
 @import '../../../../assets/styles/tables';
 
+
+tr.mat-header-row, tr.mat-header-row:first-of-type{
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+th:last-of-type{
+  width: 100px;
+}
+
+// .example-element-row{
+//     padding-right: 50px;
+//     padding-left: 50px;
+// }
+
 // .mat-cell{
 //     height: rem(35px);
 //     text-align: center;
