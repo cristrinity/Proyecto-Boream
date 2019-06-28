@@ -6,11 +6,11 @@ import { Observable, of, throwError } from 'rxjs';
 export class LogginFakeInterceptor implements HttpInterceptor {
 
   private misUsers = [{
-    name: 'Koldo', pass: '1234', id: 1
+    name: 'Koldo', pass: '1234', id: 0
   }, {
-    name: 'Loreto', pass: '1234', id: 2
+    name: 'Loreto', pass: '1234', id: 1
   }, {
-    name: 'Luis', pass: '1234', id: 3
+    name: 'Luis', pass: '1234', id: 2
   }
 
   ];

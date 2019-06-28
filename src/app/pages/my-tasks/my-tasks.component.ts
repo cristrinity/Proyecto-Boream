@@ -11,6 +11,7 @@ import { TasksService } from 'src/app/services/task.service';
 
 export class MyTasksComponent implements OnInit{
   
+  constructor(private taskService: TasksService){}
   
   tasks;
   taskInfo;
@@ -19,11 +20,10 @@ export class MyTasksComponent implements OnInit{
     this.refreshTasks();
   }
   
-  refreshTasks() {
-    this.tasks = this.taskService.getTasks();
+  async refreshTasks() {
+    this.tasks = await this.taskService.getTasks();
   }
   
-  constructor(private taskService: TasksService){}
 
   async onDelete(task) {
     await this.taskService.deleteTask(task.id);

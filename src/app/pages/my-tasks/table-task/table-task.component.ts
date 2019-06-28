@@ -19,7 +19,7 @@ export class TableTaskComponent implements OnChanges, OnInit {
 
   dataSource;
 
-  columnsToDisplay = ['status', 'name', 'time', 'project', 'datelimit'];
+  columnsToDisplay = ['status', 'name', 'time_spent', 'project', 'date_limit'];
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -59,9 +59,3 @@ export class TableTaskComponent implements OnChanges, OnInit {
 
 }
 
-export interface TaskData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}

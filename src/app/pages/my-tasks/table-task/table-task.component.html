@@ -14,17 +14,17 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de la tarea </th>
                     <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                 </ng-container>
-                <ng-container matColumnDef="time">
+                <ng-container matColumnDef="time_spent">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiempo Empleado </th>
-                    <td mat-cell *matCellDef="let row"> {{row.time}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.time_spent}} </td>
                 </ng-container>
                 <ng-container matColumnDef="project">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Proyecto </th>
                     <td mat-cell *matCellDef="let row" > {{row.project}} </td>
                 </ng-container>
-                <ng-container matColumnDef="datelimit">
+                <ng-container matColumnDef="date_limit">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha límite de ejecución</th>
-                    <td mat-cell *matCellDef="let row"> {{row.datelimit}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.date_limit}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

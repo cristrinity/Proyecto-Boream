@@ -29,32 +29,45 @@ ngOnInit(){
     name: [''],
     status: [''],
     tasks: [''],
-    time: [''],
+    time_spent: [''],
     projects: [''],
     description: [''],
-    datelimit: ['']
+    date_limit: ['']
   });
 
 
 if (this.taskToEdit){
 
   this.myForm.setValue({
-    alias: this.taskToEdit.alias,
-    UrlDominio: this.taskToEdit.UrlDominio,
-    UrlAdministracion: this.taskToEdit.UrlAdministracion,
-    tareasRealizadas: this.taskToEdit.tareasRealizadas,
-    host: this.taskToEdit.host,
-    puerto: this.taskToEdit.puerto,
-    cifrado: this.taskToEdit.cifrado,
-    usuario: this.taskToEdit.usuario ? this.taskToEdit.usuario : '',
-    pass: this.taskToEdit.pass,
-    userAdmin: this.taskToEdit.userAdmin,
-    passAdmin: this.taskToEdit.passAdmin,
-    webH: this.taskToEdit.webH,
-    usuarioH: this.taskToEdit.usuarioH,
-    passH: this.taskToEdit.passH
+    name: this.taskToEdit.name,
+    status: this.taskToEdit.status,
+    time_spent: this.taskToEdit.time_spent,
+    projects: this.taskToEdit.projects,
+    description: this.taskToEdit.description,
+    date_limit: this.taskToEdit.date_limit
+
   });
 }
+
+// if (this.taskToEdit){
+
+//   this.myForm.setValue({
+//     alias: this.taskToEdit.alias,
+//     UrlDominio: this.taskToEdit.UrlDominio,
+//     UrlAdministracion: this.taskToEdit.UrlAdministracion,
+//     tareasRealizadas: this.taskToEdit.tareasRealizadas,
+//     host: this.taskToEdit.host,
+//     puerto: this.taskToEdit.puerto,
+//     cifrado: this.taskToEdit.cifrado,
+//     usuario: this.taskToEdit.usuario ? this.taskToEdit.usuario : '',
+//     pass: this.taskToEdit.pass,
+//     userAdmin: this.taskToEdit.userAdmin,
+//     passAdmin: this.taskToEdit.passAdmin,
+//     webH: this.taskToEdit.webH,
+//     usuarioH: this.taskToEdit.usuarioH,
+//     passH: this.taskToEdit.passH
+//   });
+// }
 
 }
 

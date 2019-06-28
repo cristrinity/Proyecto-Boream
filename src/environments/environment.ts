@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://5cff8739d691540014b0dd80.mockapi.io',
+  apiUrl: 'http://localhost:3000',
+  //apiUrl: 'http://5cff8739d691540014b0dd80.mockapi.io',
   apiClient: 'http://www.mocky.io/v2/5d08f3193400005300d82c9b'
 };
 
