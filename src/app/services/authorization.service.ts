@@ -23,17 +23,17 @@ export class AuthorizationService {
     }).toPromise().then((response: any) => {
       this.token = response.access_token;
       this.userActive.next(response.user);
-      this.observer.next(response.user);
-      //debugger
+     // debugger
       if (user === 'Koldo') {
         this.id = 0;
       } else if (user === 'Loreto') {
         this.id = 1;
       } else if
-        (user === 'Luis') {
+      (user === 'Luis') {
         this.id = 2;
       }
-
+      
+      this.observer.next(this.id);
       localStorage.token = this.token;
       localStorage.id = this.id;
     });

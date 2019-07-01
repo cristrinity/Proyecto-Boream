@@ -14,23 +14,14 @@ export class ProjectsService {
   constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
 
 
-  client = this.authorization.getId();
-  
-  // async getProjectsByClient(client: number) {
-  //   console.log('cliente bueno', this.client);
-  //   // console.log(this.httpClient.get(`${environment.apiUrl}/projects`).toPromise());
-  //   return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.client}`).toPromise()
-  //     .then((response: any) => {
-  //       this.datos = response;
-  //       console.log('hola', this.datos)
-  //       return this.datos;
-  //     })
-  // }
-  // pepito = new BehaviorSubject<any>('');
+  client = this.authorization.getId();// esto es lo que hace que se pinte el ID de cliente, por eso se lo paso en la llamada a la API.
+  // Si no, hay que refrescar antes para que aparezcan de nuevo los datos. Esta línea se lee nada más abrir.
 
 
   getProjectsByClient(client: number): Observable<any>{
-    return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.client}`)
+    return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
+
+    //return this.httpClient.get(`${environment.apiUrl}/client/${this.authorization.getId()}/projects/`) // cambiamos la URL y ponemos el cliente delante
   }
   
 // //creamos la función del observador
@@ -62,12 +53,10 @@ export class ProjectsService {
 
   async addProject(project) {
     return this.httpClient.post(`${environment.apiUrl}/projects/`, project).toPromise();
-
   }
 
   async getProjectById(id) {
     return this.httpClient.get(`${environment.apiUrl}/projects/${id}`).toPromise();
-
     //return this.projectsArray.find(elem => elem.id === id);
   }
 }
