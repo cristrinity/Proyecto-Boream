@@ -9,6 +9,7 @@ export class ClientService {
 
   async getClients() {
     return this.httpClient.get(`${environment.apiClient}`).toPromise();
+    //return this.httpClient.get(`${environment.apiUrl}`).toPromise();
   }
 
   async getClientById(id) {

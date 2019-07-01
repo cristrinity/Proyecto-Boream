@@ -48,6 +48,7 @@ import { ClientService } from './services/client.service';
 import { PackService } from './services/pack.service';
 import { TablePackComponent } from './pages/my-packs/table-packs/table-packs.component';
 
+
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LogginInterceptor, multi: true },

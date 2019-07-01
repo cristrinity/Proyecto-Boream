@@ -20,8 +20,8 @@ export class MyTasksComponent implements OnInit{
     this.refreshTasks();
   }
   
-  async refreshTasks() {
-    this.tasks = await this.taskService.getTasks();
+   refreshTasks() {
+    this.tasks = this.taskService.getTasks();
   }
   
 

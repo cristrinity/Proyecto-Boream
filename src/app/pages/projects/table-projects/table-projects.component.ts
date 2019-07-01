@@ -5,6 +5,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {ProjectsService } from '../../../services/project.service';
+import { ClientService } from 'src/app/services/client.service';
+import { Observable } from 'rxjs';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
 @Component({
   selector: 'app-table-projects',
@@ -21,38 +24,62 @@ import {ProjectsService } from '../../../services/project.service';
 
 export class MyProjectsComponent implements OnInit, OnChanges{
 
-
+  isLoggedIn : Observable<boolean>;
   @Input() projects;
+  @Input() client;
   @Input() nuevo;
+  @Input() datos;
 
-  constructor() {
-    // Create 100 users
-   // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
-    // Assign the data to the data source for the table to render
-    //debugger
-    this.dataSource = new MatTableDataSource(this.projects);
-    // this.dataSource = this.projects;
-
+  constructor(private projectService: ProjectsService, private authorization: AuthorizationService) {
+   // this.dataSource = this.projectService.getProjectsByClient(this.client);
+  
   }
-
-ngOnChanges(){
-  if(Array.isArray(this.projects)){
-    this.dataSource = new MatTableDataSource(this.projects);
-    this.dataSource.paginator = this.paginator;
-  }
-}
-
+  
   @Output() delete = new EventEmitter();
   @Output() edit = new EventEmitter();
   dataSource;
-
+  
   @ViewChild(MatPaginator)  paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  
+  ngOnChanges(){
+   
+    this.projectService.getProjectsByClient(this.client).subscribe(
+      result => {
+        this.dataSource = result;
+        console.log(result)
+       },
+       err => {
+         console.log('hay error');
+       }
+    );
+   
 
+    if(Array.isArray(this.projects)){
 
-ngOnInit() {
-  this.dataSource.paginator = this.paginator;
+    this.dataSource = new MatTableDataSource();
+      this.dataSource.paginator = this.paginator;
+    }
+  }
+  
+  ngOnInit() {
+    
+    this.projectService.getProjectsByClient(this.client).subscribe(
+      result => {
+        this.dataSource = result;
+        console.log(result)
+       },
+       err => {
+         console.log('hay error');
+       }
+    );
+
+    this.dataSource = new MatTableDataSource();
+    
+    console.log(this.projectService.datos); //aquí está el array con el objeto dentro del usuario
+    //console.log(this.projects); // aquí no hay nada
+    this.dataSource.paginator = this.paginator;
 
    }
 

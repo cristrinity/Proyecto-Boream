@@ -8,7 +8,7 @@ export class TasksService {
 
 constructor(private httpClient: HttpClient){}
 
-    getTasks() {
+  async getTasks() {
     return this.httpClient.get(`${environment.apiUrl}/tasks`).toPromise();
   }
 

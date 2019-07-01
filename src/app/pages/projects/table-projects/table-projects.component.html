@@ -1,7 +1,7 @@
     <div class="content">
             <div class="table">
                 <table mat-table
-                [dataSource]="dataSource" multiTemplateDataRows
+                [dataSource]="dataSource" #isLoggedIn multiTemplateDataRows
                 class="">
            <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
              <th mat-header-cell *matHeaderCellDef> {{column}} </th>
