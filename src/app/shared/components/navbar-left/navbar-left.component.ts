@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
-@Component ({
+@Component({
   selector: 'app-navbar-left',
   templateUrl: 'navbar-left.component.html',
   styleUrls: ['navbar-left.component.scss']
@@ -8,10 +9,13 @@ import { Component, Input } from '@angular/core';
 
 
 export class NavbarLeftComponent {
+  @Input() project;
+  userActive;
 
-@Input() project;
 
-
+  constructor(private authorization: AuthorizationService) {
+    this.userActive = this.authorization.getId();
+  }
 
 
 }
