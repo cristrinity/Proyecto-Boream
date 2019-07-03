@@ -33,7 +33,7 @@ submit(event, form){
     return this.authorization.login(form.value.name, form.value.password).then(() => {
       this.userName = form.value.name;
       console.log(`ha hecho login! ${form.value.name}`);
-      this.router.navigate(['/clients/:client/proyectos']);
+      this.router.navigate(['/proyectos']);
     });
   }
 }

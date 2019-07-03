@@ -18,10 +18,11 @@ export class EditProjectComponent implements OnInit{
 
 
 ngOnInit() {
+  
   this.activatedRoute.params.subscribe((data) => {
     this.projectsService.getProjectById(data.id).then(project => {
       this.projectSelected = project;
-      console.log(this.projectSelected)
+      console.log('soy el proyecto selecccionado', this.projectSelected)
      });
     });
   }

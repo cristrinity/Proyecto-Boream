@@ -51,7 +51,7 @@
 
                 <div class="example-element-diagram iedit">
                     <!-- <span class="iedit__write"><i class="fas fa-eye"></i></span> -->
-                    <span class="iedit__write" (click)="onEdit(element)" [routerLink]="['/edit-project', element.id]"><i class="fas fa-edit"></i></span>
+                    <span class="iedit__write" (click)="onEdit(element)" [routerLink]="['/proyectos/edit-project', element._id]"><i class="fas fa-edit"></i></span>
                     <span class="iedti__delete" (click)="onDelete(element)"><i class="far fa-trash-alt"></i></span>
                 </div>
                </div>

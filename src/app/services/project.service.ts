@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AuthorizationService } from './authorization.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-//import { Observable } from "rxjs/Rx"
+
 
 
 @Injectable()
@@ -21,27 +21,25 @@ export class ProjectsService {
   getProjectsByClient(client: number): Observable<any>{
     //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
 
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/projects/`) // cambiamos la URL y ponemos el cliente delante
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/`) // cambiamos la URL y ponemos el cliente delante
   }
   
-// //creamos la función del observador
-//   actualizarUser(dato){this.pepito.next(dato)}
 
   async getProjects() {
-    console.log('cliente', this.client);
 
     // console.log(this.httpClient.get(`${environment.apiUrl}/projects`).toPromise());
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/projects/`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/projects/`).toPromise();
   }
 
   async deleteProject(id: number) {
 
-    return this.httpClient.delete(`${environment.apiUrl}/clients/${this.authorization.getId()}/projects/${id}`).toPromise();
+    return this.httpClient.delete(`${environment.apiUrl}/projects/${this.authorization.getId()}/${id}`).toPromise();
     //this.projectsArray = this.projectsArray.filter(b => b.id !== id);
   }
 
   async editProject(id: number, body) {
-    return this.httpClient.put(`${environment.apiUrl}/clients/${this.authorization.getId()}/projects/${id}`, body).toPromise();
+    console.log('soy id', id);
+    return this.httpClient.put(`${environment.apiUrl}/projects/${id}`, body).toPromise();
 
     //  this.projectsArray = this.projectsArray.map(b => {
     //    if(b.id === id){
@@ -52,11 +50,11 @@ export class ProjectsService {
   }
 
   async addProject(project) {
-    return this.httpClient.post(`${environment.apiUrl}/clients/${this.authorization.getId()}/projects/`, project).toPromise();
+    return this.httpClient.post(`${environment.apiUrl}/projects/${this.authorization.getId()}`, project).toPromise();
   }
 
   async getProjectById(id) {
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/projects/${id}`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${id}`).toPromise();
     //return this.projectsArray.find(elem => elem.id === id);
   }
 }

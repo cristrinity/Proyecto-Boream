@@ -27,31 +27,31 @@ const routes: Routes = [{
   component: LoginComponent
 },
 {
-  path: 'clients/:id/tareas',
+  path: 'tareas',
   component: MyTasksComponent
 },
 {
-  path: 'clients/:client/proyectos',
+  path: 'proyectos',
   component: ProjectsComponent
 },
 {
-  path: 'clients/:id/packs',
+  path: 'packs',
   component: MyPacksComponent
 },
 {
-  path: 'clients/:id/datos',
+  path: 'datos',
   component: MyAccountComponent
 },
 {
-  path: 'clients/:client/proyectos/create-project',
+  path: 'proyectos/create-project',
   component: CreateProjectComponent
 },
 {
-  path: 'clients/:client/proyectos/edit-project/:id',
+  path: 'proyectos/edit-project/:id',
   component: EditProjectComponent
 },
 {
-path: 'clients/:client/proyectos/edit-account/:id',
+path: 'edit-account/:id',
 component: EditAccountComponent
 },
 {

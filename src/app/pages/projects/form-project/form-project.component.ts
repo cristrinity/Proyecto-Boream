@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectsService } from '../../../services/project.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 
 
-@Component ({
+@Component({
   selector: 'app-form-project',
   templateUrl: 'form-project.component.html',
   styleUrls: ['form-project.component.scss']
@@ -17,64 +17,61 @@ export class FormProjectComponent implements OnInit, OnChanges {
   //     console.log(changes);
   //   }
   // }
-  @Input () projectToEdit;
+  @Input() projectToEdit;
   @Output() saveProject = new EventEmitter();
 
-myForm;
-projectCopy;
+  myForm;
+  projectCopy;
 
-alias = [
-  'alias 7',
-  'alias 8',
-  'Blog',
-  'Html5'
-];
+  alias = [
+    'alias 7',
+    'alias 8',
+    'Blog',
+    'Html5'
+  ];
 
-  constructor(private fb: FormBuilder, private projectsService: ProjectsService ) {}
+  constructor(private fb: FormBuilder, private projectsService: ProjectsService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.projectCopy = {...changes.projectToEdit.currentValue};
+    this.projectCopy = { ...changes.projectToEdit.currentValue };
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.myForm = this.fb.group({
 
-    alias: [''
-    ],
-    UrlDominio: [''
-    ],
-    UrlAdministracion: [''
-    ],
-    tareasRealizadas: [''
-    ],
-    host: [''
-    ],
-    puerto: [''
-    ],
-    cifrado: [''
-    ],
-    usuario: [''
-    ],
-    pass: [''
-    ],
-    userAdmin: [''
-    ],
-    passAdmin: [''
-    ],
-    webH: [''
-    ],
-    usuarioH: [''
-  ],
-    passH: [''
-  ]
+      alias: [''
+      ],
+      UrlDominio: [''
+      ],
+      UrlAdministracion: [''
+      ],
+      tareasRealizadas: [''
+      ],
+      host: [''
+      ],
+      puerto: [''
+      ],
+      cifrado: [''
+      ],
+      usuario: [''
+      ],
+      pass: [''
+      ],
+      userAdmin: [''
+      ],
+      passAdmin: [''
+      ],
+      webH: [''],
+      usuarioH: [''],
+      passH: ['']
 
     }
-    // { validators: identityRevealedValidator }
+      // { validators: identityRevealedValidator }
     );
 
 
-    if (this.projectToEdit){
+    if (this.projectToEdit) {
 
       this.myForm.setValue({
         alias: this.projectToEdit.alias,
@@ -96,11 +93,12 @@ alias = [
 
   }
 
-  public submit(e, form){
+  public submit(_id, form) {
     if (form.valid) {
-      if(this.projectToEdit){
-        this.projectsService.editProject(this.projectToEdit.id, form.value);
-      }else{
+      if (this.projectToEdit) {
+        //console.log('editando projecto', this.projectToEdit._id)
+        this.projectsService.editProject(this.projectToEdit._id, form.value);
+      } else {
         this.projectsService.addProject(form.value);
       }
     }
