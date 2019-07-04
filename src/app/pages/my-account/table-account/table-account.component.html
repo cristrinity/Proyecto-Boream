@@ -1,62 +1,62 @@
 
-<mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+<div class="content">
+    <div class="table">
+        <table mat-table [dataSource]="dataSource" matSort class="">
 
-    <div class="content">
-        <div class="table">
-            <table mat-table [dataSource]="dataSource" matSort class="">
-     
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-                </ng-container>
-                <ng-container matColumnDef="nif">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NIF </th>
-                    <td mat-cell *matCellDef="let row"> {{row.nif}} </td>
-                </ng-container>
-                <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
-                    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
-                </ng-container>
-                <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tfno</th>
-                    <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
-                </ng-container>
-                <ng-container matColumnDef="address">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Dirección</th>
-                    <td mat-cell *matCellDef="let row"> {{row.address}} </td>
-                </ng-container>
-                <ng-container matColumnDef="cp">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cp</th>
-                    <td mat-cell *matCellDef="let row"> {{row.cp}} </td>
-                </ng-container>
-                <ng-container matColumnDef="city">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
-                    <td mat-cell *matCellDef="let row"> {{row.city}} </td>
-                </ng-container>
+            <ng-container matColumnDef="user">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Datos <br> de Acceso</th>
+                <td mat-cell *matCellDef="let row">
 
-                <ng-container matColumnDef="avatar">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="rounded">Logo</th>
-                    <td mat-cell *matCellDef="let row">
-                        <img class="avatar" src="{{row.avatar}}"> 
-                    </td>
-                </ng-container>
+                    <span>usuario: {{row.username}}<br> </span><br>
+                    <span>password: {{row.password}} <br></span><br>
+                    <span>Email: {{row.email}}<br> </span><br>
 
-                <ng-container matColumnDef="iedit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="nostyle"></th> 
-                <td mat-cell *matCellDef="let row" class="noline iedit">
-                     
-                    <span class="iedit__write" (click)="onEdit(row)" [routerLink]="['/edit-account', row.id]"><i class="material-icons md-18">edit</i></span>
-                    <span class="iedti__delete" (click)="onDelete(row)">   <i class="material-icons md-18">delete_outline</i></span>
                 </td>
-            
             </ng-container>
-                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-                <tr mat-row *matRowDef="let row; columns: columnsToDisplay;">
-                </tr>
-            </table>
+            <ng-container matColumnDef="contact">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Datos <br>de Contacto</th>
+                <td mat-cell *matCellDef="let row">
+                    <br>
+                    <span>{{row.data_contact.name}}</span><br>
+                    <span>{{row.data_contact.email}}</span><br>
+                    <span>{{row.data_contact.tel}}<br></span><br>
+                    <span>{{row.data_contact.address}}<br></span><br>
+                    <span>{{row.data_contact.cp}}<br></span><br>
+                    <span>{{row.data_contact.city}}<br></span><br>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="invoice">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="rounded"> Datos <br>de Facturación</th>
+                <td mat-cell *matCellDef="let row">
+                    <img class="logo" src="{{row.logo}}"><br>
+                  
+                            <span>{{row.data_invoice.company}}<br></span><br>
+                            <span>{{row.data_invoice.cif}}<br></span><br>
+                            <span>{{row.data_invoice.email}}<br></span><br>
+                            <span>{{row.data_invoice.tel}}<br></span><br>
+                            <span>{{row.data_invoice.address}}<br></span><br>
+                            <span>{{row.data_invoice.city}}<br></span><br>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>
+                
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="iedit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="nostyle"></th>
+                <td mat-cell *matCellDef="let row" class="noline iedit">
+
+                    <span class="iedit__write" (click)="onEdit(row)" [routerLink]="['/edit-account', row._id]"><i
+                            class="material-icons md-18">edit</i></span>
+                    <span class="iedti__delete" (click)="onDelete(row)"> <i
+                            class="material-icons md-18">delete_outline</i></span>
+                </td>
+
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;">
+            </tr>
+        </table>
+
     </div>
+</div>

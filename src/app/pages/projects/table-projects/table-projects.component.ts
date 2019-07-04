@@ -30,6 +30,7 @@ export class MyProjectsComponent implements OnInit, OnChanges{
   @Input() nuevo;
   @Input() datos;
   observer;
+  
   //client;
 
   constructor(private projectService: ProjectsService, private authorization: AuthorizationService) {
@@ -99,7 +100,6 @@ columnsToDisplay = ['alias', 'UrlDominio', 'UrlAdministracion', 'tareasRealizada
 
 expandedElement: any;
 
-// constructor(private projectsArray:ProjectsService) {}
 
 }
 

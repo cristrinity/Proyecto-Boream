@@ -10,11 +10,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 export class FormAccountComponent implements OnInit, OnChanges{
 
-  myForm;
-  accountCopy;
-
+  
   @Input () accountToEdit;
   @Output() saveAccount = new EventEmitter();
+  myForm;
+  accountCopy;
 
 constructor(private fb: FormBuilder, private accountService: AccountService){}
 
@@ -25,34 +25,56 @@ ngOnChanges(changes: SimpleChanges) {
 
 ngOnInit(){
   this.myForm = this.fb.group({
-    name: [''],
-    nif: [''],
+
+    username: [''],
+    password: [''],
     email: [''],
-    phone: [''],
+    name: [''],
+    emailc: [''],
+    tel: [''],
     address: [''],
-    avatar: ['']
+    cp: [''],
+    city: [''],
+    company: [''],
+    cif: [''],
+    emaili: [''],
+    teli: [''],
+    addressi: [''],
+    cpi: [''],
+    cityi: [''],
+    logo: [''],
   });
 
 
 if (this.accountToEdit){
 
   this.myForm.setValue({
-    name: this.accountToEdit.name,
-    nif: this.accountToEdit.nif,
+    username: this.accountToEdit.username,
+    password: this.accountToEdit.password,
     email: this.accountToEdit.email,
-    phone: this.accountToEdit.phone,
-    address: this.accountToEdit.address,
-    avatar: this.accountToEdit.avatar,
-   
+    name: this.accountToEdit.data_contact.name,
+    emailc: this.accountToEdit.data_contact.email,
+    tel: this.accountToEdit.data_contact.tel,
+    address: this.accountToEdit.data_contact.address,
+    cp: this.accountToEdit.data_contact.cp,
+    city: this.accountToEdit.data_contact.city,
+    company: this.accountToEdit.data_invoice.company,
+    cif: this.accountToEdit.data_invoice.cif,
+    emaili: this.accountToEdit.data_invoice.email,
+    teli: this.accountToEdit.data_invoice.tel,
+    addressi: this.accountToEdit.data_invoice.address,
+    cpi: this.accountToEdit.data_invoice.cp,
+    cityi: this.accountToEdit.data_invoice.city,
+    logo: this.accountToEdit.logo
   });
 }
 
 }
 
-public submit(e, form){
+public submit(_id, form){
 if (form.valid) {
   if(this.accountToEdit){
-    this.accountService.editAccount(this.accountToEdit.id, form.value);
+    this.accountService.editAccount(this.accountToEdit._id, form.value);
   }else{
     this.accountService.addAccount(form.value);
   }

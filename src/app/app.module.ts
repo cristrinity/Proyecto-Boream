@@ -47,7 +47,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ClientService } from './services/client.service';
 import { PackService } from './services/pack.service';
 import { TablePackComponent } from './pages/my-packs/table-packs/table-packs.component';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
@@ -100,7 +101,9 @@ export const httpInterceptorProviders = [
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatFileUploadModule
+    MatFileUploadModule,
+    MatExpansionModule,
+    MatDividerModule
     // MatSort,
   ],
   providers: [

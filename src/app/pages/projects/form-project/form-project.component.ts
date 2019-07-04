@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, Valid
 
 export class FormProjectComponent implements OnInit, OnChanges {
 
-
   // ngOnChanges(changes: SimpleChanges): void {
   //   if(changes && changes.projectToEdit && changes.projectToEdit.currentValue){
   //     console.log(changes);
@@ -24,8 +23,8 @@ export class FormProjectComponent implements OnInit, OnChanges {
   projectCopy;
 
   alias = [
-    'alias 7',
-    'alias 8',
+    'Wordpress',
+    'Prestashop',
     'Blog',
     'Html5'
   ];

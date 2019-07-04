@@ -1,7 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component ({
@@ -13,57 +11,43 @@ import {MatTableDataSource} from '@angular/material/table';
 export class TableAccountComponent implements OnInit, OnChanges{
 
   
-    @Input() datos;
-
+    @Input() data;
+    @Input() accounts;
     @Output() delete = new EventEmitter();
     @Output() edit = new EventEmitter();
-  
     dataSource;
   
-    columnsToDisplay = ['name', 'nif', 'email', 'phone', 'address', 'avatar', 'iedit'];
+    columnsToDisplay = ['user', 'contact', 'invoice', 'iedit'];
   
+
   
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-  
-    constructor(private accountService: AccountService) {
-    
-      this.dataSource = new MatTableDataSource(this.datos);
+    constructor() {
+      this.dataSource = new MatTableDataSource(this.accounts);
     }
     ngOnChanges(){
-      if(Array.isArray(this.datos)){
-        this.dataSource = new MatTableDataSource(this.datos);
-        this.dataSource.paginator = this.paginator;
+      if(Array.isArray(this.accounts)){
+        console.log('soy data baby', this.accounts)
+        this.dataSource = new MatTableDataSource(this.accounts);
+
       }
     }
   
     ngOnInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+
     }
   
     applyFilter(filterValue: string) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
   
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
     }
     
-    onDelete(datos) {
-      this.delete.emit(datos);
+    onDelete(data) {
+      this.delete.emit(data);
     }
   
-    onEdit(evt, datos) {
-      this.edit.emit(datos);
+    onEdit(evt, data) {
+      this.edit.emit(data);
     }
   
-  }
-  
-  export interface AccountData {
-    
-    name: string;
-    progress: string;
-    color: string;
   }
   
