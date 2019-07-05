@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class FormAccountComponent implements OnInit, OnChanges{
 
   
-  @Input () accountToEdit;
+  @Input() accountToEdit;
   @Output() saveAccount = new EventEmitter();
   myForm;
   accountCopy;
@@ -53,18 +53,18 @@ if (this.accountToEdit){
     password: this.accountToEdit.password,
     email: this.accountToEdit.email,
     name: this.accountToEdit.data_contact.name,
-    emailc: this.accountToEdit.data_contact.email,
+    emailc: this.accountToEdit.data_contact.emailc,
     tel: this.accountToEdit.data_contact.tel,
     address: this.accountToEdit.data_contact.address,
     cp: this.accountToEdit.data_contact.cp,
     city: this.accountToEdit.data_contact.city,
     company: this.accountToEdit.data_invoice.company,
     cif: this.accountToEdit.data_invoice.cif,
-    emaili: this.accountToEdit.data_invoice.email,
-    teli: this.accountToEdit.data_invoice.tel,
-    addressi: this.accountToEdit.data_invoice.address,
-    cpi: this.accountToEdit.data_invoice.cp,
-    cityi: this.accountToEdit.data_invoice.city,
+    emaili: this.accountToEdit.data_invoice.emaili,
+    teli: this.accountToEdit.data_invoice.teli,
+    addressi: this.accountToEdit.data_invoice.addressi,
+    cpi: this.accountToEdit.data_invoice.cpi,
+    cityi: this.accountToEdit.data_invoice.cityi,
     logo: this.accountToEdit.logo
   });
 }

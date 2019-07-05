@@ -51,7 +51,7 @@ const routes: Routes = [{
   component: EditProjectComponent
 },
 {
-path: 'datos/edit-account/:id',
+path: 'edit-account/:id',
 component: EditAccountComponent
 },
 {
