@@ -10,7 +10,7 @@ import { TasksService } from 'src/app/services/task.service';
 
 export class CreateTaskComponent {
   taskInfo: any;
-
+  @Input() client;
 
   constructor(private tasksService: TasksService) {}
 
@@ -20,7 +20,7 @@ export class CreateTaskComponent {
       this.tasksService.editTask(this.taskInfo.id, task);
       this.taskInfo = null;
     }else{
-      this.tasksService.addTask(task);
+      this.tasksService.addTask(task, this.client);
     }
   }
 

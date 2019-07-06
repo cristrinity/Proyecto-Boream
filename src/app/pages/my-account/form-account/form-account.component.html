@@ -6,6 +6,7 @@
                         </div>
                 </div>
         </div>
+        
         <div class="content">
                 <div class="table">
                         <form [formGroup]="myForm" class="form-class">
@@ -25,7 +26,9 @@
                                         <mat-label>Email </mat-label>
                                         <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
                                 </mat-form-field>
-                                <div class="form-section">Datos de Contacto</div>
+
+                                <div formGroupName="data_contact">
+                                        <div class="form-section">Datos de Contacto</div>
                                 <mat-form-field>
                                         <input matInput type="text" formControlName="name" required>
                                         <mat-label>Nombre y apellidos </mat-label>
@@ -48,8 +51,9 @@
                                 <mat-form-field>
                                         <input matInput type="text" formControlName="city" required>
                                         <mat-label>Ciudad</mat-label>
-                                </mat-form-field>
-                                <div class="form-section">Datos de Facturación</div>
+                                </mat-form-field></div>
+                                <div formGroupName="data_invoice">
+                                        <div class="form-section">Datos de Facturación</div>
                                 <mat-form-field>
                                         <input matInput type="text" formControlName="company" required>
                                         <mat-label>Empresa</mat-label>
@@ -78,6 +82,7 @@
                                         <input matInput type="text" formControlName="cityi" required>
                                         <mat-label>Ciudad</mat-label>
                                 </mat-form-field>
+                        </div>
 
                                 <!-- <input matInput type="text" formControlName="avatar" required>
                                         <mat-label>Logotipo</mat-label>

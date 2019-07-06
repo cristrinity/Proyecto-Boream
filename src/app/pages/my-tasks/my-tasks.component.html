@@ -10,7 +10,11 @@
                </div>
            </div>
        </div>
-       <app-table-task  [tasks]="tasks | async"
+       <app-table-task  
+       [tasks]="tasks"
+       [datos]="datos"
+       [client]="client"
+       [projects]="projects"
        (delete)="onDelete($event)"
        (edit)="onEdit($event)"
        >

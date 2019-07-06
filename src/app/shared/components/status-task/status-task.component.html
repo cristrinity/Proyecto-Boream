@@ -1,0 +1,12 @@
+<div class="status-task">
+  <form [formGroup]="myForm">
+    <mat-form-field>
+      <mat-select formControlName="status-in">
+        <mat-option value="active" class="status-active">En curso </mat-option>
+        <mat-option value="waiting" class="status-wait">En espera </mat-option>
+        <mat-option value="done" class="status-done">Terminada </mat-option>
+        <mat-option value="cancel" class="status-cancel">Cancelada </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>

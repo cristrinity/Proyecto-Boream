@@ -27,11 +27,11 @@ constructor(private httpClient: HttpClient, private authorization: Authorization
 
   async editAccount(id: number, body){
     console.log('soy id', id);
-    return this.httpClient.put(`${environment.apiUrl}/clients/${id}`, body ).toPromise();
+    return this.httpClient.put(`${environment.apiUrl}/clients/${id}`, body).toPromise();
   }
 
   async addAccount(account) {
-    return this.httpClient.post(`${environment.apiUrl}/clients/${this.authorization.getId()}/`, account ).toPromise();
+    return this.httpClient.post(`${environment.apiUrl}/clients/${this.authorization.getId()}/`, account).toPromise();
   }
 
   async getAccountById(id){

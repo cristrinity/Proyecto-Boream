@@ -8,8 +8,17 @@
     </div>
     <div class="content">
         <div class="table">
-
             <form [formGroup]="myForm" class="form-class">
+
+                <!-- <mat-form-field *ngIf="{{useractive[5]}}">
+                        <mat-select formControlName="status-in">
+                        <mat-option value="active" class="status-active">En curso </mat-option>
+                        <mat-option value="waiting" class="status-wait">En espera </mat-option>
+                        <mat-option value="done" class="status-done">Terminada </mat-option>
+                        <mat-option value="cancel" class="status-cancel">Cancelada </mat-option>
+                        </mat-select>
+                </mat-form-field> -->
+
                 <mat-form-field>
                     <input matInput type="text" formControlName="name" required>
                     <mat-label>Nombre de la tarea</mat-label>
@@ -23,22 +32,23 @@
 
                 <mat-form-field>
                     <mat-label>Proyecto asociado</mat-label>
-                    <mat-select formControlName="projects">
-                        <mat-option *ngFor="let proj of project" [value]="proj">{{proj}}
+                    <mat-select formControlName="project">
+                            <mat-option *ngFor="let alias of aliasPro" [value]="alias.alias">{{alias.alias}}
+                             <!-- <mat-option *ngFor="let proj of project" [value]="proj">{{proj}} -->
                         </mat-option>
                         <!-- <mat-error *ngIf="myForm.controls.genre.errors?.required">Campo Requerido</mat-error> -->
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput [matDatepicker]="datelimit" placeholder="Fecha límite">
+                    <input matInput [matDatepicker]="datelimit" placeholder="Fecha límite" formControlName="datelimit">
                     <mat-datepicker-toggle matSuffix [for]="datelimit"></mat-datepicker-toggle>
                     <mat-datepicker #datelimit></mat-datepicker>
                 </mat-form-field>
 
 
                 <button matButton type="button" class="btn btn--success"
-                    (click)="submit($event, myForm)">Guardar</button>
+                    (click)="submit($event, myForm, client)">Guardar</button>
                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
             </form>

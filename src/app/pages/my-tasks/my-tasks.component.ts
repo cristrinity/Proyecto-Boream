@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import { TasksService } from 'src/app/services/task.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { ProjectsService } from 'src/app/services/project.service';
 
 // import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -10,14 +12,52 @@ import { TasksService } from 'src/app/services/task.service';
 })
 
 export class MyTasksComponent implements OnInit{
-  
-  constructor(private taskService: TasksService){}
-  
+    
   tasks;
   taskInfo;
+  projects;
+  @Input() client;
+  @Input() datos;
+  userActive;
+  aliasPro: Array<any> = [];
   
+  observer;
+  constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService){
+
+    this.authorization.observer.subscribe(data => {
+      this.client = data;
+      console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
+    });
+    
+      this.projectService.getProjectsByClient(this.client).subscribe(
+        result => {
+          this.aliasPro = result;
+          console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
+      this.taskService.getTaskByClient(this.client).subscribe(
+        result => {
+          this.tasks = result;
+          console.log('holaaaaa task!', result)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
+    }
+
+
   ngOnInit() {
     this.refreshTasks();
+    this.authorization.observer.subscribe(data => {
+      this.client = data;
+    })
+
+    //this.refreshProjects();
+    this.userActive = this.authorization.getId();
   }
   
    refreshTasks() {

@@ -20,10 +20,12 @@ export class ProjectsService {
 
   getProjectsByClient(client: number): Observable<any>{
     //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
-
-    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/`) // cambiamos la URL y ponemos el cliente delante
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/`) 
   }
   
+  getProjectsByAlias(alias: String): Observable<any>{
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${alias}`) 
+  }
 
   async getProjects() {
 
@@ -33,7 +35,7 @@ export class ProjectsService {
 
   async deleteProject(id: number) {
 
-    return this.httpClient.delete(`${environment.apiUrl}/projects/${this.authorization.getId()}/${id}`).toPromise();
+    return this.httpClient.delete(`${environment.apiUrl}/projects/${id}`).toPromise();
     //this.projectsArray = this.projectsArray.filter(b => b.id !== id);
   }
 

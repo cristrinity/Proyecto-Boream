@@ -49,6 +49,8 @@ import { PackService } from './services/pack.service';
 import { TablePackComponent } from './pages/my-packs/table-packs/table-packs.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
+import { StatusTaskComponent } from './shared/components/status-task/status-task.component';
+import { DatePipe } from '@angular/common';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
@@ -82,7 +84,8 @@ export const httpInterceptorProviders = [
     TableAccountComponent,
     EditAccountComponent,
     UsernavComponent,
-    TablePackComponent
+    TablePackComponent,
+    StatusTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +118,8 @@ export const httpInterceptorProviders = [
     TasksService,
     AccountService,
     ClientService,
-    PackService
+    PackService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
