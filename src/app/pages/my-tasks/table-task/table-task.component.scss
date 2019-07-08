@@ -2,7 +2,10 @@
 @import "../../../../assets/styles/main-comun";
 @import "../../../../assets/styles/tables";
 
-
+.iedit {
+    padding-left: 0;
+    width: 100%;
+}
 
 tr.mat-header-row, tr.mat-header-row:first-of-type{
     padding-right: 50px;

@@ -9,6 +9,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 export class EditProjectComponent implements OnInit{
   projectSelected;
+  
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

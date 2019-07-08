@@ -31,6 +31,9 @@ export class AuthorizationService {
       } else if
       (user === 'Luis') {
         this.id = 2;
+      } else if
+      (user === 'admin') {
+        this.id = 3;
       }
       
       this.observer.next(this.id);

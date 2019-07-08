@@ -220,6 +220,7 @@
 .user__name::before {
   content: 'Hola,';
   font-size: .7rem;
+  right: 0;
   display: block;
   font-weight: var(--font-b);
   padding-bottom: rem(2px);
@@ -236,12 +237,23 @@
   position: absolute;
   bottom: 0;
   height: 100%;
-  top: 17px;
-  right: 37px;
+  top: rem(17px);
+  left: 45px;
   cursor: pointer;
   &:hover{
     color: var(--grey-default);
-  
+  }
+}
+.user__checkout--admin{
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  top: rem(17px);
+  left: 45px;
+  color: #aaa;
+  cursor: pointer;
+  &:hover{
+    color: var(--grey-default);
   }
 }
 .user__image {
@@ -249,9 +261,9 @@
   display: inline-flex;
   align-items: center;
   margin-right: rem(11px);
-  width: (40px);
-  height: (40px);
-  border-radius: (30px);
+  width: rem(40px);
+  height: rem(40px);
+  border-radius: rem(30px);
   background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 }
 

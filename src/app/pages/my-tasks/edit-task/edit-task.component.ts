@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges
 import { ProjectsService } from '../../../services/project.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { TasksService } from 'src/app/services/task.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component ({
   selector: 'app-edit-task',
@@ -9,14 +10,50 @@ import { TasksService } from 'src/app/services/task.service';
   styleUrls: ['edit-task.component.scss']
 })
 
-export class EditTaskComponent {
-
-
+export class EditTaskComponent implements OnInit{
+taskSelected;
+projectsSelected : Array<any> = [{}];
 @Output() newTasks;
-@Input() tasks;
+// @Input() tasks;
+clientProj;
 
-constructor(private taksService: TasksService){}
+constructor(private taksService: TasksService, 
+  private activatedRoute: ActivatedRoute, 
+  private taskService: TasksService,
+  private projectService: ProjectsService
+  ){}
 
+
+ngOnInit() {
+  this.activatedRoute.params.subscribe((data) => {
+    this.taskService.getTaskById(data.id).then(task => {
+      this.taskSelected = task;
+      console.log('soy la taskSelected', this.taskSelected)
+      this.clientProj = this.taskSelected.client;
+      console.log('soy clientProj', this.clientProj)
+     });
+    });
+  }
+    //   this.projectService.getProjectsByClient(this.taskSelected.client).subscribe(
+    //     result => {
+    //       this.projectsSelected = result;
+    //       this.alias = this.projectsSelected.alias;
+    //       console.log('en proy', this.projectsSelected)
+    //       console.log('en client', this.taskSelected.client)
+    //     },
+    //     err => {
+    //       console.log('hay error');
+    //     }
+    //   );
+    // }
+  
+  // this.activatedRoute.params.subscribe((data) => {
+  //   this.taskService.getTaskById(data.id).subscribe(task => {
+  //     this.taskSelected = task;
+  //     console.log('soy la taskSelected', this.taskSelected)
+  //    });
+  //   });
+  // }
 
 
 }

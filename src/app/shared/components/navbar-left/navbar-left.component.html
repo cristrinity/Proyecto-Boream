@@ -1,6 +1,16 @@
     <div class="aside">
         <div class="container">
-            <nav class="navbar">
+            <nav *ngIf="isAdmin" class="navabar">
+                    <nav class="navbar">
+                            <!-- <a [routerLink]="['/clients', userActive,'proyectos']" class="navbar__link" routerLinkActive="navbar__link--active">Mis proyectos</a> -->
+                            <a routerLink="clientes" class="navbar__link" routerLinkActive="navbar__link--active">Clientes</a>
+                            <a routerLink="tareas" class="navbar__link" routerLinkActive="navbar__link--active">Tareas</a>
+                            <a routerLink="proyectos" class="navbar__link" routerLinkActive="navbar__link--active">Proyectos</a>
+                            <!-- <a [routerLink]="['/proyectos', 1]" class="navbar__link" routerLinkActive="navbar__link--active">Mis proyectos</a> -->
+                            <a routerLink="packs" class="navbar__link" routerLinkActive="navbar__link--active">Packs de horas</a>
+                        </nav>
+            </nav>
+            <nav *ngIf="!isAdmin" class="navbar">
                 <!-- <a [routerLink]="['/clients', userActive,'proyectos']" class="navbar__link" routerLinkActive="navbar__link--active">Mis proyectos</a> -->
                     <a routerLink="tareas" class="navbar__link" routerLinkActive="navbar__link--active">Mis tareas</a>
                     <a routerLink="proyectos" class="navbar__link" routerLinkActive="navbar__link--active">Mis proyectos</a>
@@ -9,3 +19,12 @@
                     <a routerLink="datos" class="navbar__link" routerLinkActive="navbar__link--active">Mis datos de cuenta</a>
             </nav>
         </div>
+        <div *ngIf="isAdmin" class="texture bg-lines-diagonales--admin">
+            <div class="clock--admin">
+            </div>
+        </div>
+        <div *ngIf="!isAdmin" class="texture bg-lines-diagonales">
+                <div class="clock--admin">
+                </div>
+            </div>
+            

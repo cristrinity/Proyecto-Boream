@@ -27,10 +27,9 @@ export class ProjectsService {
     return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${alias}`) 
   }
 
-  async getProjects() {
-
+  getProjects() {
     // console.log(this.httpClient.get(`${environment.apiUrl}/projects`).toPromise());
-    return this.httpClient.get(`${environment.apiUrl}/projects/`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/projects/`);
   }
 
   async deleteProject(id: number) {
@@ -51,8 +50,8 @@ export class ProjectsService {
     //  });
   }
 
-  async addProject(project) {
-    return this.httpClient.post(`${environment.apiUrl}/projects/${this.authorization.getId()}`, project).toPromise();
+  async addProject(project, client) {
+    return this.httpClient.post(`${environment.apiUrl}/projects/${this.authorization.getId()}`, project, client).toPromise();
   }
 
   async getProjectById(id) {

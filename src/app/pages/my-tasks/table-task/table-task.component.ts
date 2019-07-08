@@ -23,37 +23,51 @@ export class TableTaskComponent implements OnChanges, OnInit {
   @Input() datos;
   chooseProject;
   dataSource;
-alias;
-  columnsToDisplay = ['status', 'name', 'time_spent', 'project', 'datelimit'];
-
-
+  alias;
+  isAdmin : boolean;
+  columnsToDisplay;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private taskService: TasksService, private projectService: ProjectsService) {
   
-   // this.dataSource = new MatTableDataSource(this.tasks);
+  constructor(private taskService: TasksService, private projectService: ProjectsService) {
+    
+    // this.dataSource = new MatTableDataSource(this.tasks);
   }
+  
   ngOnChanges(){
     if(Array.isArray(this.tasks)){
-
+      
       this.dataSource = new MatTableDataSource(this.tasks);
       this.dataSource.paginator = this.paginator;
       this.chooseProject = this.projectService.getProjectsByClient(this.client);
       this.alias = this.chooseProject.alias;
     }
   }
-
+  
   ngOnInit() {
+    if(this.client == 3){
+      this.isAdmin = true;
+      this.columnsToDisplay = ['status', 'client', 'name', 'time_spent', 'project', 'datelimit', 'iedit' ];
+      console.log('soy valor isAsdmin en task', this.isAdmin)
+    }else{
+      this.columnsToDisplay = ['status', 'name', 'time_spent', 'project', 'datelimit' ];
+      this.isAdmin = false;
+    }
+  
     this.dataSource = new MatTableDataSource(this.tasks);
     this.chooseProject = this.projectService.getProjectsByClient(this.client);
     this.alias = this.chooseProject.alias;
      
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    // console.log('estos son mis projectos desde el otro lado del planeta code', this.chooseProject)
-    // console.log('estos son mis projectos desde el otro lado del planeta datos', this.projectService.datos)
-    //this.chooseProject = this.projectService.getProjectsByAlias()
+
+    if(this.client == 3){
+      this.isAdmin = true;
+      console.log('soy valor isAsdmin en task', this.isAdmin)
+    }else{
+      this.isAdmin = false;
+    }
   }
 
   applyFilter(filterValue: string) {

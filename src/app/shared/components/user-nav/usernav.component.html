@@ -1,16 +1,31 @@
-       <header class="topbar">
+       <header *ngIf="!isAdmin" class="topbar">
          <div class="topbar__container">
            <div class="topbar__company">
              <i class="fas fa-bars toggler"></i>
-             <img src="{{useractive[userActive].logo}}">
+             <!-- <img src="{{useractive[userActive].logo}}"> -->
+             <img src="{{useractive[id].logo}}">
            </div>
            <div class="user">
              <div class="user__login">
                <span class="user__name ">{{useractive[id].name}} {{useractive[id].surname}}</span>
                <button type="button" class="user__checkout simple_link" (click)="checkout()">Salir</button>
-               <span class="user__image">
+               <div class="user__image">
                  <span class="user__capitals">KZ</span>
-               </span>
+               </div>
+             </div>
+           </div>
+         </div>
+       </header>
+       <header *ngIf="isAdmin" class="topbar--admin">
+         <div class="topbar__container--admin">
+
+           <div class="user">
+             <div class="user__login">
+               <span class="user__name ">{{useractive[id].name}}</span>
+               <button type="button" class="user__checkout--admin simple_link" (click)="checkout()">Salir</button>
+               <div class="user__image">
+                 <span class="user__capitals">AD</span>
+               </div>
              </div>
            </div>
          </div>

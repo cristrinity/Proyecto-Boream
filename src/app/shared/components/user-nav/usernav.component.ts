@@ -13,25 +13,36 @@ export class UsernavComponent implements OnInit{
 
   @Input() userId;
   @Input() userName;
-  usuario;
   useractive;
   userActive;
   id;
-
+  isAdmin : boolean;
 constructor(private clientService: ClientService, private authorization: AuthorizationService, private router: Router){}
 
 ngOnInit(){
-  this.userActive = this.authorization.getId();
+  //this.userActive = this.authorization.getId();
   this.id = this.authorization.getId();
   this.myClients(this.userId);
+  
+  if(this.id == 3){
+    this.isAdmin = true;
+    console.log('holaaaaaa!!!!!!??????')
+  }else{
+    this.isAdmin = false;
+    console.log('admin se ve que es false')
+
+  }
 }
 
  async myClients(id){
    this.useractive = await this.clientService.getClientById(id);
-   console.log(this.useractive);
-   this.usuario = this.useractive[0];
    //this.useractive[0].id;
-   console.log('soy el usuario: ', this.userActive);
+   if(this.id == 3){
+    this.isAdmin = true;
+  }else{
+    this.isAdmin = false;
+  }
+   console.log('soy useractive y traigo: ', this.useractive);
    //debugger
 }
 

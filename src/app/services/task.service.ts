@@ -18,15 +18,15 @@ client = this.authorization.getId();
     return this.httpClient.get(`${environment.apiUrl}/tasks/${this.authorization.getId()}/`) 
     }
 
-  async getTasks() {
-    return this.httpClient.get(`${environment.apiUrl}/tasks`).toPromise();
+  getTasks() {
+    return this.httpClient.get(`${environment.apiUrl}/tasks`);
   }
 
   async deleteTask(id: number) {
     return this.httpClient.delete(`${environment.apiUrl}/tasks/${id}`).toPromise();
   }
 
-  async editTask(id: number, body){
+ async editTask(id: number, body){
     return this.httpClient.put(`${environment.apiUrl}/tasks/${id}`, body).toPromise();
 
   }
@@ -37,7 +37,7 @@ client = this.authorization.getId();
   }
 
   async getTaskById(id){
-    return this.httpClient.get(`${environment.apiUrl}/tasks/${id}`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/tasks/edit/${id}`).toPromise();
 
   }
 }

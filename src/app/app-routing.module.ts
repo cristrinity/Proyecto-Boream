@@ -14,12 +14,17 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { CreateTaskComponent } from './pages/my-tasks/create-task/create-task.component';
 import { TableAccountComponent } from './pages/my-account/table-account/table-account.component';
 import { EditAccountComponent } from './pages/my-account/edit-account/edit-account.component';
+import { EditTaskComponent } from './pages/my-tasks/edit-task/edit-task.component';
 
 
 const routes: Routes = [{
 
   path: 'create-task',
   component: CreateTaskComponent
+},
+{
+path: 'edit-task/:id',
+  component: EditTaskComponent
 },
 
 {

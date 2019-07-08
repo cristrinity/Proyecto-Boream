@@ -16,6 +16,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
   //     console.log(changes);
   //   }
   // }
+  @Input() client;
   @Input() projectToEdit;
   @Output() saveProject = new EventEmitter();
 
@@ -24,9 +25,11 @@ export class FormProjectComponent implements OnInit, OnChanges {
 
   alias = [
     'Wordpress',
+    'Woocommerce',
     'Prestashop',
     'Blog',
-    'Html5'
+    'Html5',
+    'Joomla'
   ];
 
   constructor(private fb: FormBuilder, private projectsService: ProjectsService) { }
@@ -98,7 +101,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
         //console.log('editando projecto', this.projectToEdit._id)
         this.projectsService.editProject(this.projectToEdit._id, form.value);
       } else {
-        this.projectsService.addProject(form.value);
+        this.projectsService.addProject(form.value, this.client);
       }
     }
   }

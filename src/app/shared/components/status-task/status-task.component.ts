@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-status-task',

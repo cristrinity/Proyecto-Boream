@@ -11,8 +11,9 @@ export class LogginFakeInterceptor implements HttpInterceptor {
     name: 'Loreto', pass: '1234', id: 1
   }, {
     name: 'Luis', pass: '1234', id: 2
+  }, {  
+    name: 'admin', pass: '1234', id: 3
   }
-
   ];
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

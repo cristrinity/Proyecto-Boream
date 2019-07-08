@@ -20,24 +20,15 @@ export class MyTasksComponent implements OnInit{
   @Input() datos;
   userActive;
   aliasPro: Array<any> = [];
-  
   observer;
+
   constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService){
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
-    });
-    
-      this.projectService.getProjectsByClient(this.client).subscribe(
-        result => {
-          this.aliasPro = result;
-          console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
-        },
-        err => {
-          console.log('hay error');
-        }
-      );
+    })
+    if (this.client !== 3){
       this.taskService.getTaskByClient(this.client).subscribe(
         result => {
           this.tasks = result;
@@ -47,11 +38,29 @@ export class MyTasksComponent implements OnInit{
           console.log('hay error');
         }
       );
+    }else{
+      this.taskService.getTasks().subscribe(
+        result => {
+          this.tasks = result;
+          console.log('holaaaaa task!', result)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
     }
-
-
+    this.projectService.getProjectsByClient(this.client).subscribe(
+      result => {
+        this.aliasPro = result;
+        //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
+      },
+      err => {
+        console.log('hay error');
+      }
+    );
+}
   ngOnInit() {
-    this.refreshTasks();
+    //this.refreshTasks();
     this.authorization.observer.subscribe(data => {
       this.client = data;
     })

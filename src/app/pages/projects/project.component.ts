@@ -24,18 +24,29 @@ export class ProjectsComponent implements OnInit, OnChanges {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
-
-    this.projectService.getProjectsByClient(this.client).subscribe(
-      result => {
-        this.projects = result;
-        console.log('holaaaaa', result)
-      },
-      err => {
-        console.log('hay error');
-      }
-    );
+    if (this.client !== 3){
+      this.projectService.getProjectsByClient(this.client).subscribe(
+        result => {
+          this.projects = result;
+          console.log('holaaaaa', result)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
+    }else {
+      this.projectService.getProjects().subscribe(
+        result => {
+          this.projects = result;
+          console.log('holaaaaa', result)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
+    }
   }
-
+  
   ngOnChanges() {
     //this.projects = this.projectService.getProjectsByClient(this.client);
   }

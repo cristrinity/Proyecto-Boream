@@ -1,31 +1,75 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PackService } from 'src/app/services/pack.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
-@Component ({
+@Component({
   selector: 'app-my-packs',
   templateUrl: './my-packs.component.html',
   styleUrls: ['./my-packs.component.scss']
 })
 
 export class MyPacksComponent {
+  @Input() client;
+  show: boolean = false;
+  packs;
+  observer;
 
-show : boolean = false;
-packs;
+  constructor(private packService: PackService, private authorization: AuthorizationService) {
 
-constructor(private packService: PackService) { }
-
-ngOnInit(){
-  this.myPack();
-}
-
-  onClick(e){
-    this.show = !this.show
+    this.authorization.observer.subscribe(data => {
+      this.client = data;
+      console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
+    })
+    if (this.client !== 3) {
+      this.packService.getPacksByClient(this.client).subscribe(
+        result => {
+          this.packs = result;
+        },
+        err => {
+          console.log('oh oh err', err);
+        }
+      );
+    } else {
+      this.packService.getPacks().subscribe(
+        result => {
+          this.packs = result;
+        },
+        err => {
+          console.log('oh oh err', err);
+        }
+      )
+    };
+  }
+  ngOnInit() {
+    this.authorization.observer.subscribe(data => {
+      this.client = data;
+      console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
+    })
+    if (this.client !== 3) {
+      this.packService.getPacksByClient(this.client).subscribe(
+        result => {
+          this.packs = result;
+        },
+        err => {
+          console.log('oh oh err', err);
+        }
+      )
+    } else {
+      this.packService.getPacks().subscribe(
+        result => {
+          this.packs = result;
+        },
+        err => {
+          console.log('oh oh err', err);
+        }
+      )
+    };
   }
 
 
-   myPack() {
-    this.packs = this.packService.getPacks();
-}
+  onClick(e) {
+    this.show = !this.show
+  }
 
 }
