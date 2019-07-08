@@ -40,25 +40,10 @@ export class FormTaskComponent implements OnInit, OnChanges {
       }else{
         this.isAdmin = false;
       }
- 
-      this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
-      result => {
-        this.aliasPro = result;
-        // console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
-      },
-      err => {
-        console.log('hay error');
-      }
-    );
-  
   }
   
   ngOnChanges(changes: SimpleChanges) {
     this.taskCopy = { ...changes.taskToEdit.currentValue };
-    this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
-      result => {
-        this.aliasPro = result;
-  })
 }
 
   ngOnInit() {
@@ -67,19 +52,29 @@ export class FormTaskComponent implements OnInit, OnChanges {
     if(this.client == 3){
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
+      this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
+        result => {
+          this.aliasPro = result;
+          //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
     }else{
       this.isAdmin = false;
+      this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
+        result => {
+          this.aliasPro = result;
+          //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
+        },
+        err => {
+          console.log('hay error');
+        }
+      );
     }
   
-    this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
-      result => {
-        this.aliasPro = result;
-        //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
-      },
-      err => {
-        console.log('hay error');
-      }
-    );
+    
   
     this.myForm = this.fb.group({
       client: this.client,

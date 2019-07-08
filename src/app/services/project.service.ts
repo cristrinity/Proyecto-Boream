@@ -22,6 +22,11 @@ export class ProjectsService {
     //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
     return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/`) 
   }
+
+  getProjectsByClientAdmin(client: number): Observable<any>{
+    //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
+    return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
+  }
   
   getProjectsByAlias(alias: String): Observable<any>{
     return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${alias}`) 
