@@ -7,37 +7,42 @@
     width: 100%;
 }
 
-tr.mat-header-row, tr.mat-header-row:first-of-type{
+tr.mat-header-row,
+tr.mat-header-row:first-of-type {
     padding-right: 50px;
     padding-left: 50px;
 }
 
-th:last-of-type{
-  width: 160px;
+th:last-of-type {
+   // width: 160px;
 }
 
-.mat-cell{
+.mat-cell {
     height: rem(35px);
     text-align: center;
     vertical-align: middle;
 }
+
 tr.mat-header-row {
     height: 30px;
     text-align: center;
 }
 
-th.mat-header-cell{
+th.mat-header-cell {
     padding: 0 20px 0 20px;
 }
-tr.mat-row{
-    height: 35px;
 
+tr.mat-row {
+    height: 35px;
 }
 
 th .mat-calendar-table-header {
     background-color: white;
-  }
-  
-  thead th {
+}
+
+thead th {
     background-color: white;
-  }
+}
+.rounded{
+    border-top-right-radius: 20px;
+}

@@ -75,7 +75,7 @@ export class MyTasksComponent implements OnInit{
   
 
   async onDelete(task) {
-    await this.taskService.deleteTask(task.id);
+    await this.taskService.deleteTask(task._id);
     await this.refreshTasks();
   }
 
