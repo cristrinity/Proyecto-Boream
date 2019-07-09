@@ -20,13 +20,15 @@ export class TableTaskComponent implements OnChanges, OnInit {
   @Input() client;
   @Output() delete = new EventEmitter();
   @Output() edit = new EventEmitter();
+
   @Input() datos;
   chooseProject;
   dataSource;
   alias;
   isAdmin : boolean;
   columnsToDisplay;
-  
+  isTaskToEdit: boolean;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
@@ -48,10 +50,10 @@ export class TableTaskComponent implements OnChanges, OnInit {
   ngOnInit() {
     if(this.client == 3){
       this.isAdmin = true;
-      this.columnsToDisplay = ['status', 'client', 'name', 'time_spent', 'project', 'datelimit', 'iedit' ];
+      this.columnsToDisplay = ['status', 'client', 'name', 'timespent', 'project', 'datelimit', 'iedit' ];
       console.log('soy valor isAsdmin en task', this.isAdmin)
     }else{
-      this.columnsToDisplay = ['status', 'name', 'time_spent', 'project', 'datelimit' ];
+      this.columnsToDisplay = ['status', 'name', 'timespent', 'project', 'datelimit' ];
       this.isAdmin = false;
     }
   
@@ -62,12 +64,6 @@ export class TableTaskComponent implements OnChanges, OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    if(this.client == 3){
-      this.isAdmin = true;
-      console.log('soy valor isAsdmin en task', this.isAdmin)
-    }else{
-      this.isAdmin = false;
-    }
   }
 
   applyFilter(filterValue: string) {
@@ -84,6 +80,7 @@ export class TableTaskComponent implements OnChanges, OnInit {
 
   onEdit(evt, tasks) {
     this.edit.emit(tasks);
+    this.isTaskToEdit = true;
   }
 
 }

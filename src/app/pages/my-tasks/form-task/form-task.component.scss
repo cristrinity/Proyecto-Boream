@@ -6,27 +6,31 @@
     //height: 40px;
 }
 
-.status-wait {
-    width: 25px;
-    height: 25px;
+.status-wait::after {
+    content: '';
+    width: 15px;
+    height: 15px;
     border-radius: 40px;
     background-color: rgb(204, 204, 33);
 }
-.status-done {
-    width: 25px;
-    height: 25px;
+.status-done::after {
+    content: '';
+    width: 15px;
+    height: 15px;
     border-radius: 40px;
     background-color: rgb(57, 138, 57);
 }
-.status-cancel {
-    width: 25px;
-    height: 25px;
+.status-cancel::after{
+    content: '';
+    width: 15px;
+    height: 15px;
     border-radius: 40px;
     background-color: rgb(163, 29, 29);
 }
-.status-active {
-    width: 25px;
-    height: 25px;
+.status-active::after {
+    content: '';
+    width: 15px;
+    height: 15px;
     border-radius: 40px;
     background-color: rgb(216, 158, 34);
 }

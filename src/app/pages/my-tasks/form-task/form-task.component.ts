@@ -22,6 +22,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
   @Output() saveTask = new EventEmitter();
   aliasPro: Array<any> = [{}];
   isAdmin: boolean;
+  @Input() isTaskToEdit: boolean;
 
   constructor(private fb: FormBuilder, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
 
@@ -31,8 +32,9 @@ export class FormTaskComponent implements OnInit, OnChanges {
     });
 
 
-    if (this.client == 3) {
+    if (this.client = 3) {
       this.isAdmin = true;
+      this.isTaskToEdit = true;
       console.log('soy valor isAsdmin', this.isAdmin)
       console.log('buscando el array perdido projectsss', this.projectsSelected)
       console.log('buscando el array perdido taskSelected', this.taskSelected)
@@ -43,13 +45,37 @@ export class FormTaskComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.taskCopy = { ...changes.taskToEdit.currentValue };
+   // this.taskCopy = { ...changes.taskToEdit.currentValue };
+   if (this.client = 3) {
+    this.isAdmin = true;
+    console.log('soy valor isAsdmin', this.isAdmin)
+    this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
+      result => {
+        this.aliasPro = result;
+        //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
+      },
+      err => {
+        console.log('hay error');
+      }
+    );
+  } else {
+    this.isAdmin = false;
+    this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
+      result => {
+        this.aliasPro = result;
+        //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
+      },
+      err => {
+        console.log('hay error');
+      }
+    );
+  }
   }
 
   ngOnInit() {
     //projectsGet();
 
-    if (this.client == 3) {
+    if (this.client = 3) {
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
       this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
@@ -73,43 +99,42 @@ export class FormTaskComponent implements OnInit, OnChanges {
         }
       );
     }
+    if (this.client = 3) {
+      this.myForm = this.fb.group({
+        // client: this.client,
+         client: this.aliasPro[0].client,
+         name: [''],
+         status: [''],
+         timespent: [''],
+         project: [''],
+         description: [''],
+         datelimit: ['']
+       });
+    }else{
+      this.myForm = this.fb.group({
+        client: this.client,
+        // client: this.aliasPro[0].client,
+         name: [''],
+         status: [''],
+         timespent: [''],
+         project: [''],
+         description: [''],
+         datelimit: ['']
+       });
+    }
 
-
-
-    this.myForm = this.fb.group({
-      client: this.client,
-      name: [''],
-      status: [''],
-      time_spent: [''],
-      project: [''],
-      description: [''],
-      datelimit: ['']
-    });
-
-    // function projectsGet(){
-    //   if (this.taskToEdit) {
-    //     this.projectService.getProjectsByClient(this.taskToEdit[0].client).subscribe(
-    //       result => {
-    //         this.aliasPro = result;
-    //         console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
-    //       },
-    //       err => {
-    //         console.log('hay error');
-    //       }
-    //     );
-    //   }
-    // }
 
     if (this.taskToEdit) {
-      this.myForm.setValue({
+      //this.myForm.setValue({
+        this.myForm.patchValue({
         name: this.taskToEdit.name,
         status: this.taskToEdit.status,
-        time_spent: this.taskToEdit.time_spent,
+        timespent: this.taskToEdit.timespent,
         project: this.taskToEdit.project,
         description: this.taskToEdit.description,
         datelimit: this.taskToEdit.datelimit,
-        client: this.client,
-
+        client: this.aliasPro[0].client
+        //client: this.client,
       });
     }
 
@@ -118,7 +143,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
   public submit(e, form) {
     if (form.valid) {
       if (this.taskToEdit) {
-        this.tasksService.editTask(this.taskToEdit.id, form.value);
+        this.tasksService.editTask(this.taskToEdit._id, form.value);
       } else {
         this.tasksService.addTask(form.value, this.client);
       }

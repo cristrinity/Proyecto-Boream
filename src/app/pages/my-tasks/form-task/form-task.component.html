@@ -1,7 +1,8 @@
 <main class="main">
     <div class="main__top">
         <div class="main__nav">
-            <div class="main__title">Nueva Tarea</div>
+            <div *ngIf="!isTaskToEdit" class="main__title">Nueva Tarea</div>
+            <div *ngIf="isTaskToEdit" class="main__title">Editar Tarea</div>
             <div class="controls">
             </div>
         </div>
@@ -30,7 +31,7 @@
                     <mat-label>Descripción</mat-label>
                 </mat-form-field>
 
-                <mat-form-field >
+                <mat-form-field>
                     <mat-label>Proyecto asociado</mat-label>
 
                     <mat-select formControlName="project">
@@ -48,8 +49,10 @@
                 </mat-form-field>
 
 
-                <button matButton type="button" class="btn btn--success"
-                    (click)="submit($event, myForm, client)">Guardar</button>
+                <!-- <button *ngIf="!isAdmin" matButton type="button" class="btn btn--success"
+                    (click)="submit($event, myForm, client)">Guardar</button> -->
+                <button      matButton type="button" class="btn btn--success"
+                    (click)="submit($event, myForm, aliasPro[0].client)">Guardar</button>
                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
             </form>

@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['edit-task.component.scss']
 })
 
-export class EditTaskComponent implements OnInit{
+export class EditTaskComponent implements OnInit, OnChanges{
 taskSelected;
 projectsSelected : Array<any> = [{}];
 @Output() newTasks;
@@ -23,6 +23,9 @@ constructor(private taksService: TasksService,
   private projectService: ProjectsService
   ){}
 
+ngOnChanges(){
+  this.clientProj = this.taskSelected.client;
+}
 
 ngOnInit() {
   this.activatedRoute.params.subscribe((data) => {
