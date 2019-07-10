@@ -44,8 +44,6 @@ export class MyAccountComponent implements OnInit {
     })
   }
 
-
-
   async onDelete(data) {
     await this.accountService.deleteAccount(data.id);
     await this.refreshAccount();
@@ -54,7 +52,6 @@ export class MyAccountComponent implements OnInit {
   onEdit(evt) {
     this.dataInfo = evt;
   }
-
 
 
 }

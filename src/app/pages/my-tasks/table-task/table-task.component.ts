@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ProjectsService } from 'src/app/services/project.service';
 import { DatePipe} from '@angular/common';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-table-task',
@@ -28,13 +29,20 @@ export class TableTaskComponent implements OnChanges, OnInit {
   isAdmin : boolean;
   columnsToDisplay;
   isTaskToEdit: boolean;
+  nameClient;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private taskService: TasksService, private projectService: ProjectsService) {
+  constructor(private taskService: TasksService, private projectService: ProjectsService, private accountService: AccountService) {
     
     // this.dataSource = new MatTableDataSource(this.tasks);
+    if(this.client = 3){
+      this.isAdmin = true}
+      else{
+        this.isAdmin = false;
+      }
+   
   }
   
   ngOnChanges(){
@@ -44,11 +52,16 @@ export class TableTaskComponent implements OnChanges, OnInit {
       this.dataSource.paginator = this.paginator;
       this.chooseProject = this.projectService.getProjectsByClient(this.client);
       this.alias = this.chooseProject.alias;
+      this.accountService.getAccounts().subscribe(data => {
+        this.nameClient = data[0].username;
+        console.log(this.nameClient) //no pinta el nombre del cliente en la tabla
+      })
     }
   }
   
   ngOnInit() {
-    if(this.client == 3){
+   
+    if(this.client = 3){
       this.isAdmin = true;
       this.columnsToDisplay = ['status', 'client', 'name', 'timespent', 'project', 'datelimit', 'iedit' ];
       console.log('soy valor isAsdmin en task', this.isAdmin)
@@ -63,6 +76,7 @@ export class TableTaskComponent implements OnChanges, OnInit {
      
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    
 
   }
 

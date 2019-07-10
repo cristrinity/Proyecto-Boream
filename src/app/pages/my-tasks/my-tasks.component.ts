@@ -21,11 +21,17 @@ export class MyTasksComponent implements OnInit{
   userActive;
   aliasPro: Array<any> = [];
   observer;
+  isAdmin;
 
   constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService){
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
+      if (this.client = 3) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
     if (this.client !== 3){

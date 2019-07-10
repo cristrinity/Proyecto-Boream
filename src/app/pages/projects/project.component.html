@@ -1,7 +1,8 @@
 <main class="main">
              <div class="main__top">
                 <div class="main__nav">
-                    <div class="main__title">Mis proyectos</div>
+                    <div *ngIf="!isAdmin" class="main__title">Mis proyectos</div>
+                    <div *ngIf="isAdmin" class="main__title">Proyectos de clientes</div>
                     <div class="controls">
                         <a [routerLink]="['/proyectos/create-project']"><button type="button" class="controls__add">
                             <i class="fas fa-plus-circle"></i>

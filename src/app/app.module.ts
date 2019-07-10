@@ -51,7 +51,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import { StatusTaskComponent } from './shared/components/status-task/status-task.component';
 import { DatePipe } from '@angular/common';
-import { MyClientsComponent } from './my-clients/my-clients.component';
+import { MyClientsComponent } from './pages/my-clients/my-clients.component';
+import { TableClientComponent } from './pages/my-clients/table-clients/table-clients.component';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
@@ -87,7 +88,8 @@ export const httpInterceptorProviders = [
     UsernavComponent,
     TablePackComponent,
     StatusTaskComponent,
-    MyClientsComponent
+    MyClientsComponent,
+    TableClientComponent
   ],
   imports: [
     BrowserModule,

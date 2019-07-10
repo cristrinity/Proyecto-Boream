@@ -12,7 +12,7 @@ constructor(private httpClient: HttpClient, private authorization: Authorization
 
   client = this.authorization.getId();
 
-    getAccountByClient(client: number): Observable<any>{
+  getAccountByClient(client: number): Observable<any>{
     return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/`);
   }
 
@@ -20,8 +20,8 @@ constructor(private httpClient: HttpClient, private authorization: Authorization
     return this.httpClient.delete(`${environment.apiUrl}/clients/${id}`).toPromise();
   }
 
-  async getAccounts(){
-    return this.httpClient.get(`${environment.apiUrl}/clients/`).toPromise();
+   getAccounts(){
+    return this.httpClient.get(`${environment.apiUrl}/clients/`);
 
   }
 

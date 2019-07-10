@@ -8,5 +8,13 @@
     border: .030rem solid #999;
     padding: 10px;
     margin: 5px;
+}
 
+.mat-form-field {
+    padding-right: 0;
+}
+
+.remember {
+    text-align: left;
+    color: var(--grey-default) ;
 }

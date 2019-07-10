@@ -14,11 +14,17 @@ export class MyPacksComponent {
   show: boolean = false;
   packs;
   observer;
+  isAdmin: boolean;
 
   constructor(private packService: PackService, private authorization: AuthorizationService) {
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
+      if (this.client = 3) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
     if (this.client !== 3) {
@@ -31,6 +37,7 @@ export class MyPacksComponent {
         }
       );
     } else {
+      this.isAdmin = true;
       this.packService.getPacks().subscribe(
         result => {
           this.packs = result;
@@ -66,8 +73,6 @@ export class MyPacksComponent {
       )
     };
   }
-
-
   onClick(e) {
     this.show = !this.show
   }

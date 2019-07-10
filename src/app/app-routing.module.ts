@@ -15,6 +15,7 @@ import { CreateTaskComponent } from './pages/my-tasks/create-task/create-task.co
 import { TableAccountComponent } from './pages/my-account/table-account/table-account.component';
 import { EditAccountComponent } from './pages/my-account/edit-account/edit-account.component';
 import { EditTaskComponent } from './pages/my-tasks/edit-task/edit-task.component';
+import { MyClientsComponent } from './pages/my-clients/my-clients.component';
 
 
 const routes: Routes = [{
@@ -26,7 +27,6 @@ const routes: Routes = [{
 path: 'edit-task/:id',
   component: EditTaskComponent
 },
-
 {
   path: 'login',
   component: LoginComponent
@@ -58,6 +58,10 @@ path: 'edit-task/:id',
 {
 path: 'edit-account/:id',
 component: EditAccountComponent
+},
+{
+path: 'clientes',
+component: MyClientsComponent
 },
 {
   path: '',
