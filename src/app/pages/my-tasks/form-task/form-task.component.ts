@@ -32,7 +32,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
     });
 
 
-    if (this.client = 3) {
+    if (this.client == 3) {
       this.isAdmin = true;
       this.isTaskToEdit = true;
       console.log('soy valor isAsdmin', this.isAdmin)
@@ -46,7 +46,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
    // this.taskCopy = { ...changes.taskToEdit.currentValue };
-   if (this.client = 3) {
+   if (this.client == 3) {
     this.isAdmin = true;
     console.log('soy valor isAsdmin', this.isAdmin)
     this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
@@ -75,7 +75,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
   ngOnInit() {
     //projectsGet();
 
-    if (this.client = 3) {
+    if (this.client == 3) {
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
       this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
@@ -99,7 +99,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
         }
       );
     }
-    if (this.client = 3) {
+    if (this.client == 3) {
       this.myForm = this.fb.group({
         // client: this.client,
          client: this.aliasPro[0].client,

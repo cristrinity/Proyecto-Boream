@@ -23,7 +23,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
-      if (this.client = 3) {
+      if (this.client == 3) {
         this.isAdmin = true;
       } else {
         this.isAdmin = false;

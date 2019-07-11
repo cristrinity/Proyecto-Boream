@@ -37,8 +37,13 @@ export class TableTaskComponent implements OnChanges, OnInit {
   constructor(private taskService: TasksService, private projectService: ProjectsService, private accountService: AccountService) {
     
     // this.dataSource = new MatTableDataSource(this.tasks);
-    if(this.client = 3){
-      this.isAdmin = true}
+    if(this.client == 3){
+      this.isAdmin = true
+      this.accountService.getAccounts().subscribe(data => {
+        this.nameClient = data[this.dataSource.client].username;
+        console.log('noooooooombre de cliente', this.dataSource.client) //no pinta el nombre del cliente en la tabla
+      })
+    }
       else{
         this.isAdmin = false;
       }
@@ -52,19 +57,20 @@ export class TableTaskComponent implements OnChanges, OnInit {
       this.dataSource.paginator = this.paginator;
       this.chooseProject = this.projectService.getProjectsByClient(this.client);
       this.alias = this.chooseProject.alias;
-      this.accountService.getAccounts().subscribe(data => {
-        this.nameClient = data[0].username;
-        console.log(this.nameClient) //no pinta el nombre del cliente en la tabla
-      })
+
     }
   }
   
   ngOnInit() {
    
-    if(this.client = 3){
+    if(this.client == 3){
       this.isAdmin = true;
       this.columnsToDisplay = ['status', 'client', 'name', 'timespent', 'project', 'datelimit', 'iedit' ];
       console.log('soy valor isAsdmin en task', this.isAdmin)
+      this.accountService.getAccounts().subscribe(data => {
+        this.nameClient = data[this.dataSource.client].username;
+        console.log('nuuuuuuumbre de cliente', this.dataSource.client) //no pinta el nombre del cliente en la tabla
+      })
     }else{
       this.columnsToDisplay = ['status', 'name', 'timespent', 'project', 'datelimit' ];
       this.isAdmin = false;

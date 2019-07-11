@@ -27,14 +27,14 @@ export class MyTasksComponent implements OnInit{
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
-      if (this.client = 3) {
+      if (this.client == 3) {
         this.isAdmin = true;
       } else {
         this.isAdmin = false;
       }
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
-    if (this.client !== 3){
+    if (this.client != 3){
       this.taskService.getTaskByClient(this.client).subscribe(
         result => {
           this.tasks = result;
