@@ -53,6 +53,8 @@ import { StatusTaskComponent } from './shared/components/status-task/status-task
 import { DatePipe } from '@angular/common';
 import { MyClientsComponent } from './pages/my-clients/my-clients.component';
 import { TableClientComponent } from './pages/my-clients/table-clients/table-clients.component';
+import { CreateClientComponent } from './pages/my-clients/create-client/create-client.component';
+import { CreateAccountComponent } from './pages/my-account/create-account/create-account.component';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
@@ -89,7 +91,9 @@ export const httpInterceptorProviders = [
     TablePackComponent,
     StatusTaskComponent,
     MyClientsComponent,
-    TableClientComponent
+    TableClientComponent,
+    CreateClientComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

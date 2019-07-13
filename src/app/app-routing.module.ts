@@ -16,10 +16,15 @@ import { TableAccountComponent } from './pages/my-account/table-account/table-ac
 import { EditAccountComponent } from './pages/my-account/edit-account/edit-account.component';
 import { EditTaskComponent } from './pages/my-tasks/edit-task/edit-task.component';
 import { MyClientsComponent } from './pages/my-clients/my-clients.component';
+import { CreateAccountComponent } from './pages/my-account/create-account/create-account.component';
 
 
 const routes: Routes = [{
 
+  path: 'create-account',
+  component: CreateAccountComponent
+},
+{
   path: 'create-task',
   component: CreateTaskComponent
 },

@@ -30,8 +30,12 @@ constructor(private httpClient: HttpClient, private authorization: Authorization
     return this.httpClient.put(`${environment.apiUrl}/clients/${id}`, body).toPromise();
   }
 
+  // async addAccount(account) {
+  //   return this.httpClient.post(`${environment.apiUrl}/clients/${this.authorization.getId()}/`, account).toPromise();
+  // }
+
   async addAccount(account) {
-    return this.httpClient.post(`${environment.apiUrl}/clients/${this.authorization.getId()}/`, account).toPromise();
+    return this.httpClient.post(`${environment.apiUrl}/clients/create`, account).toPromise();
   }
 
   async getAccountById(id){

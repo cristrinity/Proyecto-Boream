@@ -1,20 +1,22 @@
 <main class="main">
-  <div class="main__top">
-     <div class="main__nav">
-         <div class="main__title">Clientes</div>
-         <div class="controls">
-             <a [routerLink]="['/edit-client/']"><button type="button" class="controls__add">
-                 <i class="fas fa-plus-circle"></i>
-                 <span>Añadir cliente</span>
-             </button></a>
-         </div>
-     </div>
- </div>
+        <div class="main__top">
+           <div class="main__nav">
+               <!-- <div *ngIf="!isAdmin" class="main__title">Mis proyectos</div> -->
+               <div class="main__title">Clientes</div>
+               <div class="controls">
+                   <a [routerLink]="['/create-account']"><button type="button" class="controls__add">
+                       <i class="fas fa-plus-circle"></i>
+                       <span>Añadir Cliente</span>
+                   </button></a>
+               </div>
+           </div>
+       </div>
  <app-table-clients
  [accounts]="accounts"
  [data]="data"
  (delete)="onDelete($event)"
  (edit)="onEdit($event)"
+ (isAccountToEdit)="isAccountToEdit"
  >
  </app-table-clients>
 
