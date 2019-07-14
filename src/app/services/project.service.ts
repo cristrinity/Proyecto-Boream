@@ -56,7 +56,7 @@ export class ProjectsService {
   }
 
   async addProject(project, client) {
-    return this.httpClient.post(`${environment.apiUrl}/projects/${this.authorization.getId()}`, project, client).toPromise();
+    return this.httpClient.post(`${environment.apiUrl}/projects/create/`, project, client).toPromise();
   }
 
   async getProjectById(id) {

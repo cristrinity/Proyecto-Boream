@@ -99,6 +99,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
         }
       );
     }
+  
     if (this.client == 3) {
       this.myForm = this.fb.group({
         // client: this.client,
@@ -122,7 +123,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
          datelimit: ['']
        });
     }
-
+  
 
     if (this.taskToEdit) {
       //this.myForm.setValue({

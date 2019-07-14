@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectsService } from '../../../services/project.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
   @Input() client;
   @Input() projectToEdit;
   @Output() saveProject = new EventEmitter();
-
+  isAdmin : boolean;
   myForm;
   projectCopy;
 
@@ -32,16 +33,29 @@ export class FormProjectComponent implements OnInit, OnChanges {
     'Joomla'
   ];
 
-  constructor(private fb: FormBuilder, private projectsService: ProjectsService) { }
+  constructor(private fb: FormBuilder, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
+
+    this.authorization.observer.subscribe(data => {
+      this.client = data;
+      console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
+
+    });
+    
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.projectCopy = { ...changes.projectToEdit.currentValue };
   }
 
   ngOnInit() {
+    if (this.client == 3) {
+      this.isAdmin = true;
+    }else{
+      this.isAdmin = false;
+    }
 
     this.myForm = this.fb.group({
-
+      client: this.client,
       alias: [''
       ],
       UrlDominio: [''

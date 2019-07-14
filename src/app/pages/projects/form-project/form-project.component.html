@@ -29,8 +29,8 @@
           <mat-label>UrlAdministracion</mat-label>
         </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="text" formControlName="tareasRealizadas" required>
+        <mat-form-field *ngIf="isAdmin">
+          <input matInput type="text" formControlName="tareasRealizadas" >
           <mat-label>Tareas</mat-label>
         </mat-form-field>
 
