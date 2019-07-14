@@ -19,12 +19,24 @@
                     <a routerLink="datos" class="navbar__link" routerLinkActive="navbar__link--active">Mis datos de cuenta</a>
             </nav>
         </div>
-        <div *ngIf="isAdmin" class="texture bg-lines-diagonales--admin">
+        <div *ngIf="!isAdmin" class="texture-admin bg-lines-diagonales--admin">
             <div class="clock--admin">
+            <img class="logotipo" src="http://csimon.es/bootcamp/assets/images/logos.png" alt="" width="100" height="83">
             </div>
         </div>
-        <div *ngIf="!isAdmin" class="texture bg-lines-diagonales">
+        <div *ngIf="!isAdmin" class="texture bg-lines-diagonales--admin">
                 <div class="clock--admin">
+                <img class="logotipo" src="http://csimon.es/bootcamp/assets/images/logo-web.png" alt="" width="200" height="58">           
+             </div>
+        </div>
+        <div *ngIf="isAdmin" class="texture-admin bg-lines-diagonales--admin">
+                <div class="clock--admin">
+                <img class="logotipo" src="http://csimon.es/bootcamp/assets/images/logo-web.png" alt="" width="200" height="58">
                 </div>
+            </div>
+            <div *ngIf="isAdmin" class="texture bg-lines-diagonales--admin">
+                    <div class="clock--admin">
+                    <img class="logotipo" src="http://csimon.es/bootcamp/assets/images/logos.png" alt="" width="100" height="83">           
+                 </div>
             </div>
             

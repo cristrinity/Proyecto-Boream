@@ -12,21 +12,31 @@
 
 .texture{
     position: absolute;
-    top: 0;
-    left: 0px;
+    bottom: 70px;
+    left: 0;
     // background-size: 22px 12px;
     z-index: 50;
     width: 250px;
-    height: 134px;
+    height: 44px;
     }
 
-.bg-lines-diagonales{
-    background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #fff 40px, #fff 50px);
-  }
+    .texture-admin{
+      position: absolute;
+      top: 0;
+      left: 0;
+      // background-size: 22px 12px;
+      z-index: 50;
+      width: 250px;
+      height: 44px;
+      }
 
-.bg-lines-diagonales--admin{
-    background: repeating-linear-gradient(-45deg, #0000 40px, #000 48px, #666 40px, #666 50px);
-  }
+// .bg-lines-diagonales{
+//     background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #fff 40px, #fff 50px);
+//   }
+
+// .bg-lines-diagonales--admin{
+//     background: repeating-linear-gradient(-45deg, #0000 40px, #000 48px, #666 40px, #666 50px);
+//   }
 
 .shadow-grey {
   -webkit-box-shadow: -13px 8px 22px -5px rgba(153,153,153,0.59);

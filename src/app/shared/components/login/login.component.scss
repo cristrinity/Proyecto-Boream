@@ -2,8 +2,19 @@
 @import "../../../../assets/styles/main-comun";
 
 
+.container-login {
+    background-color: #ecffff;
+    width: 100vw;
+    height: 100vh;
+}
+
+.logotipo {
+    margin-bottom: 55px;
+    margin-top: -26px;
+}
+
 .mat-form-field-infix  {
-    min-width: 300px;
+    width: 100%;
     border-radius: 10px;
     border: .030rem solid #999;
     padding: 10px;

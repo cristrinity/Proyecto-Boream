@@ -165,7 +165,7 @@
   position: fixed;
   top: 0;
   z-index: 2;
-  background-color: #333;
+  //background-color: #333;
 
   &::after {
     content: '';
@@ -185,7 +185,7 @@
 .topbar__container--admin {
   display: flex;
   justify-content: flex-end;
-  color: #fff;
+  color: #333;
   padding: 10px 0;
 }
 
@@ -218,7 +218,7 @@
 }
 
 .user__name::before {
-  content: 'Hola,';
+  content: ' ';
   font-size: .7rem;
   right: 0;
   display: block;
@@ -250,7 +250,7 @@
   height: 100%;
   top: rem(17px);
   left: 45px;
-  color: #aaa;
+  color: #333;
   cursor: pointer;
   &:hover{
     color: var(--grey-default);
@@ -264,12 +264,13 @@
   width: rem(40px);
   height: rem(40px);
   border-radius: rem(30px);
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  //background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-color: #ff568c;
 }
 
 .user__capitals {
   color: #fff;
   margin: 0 auto;
-  text-shadow: 0px 0px 2px var(--green-hover);
+  //text-shadow: 0px 0px 2px var(--green-hover);
 }
 
