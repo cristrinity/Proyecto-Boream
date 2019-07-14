@@ -90,13 +90,22 @@
                                                 <mat-label>Ciudad</mat-label>
                                         </mat-form-field>
                                 </div>
+                                <input type="file" accept=".jpg, .png"
+                                (change)="onUpload($event)" /> 
                                 <mat-form-field>
-                                <input matInput type="text" formControlName="logo" >
-                                        <mat-label>Logotipo</mat-label>
-                                        <input id="singleFile" formControlName="logo" type="file" (change)="onFileSelected($event)" />
+                                        <mat-label>Logo</mat-label>
+                                         <br>
+                                        <input matInput type="text"  formControlName="logo" #imageUser [value]="urlImage | async">
                                 </mat-form-field>
-                                <button type="button" (click)="onUpload()">Subir</button>
+                                
+
+                                <!-- <input  type="text" #imageUser  [value]="urlImage | async" hidden> -->
+                                <!-- <button type="button" (click)="onUpload()">Subir</button> -->
                                 <br>
+                                <div class="progress">
+                                        <div class="progress__bar" role="progressbar" [style.width]="(uploadPercent | async)">
+                                        </div>
+                                </div>
                                 <!-- <label for="singleFile">Sube tu logotipo</label>
                                 <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" />
                                 <br> -->
