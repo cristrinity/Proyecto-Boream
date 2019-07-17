@@ -19,7 +19,6 @@ export class TableAccountComponent implements OnInit, OnChanges{
   
     columnsToDisplay = ['user', 'contact', 'invoice', 'iedit'];
   
-
   
     constructor() {
       this.dataSource = new MatTableDataSource(this.accounts);

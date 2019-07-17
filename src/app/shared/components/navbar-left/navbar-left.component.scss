@@ -30,6 +30,11 @@
   }
 }
 
+.clock--admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .hide {
   visibility: hidden;
 }
@@ -76,7 +81,4 @@
   -o-transition: left 250ms ease;
   transition: left 250ms ease;
   }
-}
-.logotipo {
-  margin-left: 15px;
 }

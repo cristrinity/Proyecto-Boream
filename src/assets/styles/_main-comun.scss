@@ -16,7 +16,7 @@
     height: rem(100px);
     width: 90%;
     position: relative;
-    margin-top: rem(40px);
+    margin-top: rem(70px);
   }
 
   &__title {
@@ -119,21 +119,30 @@
   &__add {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     background-color: transparent;
     border: 0;
+    width: 130px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: var(--green-dark);
+    cursor: pointer;
   }
 
   & span {
-    color: var(--green-dark);
+    color: #fff;
+    font-weight: var(--font-m);
+    font-size: var(--fdefault)
   }
 }
 
+
 .fa-plus-circle {
-  font-size: 2.5rem;
+  font-size: 1rem;
   //  color: #99d8e1;
-  color: var(--green-dark);
-  margin-bottom: 5px;
+  color: #fff;
+  margin-right: 5px;
 }
 
 .navbar-buttons {
@@ -145,15 +154,17 @@
 }
 
 .btn {
-  font-weight: 300;
+  font-weight: 500;
   font-size: var(--fbutton);
   color: #fff;
   background-color: var(--green-dark);
   border-radius: 5px;
   padding: .65rem 1.5rem;
+  border: 0;
 
   &:hover {
-    background-color: var(--green-hover);
+    background-color: var(--green-transp);
+    border: 0;
   }
 
   &--gradient {

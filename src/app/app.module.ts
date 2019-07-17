@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule, MatSelectModule} from '@angular/material';
+import { MatNativeDateModule, MatSelectModule, MatIconModule} from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -121,7 +121,8 @@ export const httpInterceptorProviders = [
     MatDividerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatIconModule,
   ],
   providers: [
     ProjectsService,

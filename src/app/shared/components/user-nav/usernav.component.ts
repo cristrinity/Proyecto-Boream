@@ -27,7 +27,7 @@ ngOnInit(){
     this.isAdmin = true;
   }else{
     this.isAdmin = false;
-    console.log('admin se ve que es false')
+   
 
   }
 }

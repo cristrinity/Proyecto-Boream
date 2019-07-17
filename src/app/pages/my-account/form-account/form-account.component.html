@@ -23,9 +23,10 @@
                                         <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
                                 </mat-form-field>
                                 <mat-form-field>
-                                        <input matInput type="text" formControlName="password" required>
-                                        <mat-label>Password </mat-label>
-                                        <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                                        <input matInput formControlName="password"  [type]="hide ? 'text' : 'password'">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
                                 </mat-form-field>
                                 <mat-form-field>
                                         <input matInput type="text" formControlName="email" required>
@@ -95,17 +96,17 @@
                                 <mat-form-field>
                                         <mat-label>Logo</mat-label>
                                          <br>
-                                        <input matInput type="text"  formControlName="logo" #imageUser [value]="urlImage | async">
+                                        <input matInput type="text"  formControlName="logo" #imageUser>
                                 </mat-form-field>
                                 
 
                                 <!-- <input  type="text" #imageUser  [value]="urlImage | async" hidden> -->
                                 <!-- <button type="button" (click)="onUpload()">Subir</button> -->
                                 <br>
-                                <div class="progress">
+                                <!-- <div class="progress">
                                         <div class="progress__bar" role="progressbar" [style.width]="(uploadPercent | async)">
                                         </div>
-                                </div>
+                                </div> -->
                                 <!-- <label for="singleFile">Sube tu logotipo</label>
                                 <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" />
                                 <br> -->

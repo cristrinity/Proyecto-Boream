@@ -51,10 +51,14 @@ export class FormAccountComponent implements OnInit, OnChanges {
     const filePath = `upload/${id}`;
     const ref = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-    this.uploadPercent = task.percentageChanges();
+    //this.uploadPercent = task.percentageChanges();
 
-    task.snapshotChanges().pipe(finalize(() =>
-      this.urlImage = ref.getDownloadURL())).subscribe();
+    // task.snapshotChanges().pipe(finalize(() =>
+    //   this.urlImage = ref.getDownloadURL())).subscribe();
+
+      task.snapshotChanges().pipe(finalize(() =>
+      ref.getDownloadURL().subscribe(url => this.myForm.controls.logo.setValue(url)))).subscribe();
+
 
 
     // const fd = new FormData();
@@ -72,12 +76,12 @@ export class FormAccountComponent implements OnInit, OnChanges {
     } else {
       this.isAdmin = false;
     }
-    if (this.inputImageUser) {
-      this.logotype = this.inputImageUser.nativeElement.value.toString();
-      console.log('logotype lleno en onChange con ->', this.logotype)
-    } else {
-      console.log('logotype vacio onChange')
-    }
+    // if (this.inputImageUser) {
+    //   this.logotype = this.inputImageUser.nativeElement.value.toString();
+    //   console.log('logotype lleno en onChange con ->', this.logotype)
+    // } else {
+    //   console.log('logotype vacio onChange')
+    // }
 
   }
 
@@ -106,10 +110,10 @@ export class FormAccountComponent implements OnInit, OnChanges {
     })
   });
 
-  uploadPercent: Observable<number>;
-  onFileSelected(event) {
-    this.selectedFile = <File>event.target.files[0]
-  }
+  // uploadPercent: Observable<number>;
+  // onFileSelected(event) {
+  //   this.selectedFile = <File>event.target.files[0]
+  // }
 
 
   ngOnInit() {
@@ -119,17 +123,17 @@ export class FormAccountComponent implements OnInit, OnChanges {
       this.isAdmin = false;
     }
 
-    if (this.urlImage) {
-      this.logotype = this.inputImageUser.nativeElement.value.toString();
-      console.log('logotype lleno en onInit con ->', this.logotype)
-    } else {
-      console.log('logotype vacio on Init')
-    }
+    // if (this.urlImage) {
+    //   this.logotype = this.inputImageUser.nativeElement.value.toString();
+    //   console.log('logotype lleno en onInit con ->', this.logotype)
+    // } else {
+    //   console.log('logotype vacio on Init')
+    // }
 
 
     this.myForm = this.fb.group({
       client: [''],
-      logo: this.logotype,
+      logo: [''],
       username: [''],
       password: [''],
       email: [''],

@@ -33,7 +33,7 @@ export class TableTaskComponent implements OnChanges, OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
   constructor(private taskService: TasksService, private projectService: ProjectsService, private accountService: AccountService) {
     
     // this.dataSource = new MatTableDataSource(this.tasks);

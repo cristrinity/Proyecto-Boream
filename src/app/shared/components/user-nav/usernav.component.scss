@@ -65,7 +65,10 @@
   }
 
 
-.clock--admin {
+div .clock--admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   top: rem(42px);
   left: rem(-30px);
@@ -165,7 +168,7 @@
   position: fixed;
   top: 0;
   z-index: 2;
-  //background-color: #333;
+  background-color: #fff;
 
   &::after {
     content: '';

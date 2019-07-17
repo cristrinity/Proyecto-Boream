@@ -17,9 +17,14 @@ export class ClientService {
     return this.httpClient.get(`${environment.apiClient}/${id}`).toPromise();
   }
 
+  
   async addClient(account, client) {
     return this.httpClient.post(`${environment.apiUrl}/clients/create-client`, account, client).toPromise();
 
+  }
+
+  async deleteClient(id: number) {
+    return this.httpClient.delete(`${environment.apiUrl}/clients/${id}`).toPromise();
   }
 
 

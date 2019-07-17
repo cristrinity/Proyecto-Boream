@@ -27,11 +27,6 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput type="text" formControlName="description" required>
-                    <mat-label>Descripción</mat-label>
-                </mat-form-field>
-
-                <mat-form-field>
                     <mat-label>Proyecto asociado</mat-label>
 
                     <mat-select formControlName="project">
@@ -48,6 +43,10 @@
                     <mat-datepicker #datelimit></mat-datepicker>
                 </mat-form-field>
 
+                <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <textarea  matInput type="text" formControlName="description" required></textarea>
+                </mat-form-field>
 
                 <!-- <button *ngIf="!isAdmin" matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, client)">Guardar</button> -->
