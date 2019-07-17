@@ -195,7 +195,7 @@ export class FormAccountComponent implements OnInit, OnChanges {
       } else {
         this.accountService.addAccount(form.value);
       }
-      this.router.navigateByUrl('/clientes');
+      
     }
   }
 

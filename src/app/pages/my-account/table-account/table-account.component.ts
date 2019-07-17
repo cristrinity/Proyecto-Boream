@@ -22,6 +22,11 @@ export class TableAccountComponent implements OnInit, OnChanges{
   
     constructor() {
       this.dataSource = new MatTableDataSource(this.accounts);
+      if(Array.isArray(this.accounts)){
+        console.log('soy data baby', this.accounts)
+        this.dataSource = new MatTableDataSource(this.accounts);
+
+      }
     }
     ngOnChanges(){
       if(Array.isArray(this.accounts)){
@@ -32,7 +37,10 @@ export class TableAccountComponent implements OnInit, OnChanges{
     }
   
     ngOnInit() {
+      if(Array.isArray(this.accounts)){
+        this.dataSource = new MatTableDataSource(this.accounts);
 
+      }
     }
   
     applyFilter(filterValue: string) {

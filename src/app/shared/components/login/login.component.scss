@@ -6,6 +6,16 @@
     background-color: #ecffff;
     width: 100vw;
     height: 100vh;
+    position: absolute;
+
+    &::before {
+        content: '';
+        position: absolute;
+        background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #fff 40px, #fff 50px);
+        top: 0;
+        width: 100vw;
+        height: 112px;
+      }
 }
 
 .logotipo {

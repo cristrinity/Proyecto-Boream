@@ -6,3 +6,8 @@
     font-size: 18px;
     color: var(--green-dark);
 }
+
+input:-internal-autofill-selected {
+    background-color: rgb(255, 255, 255) !important;
+   // background-color: #fff;
+}

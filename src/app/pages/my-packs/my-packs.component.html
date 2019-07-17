@@ -6,7 +6,9 @@
             <div class="controls">
                 <button type="button" (click)="onClick()" class="controls__add">
                     <i class="fas fa-plus-circle"></i>
-                    <span>Comprar Pack</span>
+                    <span *ngIf="isAdmin">Asignar Pack</span>
+                    <span *ngIf="!isAdmin">Comprar Pack</span>
+                
                 </button>
             </div>
         </div>

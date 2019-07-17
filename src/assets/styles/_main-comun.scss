@@ -1,4 +1,7 @@
 
+button {
+  cursor: pointer;
+}
 .main {
   //background-color: #eef3f9;
   background-color: #fff;
@@ -235,18 +238,11 @@
   vertical-align: middle;
   border-radius: 6px;
   margin: 0 auto;
+  margin-top: 110px;
   background-color: #fff;
   //background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
   box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.15);
 
-  &::before {
-    content: '';
-    position: absolute;
-    background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #fff 40px, #fff 50px);
-    top: 0;
-    width: 100vw;
-    height: 112px;
-  }
 }
 
 .material-icons {

@@ -1,7 +1,8 @@
 <main class="main">
         <div class="main__top">
                 <div class="main__nav">
-                        <div *ngIf="isAdmin" class="main__title">Añadir cuenta</div>
+                        <div *ngIf="isAdmin && !accountToEdit" class="main__title">Añadir cuenta</div>
+                        <div *ngIf="isAdmin && accountToEdit" class="main__title">Editar cuenta</div>
                         <div *ngIf="!isAdmin" class="main__title">Modificar datos</div>
                         <div class="controls">
                         </div>
@@ -91,37 +92,21 @@
                                                 <mat-label>Ciudad</mat-label>
                                         </mat-form-field>
                                 </div>
-                                <input type="file" accept=".jpg, .png"
-                                (change)="onUpload($event)" /> 
                                 <mat-form-field>
-                                        <mat-label>Logo</mat-label>
-                                         <br>
-                                        <input matInput type="text"  formControlName="logo" #imageUser>
-                                </mat-form-field>
+                                        <span>Logotipo</span><br><br>
+                                        <input type="file" accept=".jpg, .png" (change)="onUpload($event)" /> 
+                                        <br>
+                                        <input matInput type="text" hidden formControlName="logo" #imageUser>
+                                        <img *ngIf="logo" src="logo" #imageUser>
+                                        </mat-form-field>
                                 
 
-                                <!-- <input  type="text" #imageUser  [value]="urlImage | async" hidden> -->
-                                <!-- <button type="button" (click)="onUpload()">Subir</button> -->
+
                                 <br>
-                                <!-- <div class="progress">
-                                        <div class="progress__bar" role="progressbar" [style.width]="(uploadPercent | async)">
-                                        </div>
-                                </div> -->
-                                <!-- <label for="singleFile">Sube tu logotipo</label>
-                                <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" />
-                                <br> -->
-
-                                <!-- <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'"
-                                        [httpUrl]="'http://localhost:3000/public/images'">
-
-                                        <mat-file-upload [file]="file" [id]="i"
-                                                *ngFor="let file of fileUploadQueue.files; let i = index">
-                                        </mat-file-upload>
-                                </mat-file-upload-queue> -->
 
 
-                                <button matButton type="button" class="btn btn--success"
-                                        (click)="submit($event, myForm)">Guardar</button>
+                                <a routerLink="/clientes"><button matButton type="button" class="btn btn--success"
+                                        (click)="submit($event, myForm)">Guardar</button></a> 
                                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
                         </form>
