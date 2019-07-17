@@ -17,6 +17,8 @@ export class UsernavComponent implements OnInit{
   userActive;
   id;
   isAdmin : boolean;
+  isKoldo: boolean;
+  isLoreto: boolean;
 constructor(private clientService: ClientService, private authorization: AuthorizationService, private router: Router){}
 
 ngOnInit(){
@@ -27,8 +29,15 @@ ngOnInit(){
     this.isAdmin = true;
   }else{
     this.isAdmin = false;
-   
-
+  }
+  if(this.id == 0){
+    this.isKoldo = true;
+    this.isLoreto = false;
+    }else{
+    if(this.id == 1){
+      this.isLoreto = true;
+      this.isKoldo = false;
+    }
   }
 }
 

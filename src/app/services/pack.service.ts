@@ -10,8 +10,7 @@ export class PackService {
     packs;
 
     constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
-
-    client = this.authorization.getId();
+    
 
     getPacks() {
         return this.httpClient.get(`${environment.apiUrl}/packs`);
@@ -21,8 +20,9 @@ export class PackService {
         return this.httpClient.get(`${environment.apiUrl}/packs/${this.authorization.getId()}`);
     }
     
-    async getPacksById(id) {
-        return this.httpClient.get(`${environment.apiUrl}/packs/${id}`).toPromise();
-    }
+    // getPacksByActive() {
+    //     return this.httpClient.get(`${environment.apiUrl}/packs/status/:active`);
+    // }
+        
 
 }

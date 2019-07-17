@@ -89,7 +89,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
 
     if (this.projectToEdit) {
 
-      this.myForm.setValue({
+      this.myForm.patchValue({
         alias: this.projectToEdit.alias,
         UrlDominio: this.projectToEdit.UrlDominio,
         UrlAdministracion: this.projectToEdit.UrlAdministracion,

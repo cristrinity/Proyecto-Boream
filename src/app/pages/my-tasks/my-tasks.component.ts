@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import { TasksService } from 'src/app/services/task.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ProjectsService } from 'src/app/services/project.service';
+import { PackService } from 'src/app/services/pack.service';
 
 // import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -22,8 +23,10 @@ export class MyTasksComponent implements OnInit{
   aliasPro: Array<any> = [];
   observer;
   isAdmin;
+  packs;
+  packActive;
 
-  constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService){
+  constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService, private packService : PackService){
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
@@ -34,6 +37,7 @@ export class MyTasksComponent implements OnInit{
       }
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
+    
     if (this.client != 3){
       this.taskService.getTaskByClient(this.client).subscribe(
         result => {
@@ -55,10 +59,11 @@ export class MyTasksComponent implements OnInit{
         }
       );
     }
+ 
+
     this.projectService.getProjectsByClient(this.client).subscribe(
       result => {
         this.aliasPro = result;
-        //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
       },
       err => {
         console.log('hay error');
@@ -66,11 +71,22 @@ export class MyTasksComponent implements OnInit{
     );
 }
   ngOnInit() {
+    // this.packService.getPacksByClient(this.client).subscribe(
+    //   result => {
+    //     this.packs = result;
+    //     console.log('pack pack', this.packs)
+    //     for(let i = 0; i < this.packs.length; i++){
+    //       debugger
+    //       if(this.packs[i].active === true){
+    //         this.packActive = this.packs[i]._id;
+    //     }return this.packActive;
+    //   }
+    // })
     //this.refreshTasks();
     this.authorization.observer.subscribe(data => {
       this.client = data;
     })
-
+    console.log('soy pack activusss', this.packActive)
     //this.refreshProjects();
     this.userActive = this.authorization.getId();
   }

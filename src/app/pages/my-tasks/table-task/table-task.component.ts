@@ -67,10 +67,10 @@ export class TableTaskComponent implements OnChanges, OnInit {
       this.isAdmin = true;
       this.columnsToDisplay = ['status', 'client', 'name', 'timespent', 'project', 'datelimit', 'iedit' ];
       console.log('soy valor isAsdmin en task', this.isAdmin)
-      this.accountService.getAccounts().subscribe(data => {
-        this.nameClient = data[this.dataSource.client].username;
-        console.log('nuuuuuuumbre de cliente', this.dataSource.client) //no pinta el nombre del cliente en la tabla
-      })
+      // this.accountService.getAccounts().subscribe(data => {
+      //   this.nameClient = data[this.dataSource.client].username;
+      //   console.log('nuuuuuuumbre de cliente', this.dataSource.client) //no pinta el nombre del cliente en la tabla
+      // })
     }else{
       this.columnsToDisplay = ['status', 'name', 'timespent', 'project', 'datelimit' ];
       this.isAdmin = false;

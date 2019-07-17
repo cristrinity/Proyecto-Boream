@@ -271,6 +271,17 @@ div .clock--admin {
   background-color: #ff568c;
 }
 
+.user__image2 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: rem(11px);
+  width: rem(40px);
+  height: rem(40px);
+  border-radius: rem(30px);
+  //background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-color: #009f4d;
+}
 .user__capitals {
   color: #fff;
   margin: 0 auto;

@@ -58,9 +58,9 @@ td:first-child {
     text-align: center;
 }
 thead th {
-    background-color: #99d7e17c;
+    background-color: #8db9ca;
     //border: 1px solid #ddd;
-    color: var(--green-black);
+    color: #2b3d3f;
   }
 
 .table__status{
@@ -95,7 +95,7 @@ td.table__ending{
 }
 .data-table__row{
     width: rem(100px);
-    font-weight: var(--font-m);
+    font-weight: var(--font-l);
 }
 .data-table th{
     border: 0;
@@ -134,9 +134,12 @@ tr.mat-row{
 th.mat-header-cell{
   font-size: .875rem;
   color: var(--green-black);
+  //color: #072a2f;
+  //color: #fff;
   padding: inherit;
   border-bottom-width: 0;
   border-bottom-style: none;
+  font-weight: var(--font-m);
 }
 tr.example-detail-row {
   height: 0;
@@ -207,7 +210,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   font-weight: 700;
   padding-left: 10px;
   padding-bottom: 10px;
-  color: var(--green-dark);
+  color:var(--grey-dark);
 }
 .table--subtitle--lighter {
   font-weight: 100;
@@ -226,6 +229,12 @@ td.mat-cell {
 td.mat-cell:last-of-type, td.mat-cell:first-of-type {
   padding-right: 5px;
   padding-left: 5px;
+}
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type, 
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type{
+  padding-left: 0;
+  padding-right: 0;
+  padding: 0 10px;
 }
 
 th.mat-header-cell{

@@ -3,6 +3,7 @@ import { TasksService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ProjectsService } from 'src/app/services/project.service';
+import { PackService } from 'src/app/services/pack.service';
 
 
 @Component({
@@ -19,18 +20,21 @@ export class FormTaskComponent implements OnInit, OnChanges {
   @Input() client;
   @Input() taskToEdit;
   @Input() taskSelected;
+  @Input() packActive;
   @Output() saveTask = new EventEmitter();
   aliasPro: Array<any> = [{}];
   isAdmin: boolean;
   @Input() isTaskToEdit: boolean;
+  packs: any;
 
-  constructor(private fb: FormBuilder, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
+  constructor(private fb: FormBuilder, private packService : PackService, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
 
     this.authorization.observer.subscribe(data => {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     });
 
+    
 
     if (this.client == 3) {
       this.isAdmin = true;
@@ -74,6 +78,15 @@ export class FormTaskComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     //projectsGet();
+    this.packService.getPacksByClient(this.client).subscribe(
+      result => {
+        this.packs = result;
+        for(let i = 0; i < this.packs.length; i++){
+          if(this.packs[i].active === true){
+            this.packActive = this.packs[i]._id;
+        }return this.packActive;
+      }
+    })
 
     if (this.client == 3) {
       this.isAdmin = true;
@@ -105,9 +118,11 @@ export class FormTaskComponent implements OnInit, OnChanges {
         // client: this.client,
          client: this.aliasPro[0].client,
          name: [''],
+         pack_id: [''],
          status: [''],
          timespent: [''],
          project: [''],
+         project_id: [''],
          description: [''],
          datelimit: ['']
        });
@@ -116,9 +131,11 @@ export class FormTaskComponent implements OnInit, OnChanges {
         client: this.client,
         // client: this.aliasPro[0].client,
          name: [''],
-         status: [''],
-         timespent: [''],
+         pack_id: [''],
+         status: ['Pendiente'],
+         timespent: ['- : -'],
          project: [''],
+         project_id: [''],
          description: [''],
          datelimit: ['']
        });
@@ -146,6 +163,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
       if (this.taskToEdit) {
         this.tasksService.editTask(this.taskToEdit._id, form.value);
       } else {
+        form.value.pack_id = this.packActive;
         this.tasksService.addTask(form.value, this.client);
       }
     }

@@ -9,8 +9,11 @@
              <div class="user__login">
                <span class="user__name ">{{useractive[id].name}} {{useractive[id].surname}}</span>
                <button type="button" class="user__checkout simple_link" (click)="checkout()">Salir</button>
-               <div class="user__image">
-                 <span class="user__capitals">KZ</span>
+               <div *ngIf="isKoldo" class="user__image">
+                <span class="user__capitals">KZ</span>
+               </div>
+               <div *ngIf="isLoreto" class="user__image2">
+                <span class="user__capitals--green">LM</span>
                </div>
              </div>
            </div>

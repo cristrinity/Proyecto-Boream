@@ -1,7 +1,8 @@
 <main class="main">
   <div class="main__top">
     <div class="main__nav">
-      <div class="main__title">Nuevo Proyecto</div>
+      <div *ngIf="!this.projectToEdit" class="main__title">Nuevo Proyecto</div>
+      <div *ngIf="this.projectToEdit" class="main__title">Editar Proyecto</div>
       <div class="controls">
       </div>
     </div>

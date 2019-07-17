@@ -1,3 +1,4 @@
+
 .main {
   //background-color: #eef3f9;
   background-color: #fff;
@@ -13,10 +14,10 @@
   overflow-y: hidden;
 
   &__top {
-    height: rem(100px);
+    height: rem(80px);
     width: 90%;
     position: relative;
-    margin-top: rem(70px);
+    margin-top: rem(50px);
   }
 
   &__title {
@@ -129,6 +130,10 @@
     background-color: var(--green-dark);
     cursor: pointer;
   }
+      &__add:hover {
+        background-color: var(--btn-hover);
+      //background-color: #fff
+    }
 
   & span {
     color: #fff;
@@ -136,7 +141,6 @@
     font-size: var(--fdefault)
   }
 }
-
 
 .fa-plus-circle {
   font-size: 1rem;
@@ -163,7 +167,8 @@
   border: 0;
 
   &:hover {
-    background-color: var(--green-transp);
+    //background-color: var(--green-transp);
+    //color: var(--green-hover);
     border: 0;
   }
 
@@ -197,7 +202,7 @@
     padding: .75rem 1.5rem;
 
     &:hover {
-      background-color: var(--green-hover);
+      background-color: var(--green-default);
     }
 
     // color: var(--grey-default);
