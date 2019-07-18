@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -9,7 +9,6 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 
 export class TableAccountComponent implements OnInit, OnChanges{
-
   
     @Input() data;
     @Input() accounts;
@@ -20,18 +19,19 @@ export class TableAccountComponent implements OnInit, OnChanges{
     columnsToDisplay = ['user', 'contact', 'invoice', 'iedit'];
   
   
-    constructor() {
+    constructor(private changeDetectorRefs: ChangeDetectorRef) {
       this.dataSource = new MatTableDataSource(this.accounts);
       if(Array.isArray(this.accounts)){
         console.log('soy data baby', this.accounts)
         this.dataSource = new MatTableDataSource(this.accounts);
-
+        this.changeDetectorRefs.detectChanges();
       }
     }
     ngOnChanges(){
       if(Array.isArray(this.accounts)){
         console.log('soy data baby', this.accounts)
         this.dataSource = new MatTableDataSource(this.accounts);
+        this.changeDetectorRefs.detectChanges();
 
       }
     }
@@ -39,6 +39,7 @@ export class TableAccountComponent implements OnInit, OnChanges{
     ngOnInit() {
       if(Array.isArray(this.accounts)){
         this.dataSource = new MatTableDataSource(this.accounts);
+        this.changeDetectorRefs.detectChanges();
 
       }
     }

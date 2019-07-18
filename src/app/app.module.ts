@@ -47,8 +47,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ClientService } from './services/client.service';
 import { PackService } from './services/pack.service';
 import { TablePackComponent } from './pages/my-packs/table-packs/table-packs.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
 import { StatusTaskComponent } from './shared/components/status-task/status-task.component';
 import { DatePipe } from '@angular/common';
 import { MyClientsComponent } from './pages/my-clients/my-clients.component';
@@ -59,6 +59,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
@@ -97,7 +98,8 @@ export const httpInterceptorProviders = [
     MyClientsComponent,
     TableClientComponent,
     CreateClientComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -123,6 +125,7 @@ export const httpInterceptorProviders = [
     AngularFirestoreModule,
     AngularFireStorageModule,
     MatIconModule,
+    MatSnackBarModule
   ],
   providers: [
     ProjectsService,

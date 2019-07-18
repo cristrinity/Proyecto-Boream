@@ -13,10 +13,10 @@
 
                 <mat-form-field *ngIf="isAdmin">
                         <mat-select formControlName="status">
-                        <mat-option value="active" class="status-active">En curso </mat-option>
-                        <mat-option value="waiting" class="status-wait">En espera </mat-option>
-                        <mat-option value="done" class="status-done">Terminada </mat-option>
-                        <mat-option value="cancel" class="status-cancel">Cancelada </mat-option>
+                        <mat-option value="En curso" class="status-active">En curso </mat-option>
+                        <mat-option value="En espera" class="status-wait">En espera </mat-option>
+                        <mat-option value="Terminada" class="status-done">Terminada </mat-option>
+                        <mat-option value="Cancelada" class="status-cancel">Cancelada </mat-option>
                         </mat-select>
                 </mat-form-field>
 
@@ -32,9 +32,14 @@
                     <mat-select formControlName="project">
                             <mat-option *ngFor="let alias of aliasPro" [value]="alias.alias">{{alias.alias}}
                              <!-- <mat-option *ngFor="let proj of project" [value]="proj">{{proj}} -->
-                        </mat-option>
+                            </mat-option>
                         <!-- <mat-error *ngIf="myForm.controls.genre.errors?.required">Campo Requerido</mat-error> -->
                     </mat-select>
+                </mat-form-field>
+
+                <mat-form-field  *ngIf="isAdmin">
+                    <mat-label>Tiempo gastado</mat-label>
+                    <input matInput type="text" formControlName="timespent">
                 </mat-form-field>
 
                 <mat-form-field>
@@ -50,7 +55,8 @@
 
                 <!-- <button *ngIf="!isAdmin" matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, client)">Guardar</button> -->
-                <button      matButton type="button" class="btn btn--success"
+                   
+                <button  matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, aliasPro[0].client)">Guardar</button>
                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
