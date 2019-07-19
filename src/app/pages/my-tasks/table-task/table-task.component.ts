@@ -29,7 +29,11 @@ export class TableTaskComponent implements OnChanges, OnInit {
   isAdmin : boolean;
   columnsToDisplay;
   isTaskToEdit: boolean;
-  nameClient;
+  nameClient: boolean;
+  isActive: boolean = false;
+  isDone: boolean = false;
+  isCancel: boolean = false;
+  isWaiting: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -58,6 +62,9 @@ export class TableTaskComponent implements OnChanges, OnInit {
       this.chooseProject = this.projectService.getProjectsByClient(this.client);
       this.alias = this.chooseProject.alias;
 
+      // if(this.dataSource.status == 'En curso'){
+      //   this.isActive = true;
+      // }
     }
   }
   
@@ -76,6 +83,22 @@ export class TableTaskComponent implements OnChanges, OnInit {
       this.isAdmin = false;
     }
   
+    this.taskService.getTaskByClient(this.client).subscribe(
+      result => {
+        this.tasks = result;
+        for(let i = 0; i < this.tasks.length; i++){
+          if(this.tasks[i].status === "En curso"){
+            this.isActive = true;
+        }else{
+          if(this.tasks[i].status === "Pendiente"){
+            this.isWaiting = true;
+            this.isActive = false;
+        }
+        }
+
+      }
+    })
+
     this.dataSource = new MatTableDataSource(this.tasks);
     this.chooseProject = this.projectService.getProjectsByClient(this.client);
     this.alias = this.chooseProject.alias;

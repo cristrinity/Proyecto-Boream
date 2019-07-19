@@ -56,18 +56,23 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" formControlName="pass" required>
+          <input matInput formControlName="pass"  [type]="hide ? 'text' : 'password'">
           <mat-label>Contraseña</mat-label>
-        </mat-form-field>
-
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
         <mat-form-field>
           <input matInput type="text" formControlName="userAdmin" required>
           <mat-label>Usuario Admin</mat-label>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" formControlName="passAdmin" required>
-          <mat-label>Pass Admin</mat-label>
+            <input matInput formControlName="passAdmin"  [type]="hide ? 'text' : 'password'">
+            <mat-label>Contraseña</mat-label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
 
         <mat-form-field>
@@ -81,8 +86,11 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" formControlName="passH" required>
-          <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="passH"  [type]="hide ? 'text' : 'password'">
+            <mat-label>Contraseña</mat-label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
 
         <button matButton type="button" class="btn btn--success" (click)="submit($event, myForm)">Guardar</button>

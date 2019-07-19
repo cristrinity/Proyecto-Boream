@@ -2,6 +2,15 @@
 @import '../../../../assets/styles/tables';
 @import '../../../../assets/styles/main-comun';
 
+thead:before {
+  content: '';
+  background-color: #ddd;
+  width: 100vw;
+  height: 20px;
+  position: absolute;
+  left: 0;
+}
+
 .mat-cell{
     height: rem(35px);
     text-align: center;
@@ -26,9 +35,10 @@ th .mat-calendar-table-header {
   thead th {
     background-color: white;
   }
-  .rounded{
-    border-top-right-radius: 20px;
-}
+
+//   .rounded{
+//     border-top-right-radius: 20px;
+// }
   .logo{
      width: 250px;
      padding: 10px;
