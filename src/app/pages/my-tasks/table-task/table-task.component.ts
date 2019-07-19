@@ -1,17 +1,17 @@
-import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { TasksService } from 'src/app/services/task.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ProjectsService } from 'src/app/services/project.service';
-import { DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-table-task',
   templateUrl: 'table-task.component.html',
   styleUrls: ['table-task.component.scss'],
-  providers: [ DatePipe ]     
+  providers: [DatePipe]
 })
 
 export class TableTaskComponent implements OnChanges, OnInit {
@@ -26,37 +26,37 @@ export class TableTaskComponent implements OnChanges, OnInit {
   chooseProject;
   dataSource;
   alias;
-  isAdmin : boolean;
+  isAdmin: boolean;
   columnsToDisplay;
   isTaskToEdit: boolean;
   nameClient: boolean;
-  isActive: boolean = false;
-  isDone: boolean = false;
-  isCancel: boolean = false;
-  isWaiting: boolean = false;
+  isActive: boolean;
+  isDone: boolean;
+  isCancel: boolean;
+  isWaiting: boolean;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private taskService: TasksService, private projectService: ProjectsService, private accountService: AccountService) {
-    
+
     // this.dataSource = new MatTableDataSource(this.tasks);
-    if(this.client == 3){
+    if (this.client == 3) {
       this.isAdmin = true
       this.accountService.getAccounts().subscribe(data => {
         this.nameClient = data[this.dataSource.client].username;
         console.log('noooooooombre de cliente', this.dataSource.client) //no pinta el nombre del cliente en la tabla
       })
     }
-      else{
-        this.isAdmin = false;
-      }
-   
+    else {
+      this.isAdmin = false;
+    }
+
   }
-  
-  ngOnChanges(){
-    if(Array.isArray(this.tasks)){
-      
+
+  ngOnChanges() {
+    if (Array.isArray(this.tasks)) {
+
       this.dataSource = new MatTableDataSource(this.tasks);
       this.dataSource.paginator = this.paginator;
       this.chooseProject = this.projectService.getProjectsByClient(this.client);
@@ -67,45 +67,47 @@ export class TableTaskComponent implements OnChanges, OnInit {
       // }
     }
   }
-  
+
   ngOnInit() {
-   
-    if(this.client == 3){
+
+    if (this.client == 3) {
       this.isAdmin = true;
-      this.columnsToDisplay = ['status', 'client', 'name', 'timespent', 'project', 'datelimit', 'iedit' ];
+      this.columnsToDisplay = ['status', 'client', 'name', 'timespent', 'project', 'datelimit', 'iedit'];
       console.log('soy valor isAsdmin en task', this.isAdmin)
       // this.accountService.getAccounts().subscribe(data => {
       //   this.nameClient = data[this.dataSource.client].username;
       //   console.log('nuuuuuuumbre de cliente', this.dataSource.client) //no pinta el nombre del cliente en la tabla
       // })
-    }else{
-      this.columnsToDisplay = ['status', 'name', 'timespent', 'project', 'datelimit' ];
+    } else {
+      this.columnsToDisplay = ['status', 'name', 'timespent', 'project', 'datelimit'];
       this.isAdmin = false;
     }
-  
+
     this.taskService.getTaskByClient(this.client).subscribe(
       result => {
+       // debugger
         this.tasks = result;
-        for(let i = 0; i < this.tasks.length; i++){
-          if(this.tasks[i].status === "En curso"){
-            this.isActive = true;
-        }else{
-          if(this.tasks[i].status === "Pendiente"){
-            this.isWaiting = true;
-            this.isActive = false;
-        }
-        }
-
-      }
-    })
+        // for (let i = 0; i < this.tasks.length; i++) {
+        //   if (this.tasks[i].status === "En curso") {
+        //     //debugger
+        //     // this.isActive = true;
+        //     // this.isDone = false;
+        //    // debugger
+        //     continue
+        //   } else if(this.tasks[i].status === "Terminada") {
+        //   //   this.isDone = true;
+        //   //  this.isActive = false;
+        //   }
+        // }
+      })
 
     this.dataSource = new MatTableDataSource(this.tasks);
     this.chooseProject = this.projectService.getProjectsByClient(this.client);
     this.alias = this.chooseProject.alias;
-     
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    
+
 
   }
 
@@ -116,7 +118,7 @@ export class TableTaskComponent implements OnChanges, OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
   onDelete(tasks) {
     this.delete.emit(tasks);
   }

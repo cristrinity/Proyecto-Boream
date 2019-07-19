@@ -8,16 +8,32 @@
         </div>
     </div>
     <div class="content">
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="close">&times;</button>
+                    <!-- <h2>Modal Header</h2> -->
+                </div>
+                <div class="modal-body">
+                    <p>Cambios guardados correctamente!</p>
+                </div>
+                
+            </div>
+
+        </div>
+
         <div class="table">
             <form [formGroup]="myForm" class="form-class">
 
                 <mat-form-field *ngIf="isAdmin">
-                        <mat-select formControlName="status">
+                    <mat-select formControlName="status">
                         <mat-option value="En curso" class="status-active">En curso </mat-option>
                         <mat-option value="En espera" class="status-wait">En espera </mat-option>
                         <mat-option value="Terminada" class="status-done">Terminada </mat-option>
                         <mat-option value="Cancelada" class="status-cancel">Cancelada </mat-option>
-                        </mat-select>
+                    </mat-select>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -30,14 +46,14 @@
                     <mat-label>Proyecto asociado</mat-label>
 
                     <mat-select formControlName="project">
-                            <mat-option *ngFor="let alias of aliasPro" [value]="alias.alias">{{alias.alias}}
-                             <!-- <mat-option *ngFor="let proj of project" [value]="proj">{{proj}} -->
-                            </mat-option>
+                        <mat-option *ngFor="let alias of aliasPro" [value]="alias.alias">{{alias.alias}}
+                            <!-- <mat-option *ngFor="let proj of project" [value]="proj">{{proj}} -->
+                        </mat-option>
                         <!-- <mat-error *ngIf="myForm.controls.genre.errors?.required">Campo Requerido</mat-error> -->
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field  *ngIf="isAdmin">
+                <mat-form-field *ngIf="isAdmin">
                     <mat-label>Tiempo gastado</mat-label>
                     <input matInput type="text" formControlName="timespent">
                 </mat-form-field>
@@ -50,14 +66,14 @@
 
                 <mat-form-field>
                     <mat-label>Descripción</mat-label>
-                    <textarea  matInput type="text" formControlName="description" required></textarea>
+                    <textarea matInput type="text" formControlName="description" required></textarea>
                 </mat-form-field>
 
                 <!-- <button *ngIf="!isAdmin" matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, client)">Guardar</button> -->
-                   
-                <button  matButton type="button" class="btn btn--success"
-                    (click)="submit($event, myForm, aliasPro[0].client)">Guardar</button>
+
+                <button matButton type="button" class="btn btn--success"
+                    (click)="submit($event, myForm, aliasPro[0].client)" id="myBtn">Guardar</button>
                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
             </form>

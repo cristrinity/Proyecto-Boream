@@ -20,17 +20,12 @@
 
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado </th>
-                    <td class="status-active" mat-cell *matCellDef="let row"> 
-                            <span *ngIf="isActive" class="status-active"></span>
-                            <span *ngIf="isWaiting" class="status-waiting"></span>
-                            <span *ngIf="isDone" class="status-done"></span>
-                            <span *ngIf="isCancel" class="status-cancel"></span>
-                            {{row.status}} </td>
-                    <!-- <td *ngIf="isActive" class="status-active" mat-cell *matCellDef="let row"> {{row.status}} </td>
-                    <td *ngIf="isWaiting" class="status-waiting" mat-cell *matCellDef="let row"> {{row.status}} </td>
-                    <td *ngIf="isCancel" class="status-cancel" mat-cell *matCellDef="let row"> {{row.status}} </td>
-                    <td *ngIf="isDone" class="status-done" mat-cell *matCellDef="let row"> {{row.status}} </td> -->
-
+                    <td class="" mat-cell *matCellDef="let row"> 
+                        <div class="balls">
+                            <span [ngClass]="{'status-active': row.status == 'En curso', 'status-done': row.status == 'Terminada', 'status-cancel': row.status == 'Cancelada', 'status-waiting': row.status == 'En espera'}"></span>
+                            {{row.status}} 
+                        </div>
+                        </td>
                 </ng-container>
 
                 <ng-container *ngIf="isAdmin" matColumnDef="client">
