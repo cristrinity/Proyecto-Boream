@@ -85,20 +85,7 @@ export class TableTaskComponent implements OnChanges, OnInit {
 
     this.taskService.getTaskByClient(this.client).subscribe(
       result => {
-       // debugger
         this.tasks = result;
-        // for (let i = 0; i < this.tasks.length; i++) {
-        //   if (this.tasks[i].status === "En curso") {
-        //     //debugger
-        //     // this.isActive = true;
-        //     // this.isDone = false;
-        //    // debugger
-        //     continue
-        //   } else if(this.tasks[i].status === "Terminada") {
-        //   //   this.isDone = true;
-        //   //  this.isActive = false;
-        //   }
-        // }
       })
 
     this.dataSource = new MatTableDataSource(this.tasks);

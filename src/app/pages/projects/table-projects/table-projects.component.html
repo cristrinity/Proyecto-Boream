@@ -1,7 +1,7 @@
     <div class="content">
             <div class="table">
                 <table mat-table
-                [dataSource]="dataSource" #isLoggedIn multiTemplateDataRows
+                [dataSource]="dataSource" multiTemplateDataRows
                 class="">
            <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
              <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -63,11 +63,11 @@
 
            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-               class="example-element-row "
+               class="example-element-row"
                [class.example-expanded-row]="expandedElement === element"
                (click)="expandedElement = expandedElement === element ? null : element">
            </tr>
-           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row row-special"></tr>
          </table>
               </div>
             <!-- fin tabla -->

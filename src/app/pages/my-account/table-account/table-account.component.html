@@ -45,7 +45,7 @@
 
 
             <ng-container matColumnDef="iedit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="nostyle"></th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                 <td mat-cell *matCellDef="let row" class="noline iedit">
 
                     <span class="iedit__write" (click)="onEdit(row)" [routerLink]="['/edit-account', row._id]"><i

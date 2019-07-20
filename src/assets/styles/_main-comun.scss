@@ -3,9 +3,9 @@ button {
   cursor: pointer;
 }
 .main {
-  //background-color: #eef3f9;
-  background-color: #fff;
-  height: auto;
+  background-color: #eef3f9;
+  ///background-color: #fff;
+  min-height: 100vh;
   font-size: var(--fdefault);
   // width: calc(100vw - 239px);
   display: flex;
@@ -60,10 +60,11 @@ button {
 }
 
 .content {
-  padding: 0 40px;
+  padding: 45px 35px;
   width: 90%;
-  height: 100%;
+  height: auto;
   margin-bottom: 50px;
+  background-color: #fff;
 }
 
 .pagination {
@@ -272,4 +273,8 @@ button {
 
 .material-icons.md-48 {
   font-size: 48px;
+}
+
+.form-txt {
+  color: #0000008a;
 }
