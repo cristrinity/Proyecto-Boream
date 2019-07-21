@@ -62,9 +62,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LogginInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: LogginFakeInterceptor, multi: true }
+  { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
+ // { provide: HTTP_INTERCEPTORS, useClass: LogginFakeInterceptor, multi: true }
 ];
 
 @NgModule({

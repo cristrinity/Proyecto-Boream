@@ -19,11 +19,27 @@ export class UsernavComponent implements OnInit{
   isAdmin : boolean;
   isKoldo: boolean;
   isLoreto: boolean;
-constructor(private clientService: ClientService, private authorization: AuthorizationService, private router: Router){}
+  client;
+
+constructor(private clientService: ClientService, private authorization: AuthorizationService, private router: Router){
+
+  this.authorization.observer.subscribe(data => {
+    this.client = data;
+    if (this.client == 3) {
+      this.isAdmin = true;
+    } else {
+      this.isAdmin = false;
+    }
+    console.log('vengo de usernav miarmaa y soy observer.data', data) // OK. Trae id de usuario (0, 1, 2)
+  })
+}
 
 ngOnInit(){
+  
+
   this.id = this.authorization.getId();
-  this.myClients(this.userId);
+  console.log('buscando a Nemo', this.id)
+  this.myClients(this.id);
   
   if(this.id == 3){
     this.isAdmin = true;
@@ -42,7 +58,7 @@ ngOnInit(){
 }
 
  async myClients(id){
-   this.useractive = await this.clientService.getClientById(id);
+   this.useractive = await this.clientService.getById(this.id);
    if(this.id == 3){
     this.isAdmin = true;
   }else{
@@ -53,9 +69,11 @@ ngOnInit(){
 
 checkout(){
   this.authorization.logout();
-  localStorage.token = '';
-  localStorage.id = '';
+  //localStorage.token = '';
+  //localStorage.id = '';
   this.router.navigate(['/login']);
 }
+
+
 
 }

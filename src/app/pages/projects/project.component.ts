@@ -41,10 +41,10 @@ export class ProjectsComponent implements OnInit, OnChanges {
         }
       );
     }else {
-      this.projectService.getProjects().subscribe(
+      this.projectService.get().subscribe(
         result => {
           this.projects = result;
-          console.log('holaaaaa', result)
+          console.log('holaaaaa soy admin buscando proyectos', result)
         },
         err => {
           console.log('hay error');

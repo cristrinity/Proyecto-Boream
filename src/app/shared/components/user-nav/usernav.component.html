@@ -1,13 +1,14 @@
-       <header *ngIf="!isAdmin && useractive" class="topbar">
+    //<header *ngIf="!isAdmin && userActive" class="topbar">
+      <header *ngIf="!isAdmin" class="topbar">
          <div class="topbar__container">
            <div class="topbar__company">
              <i class="fas fa-bars toggler"></i>
              <!-- <img src="{{useractive[userActive].logo}}"> -->
-             <img src="{{useractive[id].logo}}">
+             <img src="{{userActive[id].logo}}">
            </div>
            <div class="user">
              <div class="user__login">
-               <span class="user__name ">{{useractive[id].name}} {{useractive[id].surname}}</span>
+               <span class="user__name ">{{userActive[id].name}} {{userActive[id].surname}}</span>
                <button type="button" class="user__checkout simple_link" (click)="checkout()">Salir</button>
                <div *ngIf="isKoldo" class="user__image">
                 <span class="user__capitals">KZ</span>

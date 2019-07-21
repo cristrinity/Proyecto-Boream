@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
-} from '@angular/common/http';
-
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthorizationService } from '../services/authorization.service';
 import {tap} from 'rxjs/operators';
@@ -20,7 +17,8 @@ export class AuthorizationInterceptor implements HttpInterceptor {
       //esto es la flecha hacia abajo
         const secureReq = req.clone({
          // url: req.url.replace('http://', 'https://')
-          headers: req.headers.set('access_token', this.authorization.getToken()? this.authorization.getToken() : localStorage.token)
+// headers: req.headers.set('access_token', this.authorization.getToken()? this.authorization.getToken() : localStorage.token)
+         headers: req.headers.set('Authorization', `Bearer ${this.authorization.getToken() ? this.authorization.getToken() : localStorage.token}`)
           // send the cloned, "secure" request to the next handler.
         });
         //console.log('AuthorizationInterceptor request');

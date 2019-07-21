@@ -11,12 +11,13 @@ export class ProjectsService {
   userActive;
   datos;
   stepOne;
+
   constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
 
 
   client = this.authorization.getId();// esto es lo que hace que se pinte el ID de cliente, por eso se lo paso en la llamada a la API.
   // Si no, hay que refrescar antes para que aparezcan de nuevo los datos. Esta línea se lee nada más abrir.
-
+  
 
   getProjectsByClient(client: number): Observable<any>{
     //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
@@ -32,7 +33,7 @@ export class ProjectsService {
     return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${alias}`) 
   }
 
-  getProjects() {
+  get() {
     // console.log(this.httpClient.get(`${environment.apiUrl}/projects`).toPromise());
     return this.httpClient.get(`${environment.apiUrl}/projects/`);
   }
