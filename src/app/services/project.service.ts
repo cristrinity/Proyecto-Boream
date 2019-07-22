@@ -11,25 +11,32 @@ export class ProjectsService {
   userActive;
   datos;
   stepOne;
-  constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
-
-
-  client = this.authorization.getId();// esto es lo que hace que se pinte el ID de cliente, por eso se lo paso en la llamada a la API.
+  user;
+  
+  constructor(private httpClient: HttpClient, private authorization: AuthorizationService) {
+  
+  
+  this.authorization.userActive.subscribe(data => {
+    this.user = data;
+  });
+}
+  //client = this.authorization.getId();// esto es lo que hace que se pinte el ID de cliente, por eso se lo paso en la llamada a la API.
   // Si no, hay que refrescar antes para que aparezcan de nuevo los datos. Esta línea se lee nada más abrir.
 
 
   getProjectsByClient(client: number): Observable<any>{
     //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
-    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/`) 
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/`) 
+    //return this.httpClient.get(`${environment.apiUrl}/projects/${this.client}/`) 
   }
 
   getProjectsByClientAdmin(client: number): Observable<any>{
-    //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
-    return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
+    return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.user}/`)
+    //return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
   }
   
   getProjectsByAlias(alias: String): Observable<any>{
-    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${alias}`) 
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/${alias}`) 
   }
 
   getProjects() {
@@ -60,7 +67,7 @@ export class ProjectsService {
   }
 
   async getProjectById(id) {
-    return this.httpClient.get(`${environment.apiUrl}/projects/${this.authorization.getId()}/${id}`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/${id}`).toPromise();
     //return this.projectsArray.find(elem => elem.id === id);
   }
 }

@@ -17,7 +17,7 @@ export class PackService {
     }
 
    getPacksByClient(client: number): Observable<any>{
-        return this.httpClient.get(`${environment.apiUrl}/packs/${this.authorization.getId()}`);
+        return this.httpClient.get(`${environment.apiUrl}/packs/${localStorage.id}`);
     }
     
     // getPacksByActive() {

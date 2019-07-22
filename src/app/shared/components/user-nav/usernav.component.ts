@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls:  ['./usernav.component.scss']
 })
 
-export class UsernavComponent implements OnInit{
+export class UsernavComponent implements OnInit, OnChanges{
 
   @Input() userId;
   @Input() userName;
@@ -21,10 +21,19 @@ export class UsernavComponent implements OnInit{
   isLoreto: boolean;
 constructor(private clientService: ClientService, private authorization: AuthorizationService, private router: Router){}
 
+ngOnChanges(changes: SimpleChanges): void {
+  //this.id = this.userActive.value;
+  this.authorization.userActive.subscribe(data => {
+    this.id = data;
+  });
+}
+
 ngOnInit(){
-  this.id = this.authorization.getId();
+  this.authorization.userActive.subscribe(data => {
+    this.id = data;
+  });
   this.myClients(this.userId);
-  
+
   if(this.id == 3){
     this.isAdmin = true;
   }else{
@@ -53,8 +62,8 @@ ngOnInit(){
 
 checkout(){
   this.authorization.logout();
-  localStorage.token = '';
-  localStorage.id = '';
+  // localStorage.token = '';
+  // localStorage.id = '';
   this.router.navigate(['/login']);
 }
 

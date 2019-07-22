@@ -10,10 +10,10 @@ export class AccountService {
 
 constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
 
-  client = this.authorization.getId();
+  client = localStorage.id;
 
   getAccountByClient(client: number): Observable<any>{
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/`);
+    return this.httpClient.get(`${environment.apiUrl}/clients/${localStorage.id}/`);
   }
 
   async deleteAccount(id: number) {
@@ -39,7 +39,7 @@ constructor(private httpClient: HttpClient, private authorization: Authorization
   }
 
   async getAccountById(id){
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/${id}`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/clients/${localStorage.id}/${id}`).toPromise();
 
   }
 }

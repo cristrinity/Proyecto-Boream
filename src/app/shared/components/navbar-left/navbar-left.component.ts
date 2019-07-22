@@ -15,12 +15,12 @@ export class NavbarLeftComponent implements OnInit{
   isAdmin : boolean;
 
   constructor(private authorization: AuthorizationService) {
-    this.userActive = this.authorization.getId();
+    this.userActive = localStorage.id;
     console.log('soy del menu', this.userActive)
   }
   
   ngOnInit(){
-    this.userActive = this.authorization.getId();
+    this.userActive = localStorage.id;
 
     if(this.userActive == 3){
       this.isAdmin = true;

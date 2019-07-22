@@ -10,12 +10,13 @@ export class TasksService {
   datos;
 constructor(private httpClient: HttpClient, private authorization: AuthorizationService){}
 
-client = this.authorization.getId();
+//client = this.authorization.getId();
+client = localStorage.id;
 
 
   getTaskByClient(client: number): Observable<any>{
     console.log('soy tu cliente', client);
-    return this.httpClient.get(`${environment.apiUrl}/tasks/${this.authorization.getId()}/`) 
+    return this.httpClient.get(`${environment.apiUrl}/tasks/${localStorage.id}/`) 
     }
 
   getTasks() {
