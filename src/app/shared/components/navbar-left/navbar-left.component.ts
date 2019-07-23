@@ -13,14 +13,21 @@ export class NavbarLeftComponent implements OnInit{
   @Input() project;
   userActive;
   isAdmin : boolean;
-
+  client;
   constructor(private authorization: AuthorizationService) {
-    this.userActive = localStorage.id;
-    console.log('soy del menu', this.userActive)
+   
+    this.authorization.userActive.subscribe(data => {
+      this.client = data;
+      if (this.client == 3) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    })
   }
   
   ngOnInit(){
-    this.userActive = localStorage.id;
+    //this.userActive = localStorage.id;
 
     if(this.userActive == 3){
       this.isAdmin = true;

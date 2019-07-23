@@ -8,15 +8,17 @@ import { Observable } from 'rxjs';
 export class TasksService {
   userActive;
   datos;
-constructor(private httpClient: HttpClient, private authorization: AuthorizationService){}
+  client;
+constructor(private httpClient: HttpClient, private authorization: AuthorizationService){
 
-//client = this.authorization.getId();
-client = localStorage.id;
-
-
+this.authorization.userActive.subscribe(data => {
+  this.client = data;
+});
+}
   getTaskByClient(client: number): Observable<any>{
     console.log('soy tu cliente', client);
-    return this.httpClient.get(`${environment.apiUrl}/tasks/${localStorage.id}/`) 
+    return this.httpClient.get(`${environment.apiUrl}/tasks/${this.client}/`) 
+//    return this.httpClient.get(`${environment.apiUrl}/tasks/${localStorage.id}/`) 
     }
 
   getTasks() {

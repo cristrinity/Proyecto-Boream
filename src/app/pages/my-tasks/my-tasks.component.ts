@@ -21,14 +21,14 @@ export class MyTasksComponent implements OnInit{
   @Input() datos;
   userActive;
   aliasPro: Array<any> = [];
-  observer;
+
   isAdmin;
   packs;
   packActive;
 
   constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService, private packService : PackService){
 
-    this.authorization.observer.subscribe(data => {
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
       if (this.client == 3) {
         this.isAdmin = true;
@@ -71,24 +71,17 @@ export class MyTasksComponent implements OnInit{
     );
 }
   ngOnInit() {
-    // this.packService.getPacksByClient(this.client).subscribe(
-    //   result => {
-    //     this.packs = result;
-    //     console.log('pack pack', this.packs)
-    //     for(let i = 0; i < this.packs.length; i++){
-    //       debugger
-    //       if(this.packs[i].active === true){
-    //         this.packActive = this.packs[i]._id;
-    //     }return this.packActive;
-    //   }
-    // })
-    //this.refreshTasks();
-    this.authorization.observer.subscribe(data => {
+    
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
-    })
+    });
+
     console.log('soy pack activusss', this.packActive)
     //this.refreshProjects();
-    this.userActive = this.authorization.getId();
+    this.userActive = this.authorization.userActive.subscribe(data => {
+      this.userActive = data;
+    });
+
   }
   
    refreshTasks() {

@@ -35,7 +35,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
 
-    this.authorization.observer.subscribe(data => {
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
 

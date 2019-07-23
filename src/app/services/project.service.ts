@@ -12,7 +12,7 @@ export class ProjectsService {
   datos;
   stepOne;
   user;
-  
+  id;
   constructor(private httpClient: HttpClient, private authorization: AuthorizationService) {
   
   
@@ -20,6 +20,17 @@ export class ProjectsService {
     this.user = data;
   });
 }
+
+ngDoCheck(): void {
+  //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+  //Add 'implements DoCheck' to the class.
+  //this.id = this.userActive.value;
+  this.authorization.userActive.subscribe(data => {
+    this.user = data;
+  });
+}
+
+
   //client = this.authorization.getId();// esto es lo que hace que se pinte el ID de cliente, por eso se lo paso en la llamada a la API.
   // Si no, hay que refrescar antes para que aparezcan de nuevo los datos. Esta línea se lee nada más abrir.
 
@@ -31,7 +42,8 @@ export class ProjectsService {
   }
 
   getProjectsByClientAdmin(client: number): Observable<any>{
-    return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.user}/`)
+    debugger
+    return this.httpClient.get(`${environment.apiUrl}/projects/client/${client}/`)
     //return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
   }
   

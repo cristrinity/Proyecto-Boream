@@ -32,7 +32,7 @@ export class FormAccountComponent implements OnInit, OnChanges {
     private http: HttpClient,
     private storage: AngularFireStorage, private router: Router) {
 
-    this.authorization.observer.subscribe(data => {
+      this.authorization.userActive.subscribe(data => {
       this.clientA = data;
       if (this.clientA == 3) {
         this.isAdmin = true;
