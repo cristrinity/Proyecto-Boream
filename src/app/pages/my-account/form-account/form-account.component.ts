@@ -122,14 +122,24 @@ export class FormAccountComponent implements OnInit, OnChanges {
     } else {
       this.isAdmin = false;
     }
+    //modal cambios guardados correctamente
+    let modal = document.getElementById("myModal");
+    let btn = document.getElementById("myBtn");
+    let button = document.getElementById("close");
 
-    // if (this.urlImage) {
-    //   this.logotype = this.inputImageUser.nativeElement.value.toString();
-    //   console.log('logotype lleno en onInit con ->', this.logotype)
-    // } else {
-    //   console.log('logotype vacio on Init')
-    // }
-
+    btn.onclick = function () {
+      modal.style.display = "block";
+    }
+    //When the user clicks on <span> (x), close the modal
+    button.onclick = function () {
+    modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
 
     this.myForm = this.fb.group({
       client: [''],

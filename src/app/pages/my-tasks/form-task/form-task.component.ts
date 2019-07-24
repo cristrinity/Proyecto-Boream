@@ -32,7 +32,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
     this.authorization.userActive.subscribe(data => {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
-      debugger
+      
     if (this.client == 3) {
       this.isAdmin = true;
       this.isTaskToEdit = true;
@@ -52,14 +52,14 @@ export class FormTaskComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    debugger
+    
     if (this.client == 3) {
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
-      debugger
+      
       this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
         result => {
-          debugger
+          
           this.aliasPro = result;
           console.log('soy aliasPro', this.aliasPro)
           //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
@@ -118,7 +118,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
     if (this.client == 3) {
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
-      debugger
+      
       this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
         result => {
           this.aliasPro = result;
@@ -160,7 +160,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
         // client: this.aliasPro[0].client,
          name: [''],
          pack_id: [''],
-         status: ['Pendiente'],
+         status: ['En espera'],
          timespent: ['- : -'],
          project: [''],
          project_id: [''],

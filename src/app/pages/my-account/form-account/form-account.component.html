@@ -8,8 +8,22 @@
                         </div>
                 </div>
         </div>
-     
+
         <div class="content">
+
+                <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <button type="button" class="close" id="close">&times;</button>
+                                        <!-- <h2>Modal Header</h2> -->
+                                </div>
+                                <div class="modal-body">
+                                        <p>Cambios guardados correctamente!</p>
+                                </div>
+                        </div>
+                </div>
+
                 <div class="table">
                         <form [formGroup]="myForm" class="form-class">
                                 <div class="form-section">Datos de Usuario</div>
@@ -24,9 +38,10 @@
                                         <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
                                 </mat-form-field>
                                 <mat-form-field>
-                                        <input matInput formControlName="password"  [type]="hide ? 'text' : 'password'">
-                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        <input matInput formControlName="password" [type]="hide ? 'text' : 'password'">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide"
+                                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                         </button>
                                 </mat-form-field>
                                 <mat-form-field>
@@ -44,7 +59,7 @@
                                         </mat-form-field>
                                         <mat-form-field>
                                                 <input matInput type="text" formControlName="emailc" required>
-                                                <mat-label>Emaill</mat-label>
+                                                <mat-label>Email</mat-label>
                                         </mat-form-field>
                                         <mat-form-field>
                                                 <input matInput type="text" formControlName="tel" required>
@@ -94,19 +109,19 @@
                                 </div>
                                 <mat-form-field>
                                         <span class="form-txt">Logotipo</span><br><br>
-                                        <input type="file" accept=".jpg, .png" (change)="onUpload($event)" /> 
+                                        <input type="file" accept=".jpg, .png" (change)="onUpload($event)" />
                                         <br>
                                         <input matInput type="text" hidden formControlName="logo" #imageUser>
                                         <img *ngIf="logo" src="logo" #imageUser>
-                                        </mat-form-field>
-                                
+                                </mat-form-field>
+
 
 
                                 <br>
 
 
                                 <button matButton type="button" class="btn btn--success"
-                                        (click)="submit($event, myForm)">Guardar</button>
+                                        (click)="submit($event, myForm)" id="myBtn">Guardar</button>
                                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
                         </form>

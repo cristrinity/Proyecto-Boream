@@ -53,13 +53,7 @@ thead th {
     align-items: center
 }
 
-.status-waiting {
-    width: 15px;
-    height: 15px;
-    border-radius: 40px;
-    background-color: #fbb034;
-    margin-right: 10px;
-}
+
 .status-done img{
     width: 25px;
     height: 25px;
@@ -77,6 +71,14 @@ thead th {
     margin-right: 10px;
     background: url('../../../../assets/images/check.png');
     background-size: cover;
+}
+.status-waiting {
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: #fbb034;
+    display: inline-block;
+    margin-right: 10px;
 }
 .status-cancel {
     width: 15px;

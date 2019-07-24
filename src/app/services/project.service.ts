@@ -42,7 +42,7 @@ ngDoCheck(): void {
   }
 
   getProjectsByClientAdmin(client: number): Observable<any>{
-    debugger
+
     return this.httpClient.get(`${environment.apiUrl}/projects/client/${client}/`)
     //return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
   }
@@ -83,4 +83,3 @@ ngDoCheck(): void {
     //return this.projectsArray.find(elem => elem.id === id);
   }
 }
-
