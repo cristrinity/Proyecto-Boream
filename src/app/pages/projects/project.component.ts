@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { ProjectsService } from '../../services/project.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -19,8 +20,28 @@ export class ProjectsComponent implements OnInit, DoCheck {
   isAdmin: boolean;
   client;
 
-  constructor(private projectService: ProjectsService, private authorization: AuthorizationService) {
+  constructor(private projectService: ProjectsService, private authorization: AuthorizationService, private router: Router) {
 
+    this.getProjects();
+
+    if (this.client == 3) {
+      this.isAdmin = true;
+
+    } else {
+      // debugger
+      this.isAdmin = false;
+    }
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/proyectos') {
+        this.getProjects();
+      }
+    })
+    console.log('soy client', this.client, localStorage.id)
+    console.log('vengo de authorization y soy data', this.client) // OK. Trae id de usuario (0, 1, 2)
+  
+  }
+
+  getProjects() {
     this.authorization.userActive.subscribe(data => {
       //debugger
       this.client = data;
@@ -50,45 +71,7 @@ export class ProjectsComponent implements OnInit, DoCheck {
         );
       }
     }
-
-
-
     });
-
-    if (this.client == 3) {
-      this.isAdmin = true;
-
-    } else {
-      // debugger
-      this.isAdmin = false;
-    }
-    console.log('soy client', this.client, localStorage.id)
-    console.log('vengo de authorization y soy data', this.client) // OK. Trae id de usuario (0, 1, 2)
-  //   if(this.client >= 0){
-  //     if (this.client !== 3) {
-  //       debugger
-  //     this.projectService.getProjectsByClient(this.client).subscribe(
-  //       result => {
-  //         debugger
-  //         this.projects = result;
-  //         console.log('holaaaaa', result)
-  //       },
-  //       err => {
-  //         console.log('hay error');
-  //       }
-  //     );
-  //   } else {
-  //     this.projectService.getProjects().subscribe(
-  //       result => {
-  //         this.projects = result;
-  //         console.log('holaaaaa', result)
-  //       },
-  //       err => {
-  //         console.log('hay error');
-  //       }
-  //     );
-  //   }
-  // }
   }
 
   ngDoCheck(): void {
@@ -107,13 +90,6 @@ export class ProjectsComponent implements OnInit, DoCheck {
       this.client = data;
     })
 
-
-    //   this.authorization.userActive.subscribe(data => {
-    //   this.client = data;
-    // });
-
-    //this.refreshProjects();
-    //this.userActive = this.client;
     console.log('tngo algo? soy Useractive', this.userActive)
   }
 

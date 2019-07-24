@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 import { ProjectsService } from '../../../services/project.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
     'Joomla'
   ];
 
-  constructor(private fb: FormBuilder, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
+  constructor(private fb: FormBuilder, private router: Router, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
 
     this.authorization.userActive.subscribe(data => {
       this.client = data;
@@ -114,11 +115,10 @@ export class FormProjectComponent implements OnInit, OnChanges {
       if (this.projectToEdit) {
         //console.log('editando projecto', this.projectToEdit._id)
         this.projectsService.editProject(this.projectToEdit._id, form.value);
+       this.router.navigate(["/proyectos"])
       } else {
         this.projectsService.addProject(form.value, this.client);
       }
     }
   }
-
-
 }

@@ -2,6 +2,7 @@ import { Injectable, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 //const AUTH_URL = 'http://localhost:4200/auth/login';
 
@@ -14,7 +15,7 @@ export class AuthorizationService {
   private token: string = null;
   id;
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(name, pass) {
 
@@ -26,13 +27,19 @@ export class AuthorizationService {
       if (response.token) {
       this.token = response.token;
       localStorage.setItem('token', this.token)
-      this.httpClient.get(`${environment.apiUrl}/auth/me`).toPromise().then((data: any) => {
-        this.userActive.next(data);
-        localStorage.setItem('id', this.userActive.value)
-        //this.isLoged.next(true);
-    }); 
+       this.getUser();
     }
   });
+}
+getUser() {
+  if (!this.getToken()) {
+    this.router.navigate(['/login']);
+  }
+  this.httpClient.get(`${environment.apiUrl}/auth/me`).toPromise().then((data: any) => {
+    this.userActive.next(data);
+    localStorage.setItem('id', this.userActive.value)
+    //this.isLoged.next(true);
+}); 
 }
   logout() {
     this.userActive.next(false);
@@ -41,7 +48,7 @@ export class AuthorizationService {
 
   }
   getToken(): string {
-    return this.token;
+    return this.token || localStorage.getItem('token');
   }
 
   getMe(){

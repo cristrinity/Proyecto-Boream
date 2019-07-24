@@ -25,6 +25,7 @@ export class AppComponent implements OnChanges {
   constructor(private router: Router, private authorizationService: AuthorizationService, private projectservice: ProjectsService) {
   }
   ngOnInit() {
+    this.authorizationService.getUser();
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

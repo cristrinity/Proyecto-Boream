@@ -23,9 +23,9 @@ export class UsernavComponent implements OnInit, OnChanges, DoCheck {
 
   ngOnChanges(changes: SimpleChanges): void {
     //this.id = this.userActive.value;
-    this.authorization.userActive.subscribe(data => {
-      this.id = data;
-    });
+    // this.authorization.userActive.subscribe(data => {
+    //   this.id = data;
+    // });
   }
 
   ngDoCheck(): void {
@@ -54,8 +54,11 @@ export class UsernavComponent implements OnInit, OnChanges, DoCheck {
   ngOnInit() {
     this.authorization.userActive.subscribe(data => {
       this.id = data;
+      if (this.id !== null && this.id !== undefined) {
+        this.myClients(this.id);
+      }
     });
-    this.myClients(this.userId);
+    
 
 
   }

@@ -78,8 +78,14 @@ ngDoCheck(): void {
     return this.httpClient.post(`${environment.apiUrl}/projects/create/`, project, client).toPromise();
   }
 
+  // async getProjectById(id) {
+  //   return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/${id}`).toPromise();
+  //   //return this.projectsArray.find(elem => elem.id === id);
+  // }
   async getProjectById(id) {
-    return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/${id}`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/projects/edit/${id}`).toPromise();
     //return this.projectsArray.find(elem => elem.id === id);
   }
+
+
 }
