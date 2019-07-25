@@ -15,12 +15,12 @@ export class MyPacksComponent {
   show: boolean = false;
   packs;
   // packs$: Observable<any>;
-  observer;
+
   isAdmin: boolean;
 
   constructor(private packService: PackService, private authorization: AuthorizationService) {
 
-    this.authorization.observer.subscribe(data => {
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
       if (this.client == 3) {
         this.isAdmin = true;
@@ -29,6 +29,7 @@ export class MyPacksComponent {
       }
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
+    
     if (this.client !== 3) {
       // this.packs$ = this.packService.getPacksByClient(this.client);
       this.packService.getPacksByClient(this.client).subscribe(
@@ -52,7 +53,7 @@ export class MyPacksComponent {
     };
   }
   ngOnInit() {
-    this.authorization.observer.subscribe(data => {
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
     })
@@ -79,11 +80,5 @@ export class MyPacksComponent {
   onClick(e) {
     this.show = !this.show
   }
-
-  // ngOnDestroy(): void {
-  //   //Called once, before the instance is destroyed.
-  //   //Add 'implements OnDestroy' to the class.
-    
-  // }
 
 }

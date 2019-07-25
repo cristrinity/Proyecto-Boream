@@ -11,14 +11,15 @@
                     </div>
                 </div>
             </div>
-            <app-table-projects
-            [client]="client"
-            [datos]="datos"
-            [nuevo]="nuevo"
-            [projects]="projects"
-            (delete)="onDelete($event)"
-            (edit)="onEdit($event)"
-            >
+           
+                <app-table-projects
+                [projects]="projects"
+                [client]="client"
+                [datos]="datos"
+                [nuevo]="nuevo"
+                (delete)="onDelete($event)"
+                (edit)="onEdit($event)"
+                >
             </app-table-projects>
-
+        
 </main>

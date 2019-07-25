@@ -37,26 +37,6 @@ ngOnInit() {
      });
     });
   }
-    //   this.projectService.getProjectsByClient(this.taskSelected.client).subscribe(
-    //     result => {
-    //       this.projectsSelected = result;
-    //       this.alias = this.projectsSelected.alias;
-    //       console.log('en proy', this.projectsSelected)
-    //       console.log('en client', this.taskSelected.client)
-    //     },
-    //     err => {
-    //       console.log('hay error');
-    //     }
-    //   );
-    // }
-  
-  // this.activatedRoute.params.subscribe((data) => {
-  //   this.taskService.getTaskById(data.id).subscribe(task => {
-  //     this.taskSelected = task;
-  //     console.log('soy la taskSelected', this.taskSelected)
-  //    });
-  //   });
-  // }
-
+    
 
 }

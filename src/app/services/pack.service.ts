@@ -6,18 +6,21 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class PackService {
-
+    user;
     packs;
 
-    constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
+    constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { 
     
-
+    this.authorization.userActive.subscribe(data => {
+        this.user = data;
+      });
+    }
     getPacks() {
         return this.httpClient.get(`${environment.apiUrl}/packs`);
     }
 
    getPacksByClient(client: number): Observable<any>{
-        return this.httpClient.get(`${environment.apiUrl}/packs/${this.authorization.getId()}`);
+        return this.httpClient.get(`${environment.apiUrl}/packs/${this.user}`);
     }
     
     // getPacksByActive() {

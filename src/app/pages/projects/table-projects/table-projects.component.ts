@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges, DoCheck} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { DataSource } from '@angular/cdk/table';
 import { MatPaginator} from '@angular/material/paginator';
@@ -22,23 +22,21 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
   ]
 })
 
-export class MyProjectsComponent implements OnInit, OnChanges{
+export class MyProjectsComponent implements OnInit, OnChanges, DoCheck{
 
   isLoggedIn : Observable<boolean>;
   @Input() projects;
   @Input() client;
   @Input() nuevo;
   @Input() datos;
-  observer;
+
   
   //client;
 
   constructor(private projectService: ProjectsService, private authorization: AuthorizationService) {
    // this.dataSource = this.projectService.getProjectsByClient(this.client);
-  
-
   }
-  
+
   @Output() delete = new EventEmitter();
   @Output() edit = new EventEmitter();
   dataSource;
@@ -46,19 +44,23 @@ export class MyProjectsComponent implements OnInit, OnChanges{
   @ViewChild(MatPaginator)  paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    //this.id = this.userActive.value;
+    this.authorization.userActive.subscribe(data => {
+      this.client = data;
+    });
+    if(Array.isArray(this.projects)){
+      console.log(this.projects);
+      this.dataSource = new MatTableDataSource(this.projects);
+        this.dataSource.paginator = this.paginator;
+      }
+  }
+
+
   ngOnChanges(){
    
-    // this.projectService.getProjectsByClient(this.client).subscribe(
-    //   result => {
-    //     this.dataSource = result;
-    //     console.log(result)
-    //    },
-    //    err => {
-    //      console.log('hay error');
-    //    }
-    // );
-   
-
     if(Array.isArray(this.projects)){
 
     this.dataSource = new MatTableDataSource(this.projects);
@@ -67,16 +69,6 @@ export class MyProjectsComponent implements OnInit, OnChanges{
   }
   
   ngOnInit() {
-    
-    // this.projectService.getProjectsByClient(this.client).subscribe(
-    //   result => {
-    //     this.dataSource = result;
-    //     console.log(result)
-    //    },
-    //    err => {
-    //      console.log('hay error');
-    //    }
-    // );
 
     this.dataSource = new MatTableDataSource(this.projects);
 

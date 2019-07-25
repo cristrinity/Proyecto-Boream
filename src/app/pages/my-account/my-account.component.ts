@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, DoCheck, SimpleChanges } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ClientService } from 'src/app/services/client.service';
@@ -10,19 +10,18 @@ import { ClientService } from 'src/app/services/client.service';
   styleUrls: ['./my-account.component.scss']
 })
 
-export class MyAccountComponent implements OnInit {
+export class MyAccountComponent implements OnInit, OnChanges { 
 
   @Input() client;
   dataInfo;
   datos;
   accounts;
-  observer;
+
   constructor(private accountService: AccountService, private authorization: AuthorizationService, private clientService: ClientService) {
 
-    this.authorization.observer.subscribe(data => {
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
-      console.log('vengo de authorization y soy data', data) // Trae id de usuario (0, 1, 2)
-    })
+    });
 
     this.accountService.getAccountByClient(this.client).subscribe(
       result => {
@@ -35,14 +34,23 @@ export class MyAccountComponent implements OnInit {
     );
   }
 
+ngOnChanges(changes: SimpleChanges): void {
+  //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+  //Add '${implements OnChanges}' to the class.
+  this.authorization.userActive.subscribe(data => {
+    this.client = data;
+  });
+
+}
+
   ngOnInit() {
     this.refreshAccount();
   }
 
   refreshAccount() {
-    this.authorization.observer.subscribe(data => {
+    this.authorization.userActive.subscribe(data => {
       this.client = data;
-    })
+    });
   }
 
   async onDelete(data) {

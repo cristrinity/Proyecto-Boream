@@ -5,15 +5,19 @@ import { AuthorizationService } from './authorization.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AccountService {
+export class AccountService  {
 
+user;
+constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { 
 
-constructor(private httpClient: HttpClient, private authorization: AuthorizationService) { }
+    this.authorization.userActive.subscribe(data => {
+      this.user = data;
+    });
+}
+  
 
-  client = this.authorization.getId();
-
-  getAccountByClient(client: number): Observable<any>{
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/`);
+  getAccountByClient(user: number): Observable<any>{
+    return this.httpClient.get(`${environment.apiUrl}/clients/${this.user}`);
   }
 
   async deleteAccount(id: number) {
@@ -39,7 +43,7 @@ constructor(private httpClient: HttpClient, private authorization: Authorization
   }
 
   async getAccountById(id){
-    return this.httpClient.get(`${environment.apiUrl}/clients/${this.authorization.getId()}/${id}`).toPromise();
+    return this.httpClient.get(`${environment.apiUrl}/clients/${this.user}/${id}`).toPromise();
 
   }
 }

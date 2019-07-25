@@ -2,6 +2,9 @@
 @import "../../../../assets/styles/main-comun";
 @import "../../../../assets/styles/tables";
 
+.hidden {
+    display: none;
+}
 
 td.mat-cell {
     padding: 0 0;

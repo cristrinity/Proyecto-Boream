@@ -32,7 +32,6 @@ export class TableAccountComponent implements OnInit, OnChanges{
         console.log('soy data baby', this.accounts)
         this.dataSource = new MatTableDataSource(this.accounts);
         this.changeDetectorRefs.detectChanges();
-
       }
     }
   
