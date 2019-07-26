@@ -17,6 +17,8 @@ import { EditAccountComponent } from './pages/my-account/edit-account/edit-accou
 import { EditTaskComponent } from './pages/my-tasks/edit-task/edit-task.component';
 import { MyClientsComponent } from './pages/my-clients/my-clients.component';
 import { CreateAccountComponent } from './pages/my-account/create-account/create-account.component';
+import { ActivateGuard } from './services/can-activate.service';
+import { SureExit } from './services/sure-exit.service';
 
 
 const routes: Routes = [{
@@ -26,11 +28,13 @@ const routes: Routes = [{
 },
 {
   path: 'create-task',
-  component: CreateTaskComponent
+  component: CreateTaskComponent,
+  canDeactivate: [SureExit]
 },
 {
 path: 'edit-task/:id',
-  component: EditTaskComponent
+  component: EditTaskComponent,
+  // canDeactivate: [SureExit]
 },
 {
   path: 'login',
@@ -50,11 +54,13 @@ path: 'edit-task/:id',
 },
 {
   path: 'datos',
-  component: MyAccountComponent
+  component: MyAccountComponent, canActivate: [ActivateGuard]
 },
 {
-  path: 'proyectos/create-project',
-  component: CreateProjectComponent
+  path: 'proyectos/create-project', 
+  component: CreateProjectComponent, 
+  // canActivate: [ActivateGuard],
+  canDeactivate: [SureExit]
 },
 {
   path: 'proyectos/edit-project/:id',
@@ -70,11 +76,15 @@ component: MyClientsComponent
 },
 {
   path: '',
-  component: LoginComponent
+  component: LoginComponent,
+  // canActivate: [ActivateGuard],
+  // canDeactivate: [SureExit]
 },
 {
   path: '**',
-  component: NotFoundComponent
+  component: NotFoundComponent,
+    // canActivate: [ActivateGuard],
+    // canDeactivate: [SureExit]
 }
 
 // {

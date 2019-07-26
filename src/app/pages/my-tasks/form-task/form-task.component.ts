@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { TasksService } from 'src/app/services/task.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ProjectsService } from 'src/app/services/project.service';
 import { PackService } from 'src/app/services/pack.service';
+import { CheckFormsService } from 'src/app/services/check-forms.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { PackService } from 'src/app/services/pack.service';
   styleUrls: ['form-task.component.scss']
 })
 
-export class FormTaskComponent implements OnInit, OnChanges {
+export class FormTaskComponent implements OnInit {
+   
 
   myForm;
   taskCopy;
@@ -26,8 +28,10 @@ export class FormTaskComponent implements OnInit, OnChanges {
   isAdmin: boolean;
   @Input() isTaskToEdit: boolean;
   packs: any;
+  advice;
 
-  constructor(private fb: FormBuilder, private packService : PackService, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
+
+  constructor(private fb: FormBuilder, private checkService: CheckFormsService, private packService : PackService, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
 
     this.authorization.userActive.subscribe(data => {
       this.client = data;
@@ -36,23 +40,18 @@ export class FormTaskComponent implements OnInit, OnChanges {
     if (this.client == 3) {
       this.isAdmin = true;
       this.isTaskToEdit = true;
-      console.log('soy valor isAsdmin', this.isAdmin)
-      console.log('buscando el array perdido projectsss', this.projectsSelected)
-      console.log('buscando el array perdido taskSelected', this.taskSelected)
-      console.log('buscando el array perdido taskCopy', this.taskCopy)
+
     } else {
       this.isAdmin = false;
     }
   });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-   // this.taskCopy = { ...changes.taskToEdit.currentValue };
-  
-  }
 
   ngOnInit() {
-    
+
+    this.checkService.checking.next(false);
+
     if (this.client == 3) {
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
@@ -80,6 +79,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
         }
       );
     }
+
       let modal = document.getElementById("myModal");
       // Get the button that opens the modal
       let btn = document.getElementById("myBtn");
@@ -95,14 +95,12 @@ export class FormTaskComponent implements OnInit, OnChanges {
       modal.style.display = "none";
       }
       // When the user clicks anywhere outside of the modal, close it
+
       window.onclick = function (event) {
         if (event.target == modal) {
           modal.style.display = "none";
         }
       }
-
-
-
 
     //projectsGet();
     this.packService.getPacksByClient(this.client).subscribe(
@@ -167,8 +165,9 @@ export class FormTaskComponent implements OnInit, OnChanges {
          description: [''],
          datelimit: ['']
        });
+
     }
-  
+
 
     if (this.taskToEdit) {
       //this.myForm.setValue({
@@ -183,8 +182,17 @@ export class FormTaskComponent implements OnInit, OnChanges {
         //client: this.client,
       });
     }
-
   }
+
+  cambio(ca){
+    console.log('valor ca',ca)
+    if(ca.dirty || !ca.pristine){
+      this.checkService.checking.next(true); // vienen del behaviourSubject
+      console.log('holaaa has tocado algo', this.checkService.checking.value)
+    }
+  }
+// this.checkService.cheking.subscribe(data => {this.mivariable = data}); 
+//esto cambiaría porque está suscrito a lo de arriba, behaviourSubject.
 
   public submit(e, form) {
     if (form.valid) {
@@ -199,5 +207,4 @@ export class FormTaskComponent implements OnInit, OnChanges {
     }
   }
   
-
 }

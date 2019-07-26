@@ -14,7 +14,10 @@ export class CreateTaskComponent {
 
   constructor(private tasksService: TasksService) {}
 
-
+  hasChanges(){
+    return true;
+  
+  } 
   onSaveTask(task) {
     if(this.taskInfo) {
       this.tasksService.editTask(this.taskInfo.id, task);

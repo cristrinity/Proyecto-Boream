@@ -60,6 +60,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ActivateGuard } from './services/can-activate.service';
+import { SureExit } from './services/sure-exit.service';
+import { CheckFormsService } from './services/check-forms.service';
+
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: LogginInterceptor, multi: true },
@@ -137,7 +141,10 @@ export const httpInterceptorProviders = [
     AccountService,
     ClientService,
     PackService,
-    DatePipe
+    DatePipe,
+    ActivateGuard,
+    SureExit,
+    CheckFormsService
   ],
   bootstrap: [AppComponent]
 })

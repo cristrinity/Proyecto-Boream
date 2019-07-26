@@ -10,7 +10,7 @@
   <div class="content">
     <div class="table">
 
-      <form [formGroup]="myForm" class="form-class">
+      <form [formGroup]="myForm" (change)="cambio(myForm)" class="form-class">
         <mat-form-field>
           <mat-label>Alias</mat-label>
           <mat-select formControlName="alias">

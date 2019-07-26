@@ -25,7 +25,7 @@
         </div>
 
         <div class="table">
-            <form [formGroup]="myForm" class="form-class">
+            <form [formGroup]="myForm" (change)="cambio(myForm)" class="form-class">
 
                 <mat-form-field *ngIf="isAdmin">
                     <mat-select formControlName="status">
@@ -72,10 +72,12 @@
                 <!-- <button *ngIf="!isAdmin" matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, client)">Guardar</button> -->
 
-                <button matButton type="button" class="btn btn--success"
+                <button *ngIf="myForm.dirty" matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, aliasPro[0].client)" id="myBtn">Guardar</button>
                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
-
+                <button  matButton type="button" class="btn btn--success"
+                (click)="submit($event, myForm, aliasPro[0].client)" id="myBtn">Guardarsen</button>
+    
             </form>
         </div>
     </div>

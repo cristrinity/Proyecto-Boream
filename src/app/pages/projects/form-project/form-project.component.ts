@@ -3,6 +3,7 @@ import { ProjectsService } from '../../../services/project.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { Router } from '@angular/router';
+import { CheckFormsService } from 'src/app/services/check-forms.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
     'Joomla'
   ];
 
-  constructor(private fb: FormBuilder, private router: Router, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
+  constructor(private fb: FormBuilder, private checkService : CheckFormsService,  private router: Router, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
 
     this.authorization.userActive.subscribe(data => {
       this.client = data;
@@ -49,6 +50,10 @@ export class FormProjectComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    this.checkService.checking.next(false); // aquí reseteamos el valor de checking 
+    // de la guarda exit, para que no tenga el último valor recibido.
+
     if (this.client == 3) {
       this.isAdmin = true;
     }else{
@@ -109,7 +114,12 @@ export class FormProjectComponent implements OnInit, OnChanges {
     }
 
   }
-
+  cambio(ca){
+    if(ca.dirty){
+      this.checkService.checking.next(true); // vienen del behaviourSubject
+    }
+  }
+  
   public submit(_id, form) {
     if (form.valid) {
       if (this.projectToEdit) {

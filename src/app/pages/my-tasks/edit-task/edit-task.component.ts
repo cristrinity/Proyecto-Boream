@@ -26,7 +26,10 @@ constructor(private taksService: TasksService,
 ngOnChanges(){
   this.clientProj = this.taskSelected.client;
 }
+hasChanges(){
+  return true;
 
+} 
 ngOnInit() {
   this.activatedRoute.params.subscribe((data) => {
     this.taskService.getTaskById(data.id).then(task => {
