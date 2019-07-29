@@ -11,7 +11,7 @@ import { TasksService } from 'src/app/services/task.service';
   styleUrls: ['./my-packs.component.scss']
 })
 
-export class MyPacksComponent implements OnInit{
+export class MyPacksComponent implements OnInit {
   @Input() client;
   show: boolean = false;
   packs;
@@ -19,9 +19,10 @@ export class MyPacksComponent implements OnInit{
 
   isAdmin: boolean;
   timeToTakeOff: any;
-  pepito;
+  timing: number;
   paRestar: any;
-  totalPack: any;
+  totalPack: number;
+  time: any = {}
 
   constructor(private packService: PackService, private authorization: AuthorizationService, private taskService: TasksService) {
 
@@ -33,15 +34,29 @@ export class MyPacksComponent implements OnInit{
         this.isAdmin = false;
       }
     })
-    
+
     if (this.client !== 3) {
       debugger
       this.packService.getPackActive(this.client).subscribe(data => { // NO FUNCIONA ¿?¿?
-         // this.pepito = (this.timeToTakeOff - data.time); // saco el "tiempo" del pack que activo sea true
-          this.pepito = data; // saco el "tiempo" del pack que activo sea true
-          
-          console.log('soy pepito', this.pepito)
-        });   
+        this.totalPack = data[0].lefttime; // saco el "tiempo" del pack que activo sea true
+        if (this.totalPack != null || this.totalPack != undefined) {
+          this.timing = this.totalPack - this.timeToTakeOff;
+          console.log('timing resta', this.timing)
+          data[0].lefttime = this.timing
+          //this.time.lefttime = this.timing
+          this.packService.updatePack(data[0]._id, data[0]).subscribe(data => {
+
+          });
+
+        }
+
+      });
+
+      this.authorization.countMinutes.subscribe(data => {
+        this.timeToTakeOff = data;
+        console.log('timetotakeoff', this.timeToTakeOff)
+      })
+      debugger
 
       this.packService.getPacksByClient(this.client).subscribe(
         result => {
@@ -62,27 +77,23 @@ export class MyPacksComponent implements OnInit{
         }
       )
     };
-    this.authorization.countMinutes.subscribe(data => {
-      this.timeToTakeOff = data;
-      console.log(this.timeToTakeOff)
-    })
-  
-    this.packService.getPackActive(this.client).subscribe(data => {
-      this.totalPack = data;
-    })
-  
+
+
   }
-  
+
 
   onClick(e) {
     this.show = !this.show
   }
 
- 
+
 
   ngOnInit() {
-  
 
+    this.authorization.countMinutes.subscribe(data => {
+      this.timeToTakeOff = data;
+      console.log('timetotakeoff en oninit', this.timeToTakeOff)
+    })
     // if (this.client !== 3) {
     //   this.packService.getPacksByClient(this.client).subscribe(
     //     result => {
@@ -102,7 +113,7 @@ export class MyPacksComponent implements OnInit{
     //     }
     //   )
     // };
-   
+
   }// Fin onInit
 
 }

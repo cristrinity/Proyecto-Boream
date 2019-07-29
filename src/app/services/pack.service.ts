@@ -22,15 +22,15 @@ export class PackService {
     }
 
    getPacksByClient(client: number): Observable<any>{
-        return this.httpClient.get(`${environment.apiUrl}/packs/${this.user}`);
+        return this.httpClient.get(`${environment.apiUrl}/packs/${client}`);
     }
     
     getPackActive(id: number){
         return this.httpClient.get(`${environment.apiUrl}/packs/status/${id}`);
     }
 
-    updatePack(id: number, body): Observable<any>{
-        return this.httpClient.put(`${environment.apiUrl}/packs/${this.id}`, body);
+    updatePack(id: number, body){
+        return this.httpClient.put(`${environment.apiUrl}/packs/${id}`, body);
     }
     // getPacksById(id: number) {
     //     return this.httpClient.get(`${environment.apiUrl}/packs/:id`);

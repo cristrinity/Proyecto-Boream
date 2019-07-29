@@ -13,7 +13,7 @@ import { CheckFormsService } from 'src/app/services/check-forms.service';
   styleUrls: ['form-task.component.scss']
 })
 
-export class FormTaskComponent implements OnInit {
+export class FormTaskComponent implements OnInit, OnChanges {
    
 
   myForm;
@@ -30,9 +30,11 @@ export class FormTaskComponent implements OnInit {
   packs: any;
   advice;
   projToCalc;
+  original;
 
   constructor(private fb: FormBuilder, private checkService: CheckFormsService, private packService : PackService, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
-
+    
+  
     this.authorization.userActive.subscribe(data => {
       this.client = data;
       console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
@@ -44,9 +46,21 @@ export class FormTaskComponent implements OnInit {
     } else {
       this.isAdmin = false;
     }
+    this.packService.getPackActive(this.projectsSelected).subscribe(
+      result => {
+        if(result){
+        this.packs = result;
+        debugger
+        }
+      }
+    )
   });
-  }
 
+  }
+    ngOnChanges(changes: SimpleChanges): void {
+      this.original = changes.taskToEdit.currentValue.timespent;
+      console.log('soy el original', this.original)
+    }
 
   ngOnInit() {
 
@@ -76,6 +90,7 @@ export class FormTaskComponent implements OnInit {
           console.log('hay error');
         }
       );
+      console.log(this.projectsSelected)
     }
 
       let modal = document.getElementById("myModal");
@@ -101,20 +116,12 @@ export class FormTaskComponent implements OnInit {
       }
 
     //projectsGet();
-    this.packService.getPacksByClient(this.client).subscribe(
-      result => {
-        this.packs = result;
-        for(let i = 0; i < this.packs.length; i++){
-          if(this.packs[i].active === true){
-            this.packActive = this.packs[i]._id;
-        }return this.packActive;
-      }
-    })
+    
 
     if (this.client == 3) {
       this.isAdmin = true;
       console.log('soy valor isAsdmin', this.isAdmin)
-      
+      console.log(this.projectsSelected)
       this.projectService.getProjectsByClientAdmin(this.projectsSelected).subscribe(
         result => {
           this.aliasPro = result;
@@ -182,6 +189,7 @@ export class FormTaskComponent implements OnInit {
     }
   }
 
+
   cambio(ca){
     console.log('valor ca',ca)
     if(ca.dirty || !ca.pristine){
@@ -192,11 +200,21 @@ export class FormTaskComponent implements OnInit {
 //.subscribe(data => {this.mivariable = data}); 
 //esto cambiaría porque está suscrito a lo de arriba, behaviourSubject.
 
+  ejecution(e, resta){
+    this.packs.timespent = this.packs.timespent - resta
+    this.packService.updatePack(this.taskSelected.pack_id, this.packs)
+  }
+
   public submit(e, form) {
     if (form.valid) {
       
       if (this.taskToEdit) {
         this.tasksService.editTask(this.taskToEdit._id, form.value);
+        
+        if(this.original !== form.value.timespent){
+          let resta = form.value.timespent - this.original;
+          this.ejecution(form, resta);
+        }
       } else {
         form.value.pack_id = this.packActive;
         //this.packActive.next(this.packActive);

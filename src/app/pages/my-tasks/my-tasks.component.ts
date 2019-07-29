@@ -48,18 +48,20 @@ export class MyTasksComponent implements OnInit{
           this.tasks = result;
           console.log('holaaaaa task clientemío!', result)
           
-          if(this.tasks != null && this.tasks != undefined){
-            for(let i = 0; i < this.tasks.length; i++){
-              console.log('time to spent iterando', this.tasks[i].timespent)
-              this.timeToSave.push(this.tasks[i].timespent);
-            }
-            this.toDiscount = 0;
-            for(let i = 0; i < this.timeToSave.length; i++){
-              this.toDiscount = this.toDiscount + this.timeToSave[i];
-              console.log('yo soy la suma', this.toDiscount)
-            }
-            this.authorization.countMinutes.next(this.toDiscount);
-            }
+          // if(this.tasks != null && this.tasks != undefined){
+          //   for(let i = 0; i < this.tasks.length; i++){
+          //     console.log('time to spent iterando', this.tasks[i].timespent)
+          //     this.timeToSave.push(this.tasks[i].timespent);
+          //   }
+          //   this.toDiscount = 0;
+          //   for(let i = 0; i < this.timeToSave.length; i++){
+          //     this.toDiscount = this.toDiscount + this.timeToSave[i];
+          //     console.log('yo soy la suma', this.toDiscount)
+          //   }
+          //   this.authorization.countMinutes.next(this.toDiscount);
+          //   // this.authorization.countMinutes.value; // Esto saca el valor actual de countMinutes
+
+          //   }
            
         },
         err => {
