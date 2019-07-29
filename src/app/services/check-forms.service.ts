@@ -4,10 +4,6 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class CheckFormsService {
 
-checking = new BehaviorSubject(false);
-
-
-
-
+    checking = new BehaviorSubject(false);
 
 }

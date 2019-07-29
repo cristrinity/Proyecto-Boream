@@ -1,8 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { TasksService } from 'src/app/services/task.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ProjectsService } from 'src/app/services/project.service';
 import { PackService } from 'src/app/services/pack.service';
+
+
 
 // import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -21,11 +23,13 @@ export class MyTasksComponent implements OnInit{
   @Input() datos;
   userActive;
   aliasPro: Array<any> = [];
-
   isAdmin;
   packs;
   packActive;
-
+  timeToSave : Array<number> = [];
+  @Output() toTakeOff = new EventEmitter();
+  toDiscount : number;
+  total : number;
   constructor(private taskService: TasksService,  private authorization: AuthorizationService, private projectService: ProjectsService, private packService : PackService){
 
     this.authorization.userActive.subscribe(data => {
@@ -42,7 +46,21 @@ export class MyTasksComponent implements OnInit{
       this.taskService.getTaskByClient(this.client).subscribe(
         result => {
           this.tasks = result;
-          console.log('holaaaaa task!', result)
+          console.log('holaaaaa task clientemío!', result)
+          
+          if(this.tasks != null && this.tasks != undefined){
+            for(let i = 0; i < this.tasks.length; i++){
+              console.log('time to spent iterando', this.tasks[i].timespent)
+              this.timeToSave.push(this.tasks[i].timespent);
+            }
+            this.toDiscount = 0;
+            for(let i = 0; i < this.timeToSave.length; i++){
+              this.toDiscount = this.toDiscount + this.timeToSave[i];
+              console.log('yo soy la suma', this.toDiscount)
+            }
+            this.authorization.countMinutes.next(this.toDiscount);
+            }
+           
         },
         err => {
           console.log('hay error');
@@ -52,14 +70,13 @@ export class MyTasksComponent implements OnInit{
       this.taskService.getTasks().subscribe(
         result => {
           this.tasks = result;
-          console.log('holaaaaa task!', result)
+          console.log('holaaaaa task desde admin!', result)
         },
         err => {
           console.log('hay error');
         }
       );
     }
- 
 
     this.projectService.getProjectsByClient(this.client).subscribe(
       result => {
@@ -70,12 +87,11 @@ export class MyTasksComponent implements OnInit{
       }
     );
 }
+
   ngOnInit() {
-    
     this.authorization.userActive.subscribe(data => {
       this.client = data;
     });
-
     console.log('soy pack activusss', this.packActive)
     //this.refreshProjects();
     this.userActive = this.authorization.userActive.subscribe(data => {
@@ -85,10 +101,9 @@ export class MyTasksComponent implements OnInit{
   }
   
    refreshTasks() {
-    this.tasks = this.taskService.getTasks();
+      this.tasks = this.taskService.getTasks();
   }
   
-
   async onDelete(task) {
     await this.taskService.deleteTask(task._id);
     await this.refreshTasks();

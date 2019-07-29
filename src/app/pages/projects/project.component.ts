@@ -36,9 +36,9 @@ export class ProjectsComponent implements OnInit, DoCheck {
         this.getProjects();
       }
     })
-    console.log('soy client', this.client, localStorage.id)
-    console.log('vengo de authorization y soy data', this.client) // OK. Trae id de usuario (0, 1, 2)
-  
+    // console.log('soy client', this.client, localStorage.id)
+    // console.log('vengo de authorization y soy data', this.client) // OK. Trae id de usuario (0, 1, 2)
+
   }
 
   getProjects() {
@@ -81,9 +81,8 @@ export class ProjectsComponent implements OnInit, DoCheck {
       // debugger
       this.client = data;
     });
-
-   
   }
+
   ngOnInit() {
     this.authorization.userActive.subscribe(data => {
       // debugger

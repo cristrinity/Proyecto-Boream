@@ -16,6 +16,7 @@ projectsSelected : Array<any> = [{}];
 @Output() newTasks;
 // @Input() tasks;
 clientProj;
+timeToSave;
 
 constructor(private taksService: TasksService, 
   private activatedRoute: ActivatedRoute, 
@@ -36,10 +37,9 @@ ngOnInit() {
       this.taskSelected = task;
       console.log('soy la taskSelected', this.taskSelected)
       this.clientProj = this.taskSelected.client;
-      console.log('soy clientProj', this.clientProj)
-     });
+      // this.timeToSave = this.taskSelected.timespent;
+      console.log('soy timeToSave', this.timeToSave)
     });
+  });
   }
-    
-
 }

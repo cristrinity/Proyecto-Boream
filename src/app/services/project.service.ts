@@ -37,7 +37,7 @@ ngDoCheck(): void {
 
   getProjectsByClient(client: number): Observable<any>{
     //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
-    return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/`) 
+    return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
     //return this.httpClient.get(`${environment.apiUrl}/projects/${this.client}/`) 
   }
 

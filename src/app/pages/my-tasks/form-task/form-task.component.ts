@@ -29,7 +29,7 @@ export class FormTaskComponent implements OnInit {
   @Input() isTaskToEdit: boolean;
   packs: any;
   advice;
-
+  projToCalc;
 
   constructor(private fb: FormBuilder, private checkService: CheckFormsService, private packService : PackService, private tasksService: TasksService, private authorization: AuthorizationService, private projectService: ProjectsService) {
 
@@ -61,7 +61,6 @@ export class FormTaskComponent implements OnInit {
           
           this.aliasPro = result;
           console.log('soy aliasPro', this.aliasPro)
-          //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
         },
         err => {
           console.log('hay error');
@@ -72,7 +71,6 @@ export class FormTaskComponent implements OnInit {
       this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
         result => {
           this.aliasPro = result;
-          //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
         },
         err => {
           console.log('hay error');
@@ -159,7 +157,7 @@ export class FormTaskComponent implements OnInit {
          name: [''],
          pack_id: [''],
          status: ['En espera'],
-         timespent: ['- : -'],
+         timespent: [0],
          project: [''],
          project_id: [''],
          description: [''],
@@ -187,11 +185,11 @@ export class FormTaskComponent implements OnInit {
   cambio(ca){
     console.log('valor ca',ca)
     if(ca.dirty || !ca.pristine){
-      this.checkService.checking.next(true); // vienen del behaviourSubject
+      this.checkService.checking.next(true); // seteamos a true el behaviourSubject
       console.log('holaaa has tocado algo', this.checkService.checking.value)
     }
   }
-// this.checkService.cheking.subscribe(data => {this.mivariable = data}); 
+//.subscribe(data => {this.mivariable = data}); 
 //esto cambiaría porque está suscrito a lo de arriba, behaviourSubject.
 
   public submit(e, form) {
@@ -201,6 +199,7 @@ export class FormTaskComponent implements OnInit {
         this.tasksService.editTask(this.taskToEdit._id, form.value);
       } else {
         form.value.pack_id = this.packActive;
+        //this.packActive.next(this.packActive);
         this.tasksService.addTask(form.value, this.client);
        
       }

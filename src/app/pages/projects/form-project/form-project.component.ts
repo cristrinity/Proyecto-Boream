@@ -51,7 +51,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    this.checkService.checking.next(false); // aquí reseteamos el valor de checking 
+    this.checkService.checking.next(false); // aquí seteamos a false el valor de checking 
     // de la guarda exit, para que no tenga el último valor recibido.
 
     if (this.client == 3) {
@@ -116,7 +116,7 @@ export class FormProjectComponent implements OnInit, OnChanges {
   }
   cambio(ca){
     if(ca.dirty){
-      this.checkService.checking.next(true); // vienen del behaviourSubject
+      this.checkService.checking.next(true); // seteo a true el behaviourSubject
     }
   }
   

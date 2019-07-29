@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { TasksService } from './task.service';
 
 //const AUTH_URL = 'http://localhost:4200/auth/login';
-
 @Injectable()
 export class AuthorizationService {
   
+  countMinutes = new BehaviorSubject(null);
   userActive = new BehaviorSubject(null);
   observer = new BehaviorSubject<number>(this.getId());
   
@@ -38,6 +39,7 @@ getUser() {
   this.httpClient.get(`${environment.apiUrl}/auth/me`).toPromise().then((data: any) => {
     this.userActive.next(data);
     localStorage.setItem('id', this.userActive.value)
+    
     //this.isLoged.next(true);
 }); 
 }
@@ -56,6 +58,7 @@ getUser() {
   }
 
   getId(): number {
+    this.countMinutes.next(null);
     return this.userActive.value
   }
 

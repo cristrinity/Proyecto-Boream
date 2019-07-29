@@ -55,7 +55,7 @@
 
                 <mat-form-field *ngIf="isAdmin">
                     <mat-label>Tiempo gastado</mat-label>
-                    <input matInput type="text" formControlName="timespent">
+                    <input matInput type="number" formControlName="timespent">
                 </mat-form-field>
 
                 <mat-form-field>
@@ -72,11 +72,10 @@
                 <!-- <button *ngIf="!isAdmin" matButton type="button" class="btn btn--success"
                     (click)="submit($event, myForm, client)">Guardar</button> -->
 
-                <button *ngIf="myForm.dirty" matButton type="button" class="btn btn--success"
-                    (click)="submit($event, myForm, aliasPro[0].client)" id="myBtn">Guardar</button>
+               
                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
-                <button  matButton type="button" class="btn btn--success"
-                (click)="submit($event, myForm, aliasPro[0].client)" id="myBtn">Guardarsen</button>
+                <button matButton type="button" class="btn btn--success"
+                (click)="submit($event, myForm, aliasPro[0].client)" id="myBtn">Guardar</button>
     
             </form>
         </div>
