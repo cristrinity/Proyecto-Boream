@@ -46,14 +46,6 @@ export class FormTaskComponent implements OnInit, OnChanges {
     } else {
       this.isAdmin = false;
     }
-    this.packService.getPackActive(this.projectsSelected).subscribe(
-      result => {
-        if(result){
-        this.packs = result;
-        debugger
-        }
-      }
-    )
   });
 
   }
@@ -80,6 +72,11 @@ export class FormTaskComponent implements OnInit, OnChanges {
           console.log('hay error');
         }
       );
+      this.packService.getPackActive(this.projectsSelected).subscribe(
+        result => {
+            this.packs = result;
+            debugger
+        })
     } else {
       this.isAdmin = false;
       this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
@@ -201,8 +198,9 @@ export class FormTaskComponent implements OnInit, OnChanges {
 //esto cambiaría porque está suscrito a lo de arriba, behaviourSubject.
 
   ejecution(e, resta){
-    this.packs.timespent = this.packs.timespent - resta
-    this.packService.updatePack(this.taskSelected.pack_id, this.packs)
+    debugger
+    this.packs[0].lefttime = this.packs[0].lefttime - resta
+    this.packService.updatePack(this.packs[0]._id, this.packs)
   }
 
   public submit(e, form) {
