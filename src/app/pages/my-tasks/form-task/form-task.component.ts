@@ -79,7 +79,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
         })
     } else {
       this.isAdmin = false;
-      this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
+      this.projectService.getProjectsByClient(this.client).subscribe(
         result => {
           this.aliasPro = result;
         },
@@ -130,7 +130,7 @@ export class FormTaskComponent implements OnInit, OnChanges {
       );
     } else {
       this.isAdmin = false;
-      this.projectService.getProjectsByClient(this.projectsSelected).subscribe(
+      this.projectService.getProjectsByClient(this.client).subscribe(
         result => {
           this.aliasPro = result;
           //console.log('aliassiis', this.aliasPro[0].alias, this.aliasPro[1].alias)
@@ -200,24 +200,27 @@ export class FormTaskComponent implements OnInit, OnChanges {
   ejecution(e, resta){
     debugger
     this.packs[0].lefttime = this.packs[0].lefttime - resta
-    this.packService.updatePack(this.packs[0]._id, this.packs)
+    this.packService.updatePack(this.packs[0]._id, this.packs[0])
   }
 
   public submit(e, form) {
     if (form.valid) {
       
       if (this.taskToEdit) {
-        this.tasksService.editTask(this.taskToEdit._id, form.value);
-        
+        //debugger
         if(this.original !== form.value.timespent){
           let resta = form.value.timespent - this.original;
-          this.ejecution(form, resta);
+          //this.ejecution(form, resta);
+          this.packs[0].lefttime = this.packs[0].lefttime - resta
+          this.packService.updatePack(this.packs[0]._id, this.packs[0])
+          this.tasksService.editTask(this.taskToEdit._id, form.value);
+        }else{
+          this.tasksService.editTask(this.taskToEdit._id, form.value);
         }
       } else {
         form.value.pack_id = this.packActive;
         //this.packActive.next(this.packActive);
         this.tasksService.addTask(form.value, this.client);
-       
       }
     }
   }
