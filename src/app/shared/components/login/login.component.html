@@ -1,25 +1,23 @@
+<div class="container-login">
 <div class="background-color">
 
   <form [formGroup]="myForm" class="form-access">
-
-          <img src="..." alt="" width="72" height="72">
-          <!-- <h1>Haz login para acceder</h1> -->
-          <mat-form-field>
-            <input matInput type="text" class=" form-control" formControlName="name" required>
-            <mat-label class="form-access__label">Usuario</mat-label>
+          <img class="logotipo" src="http://csimon.es/bootcamp/assets/images/logo-web.png" alt="" width="354" height="103">
+         
+            <label class="form-access__label">Nombre de usuario</label>
+            <input (keyup.enter)="submit($event, myForm)"  type="text" class=" form-control" formControlName="name" required>
             <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="password" class="form-control" formControlName="password" required>
-            <mat-label class="form-access__label">Contraseña</mat-label>
-          </mat-form-field>
-          <div class="checkbox">
+        
+            <label class="form-access__label">Contraseña</label>
+            <input (keyup.enter)="submit($event, myForm)"  type="password" class="form-control" formControlName="pass" required>
+          
+          <!-- <div class="checkbox">
             <label>
-              <input type="checkbox" value="remember-me"> Recuérdame
+              <input type="checkbox" class="remember" value="remember-me"> Recuérdame
             </label>
-          </div>
-          <button class="btn btn-lg btn-primary btn-block" matButton type="button" (click)="submit($event, myForm)">Entrar</button>
+          </div> -->
+          <button class="btn btn-lg btn-primary btn-block"  type="button" (click)="submit($event, myForm)">Acceder</button>
         </form>
-
 </div>
 
+</div>

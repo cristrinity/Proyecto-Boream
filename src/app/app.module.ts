@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule, MatSelectModule} from '@angular/material';
+import { MatNativeDateModule, MatSelectModule, MatIconModule} from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,11 +47,28 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ClientService } from './services/client.service';
 import { PackService } from './services/pack.service';
 import { TablePackComponent } from './pages/my-packs/table-packs/table-packs.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { StatusTaskComponent } from './shared/components/status-task/status-task.component';
+import { DatePipe } from '@angular/common';
+import { MyClientsComponent } from './pages/my-clients/my-clients.component';
+import { TableClientComponent } from './pages/my-clients/table-clients/table-clients.component';
+import { CreateClientComponent } from './pages/my-clients/create-client/create-client.component';
+import { CreateAccountComponent } from './pages/my-account/create-account/create-account.component';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ActivateGuard } from './services/can-activate.service';
+import { SureExit } from './services/sure-exit.service';
+import { CheckFormsService } from './services/check-forms.service';
+
 
 export const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LogginInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: LogginFakeInterceptor, multi: true }
+  { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
+ // { provide: HTTP_INTERCEPTORS, useClass: LogginFakeInterceptor, multi: true }
 ];
 
 @NgModule({
@@ -80,7 +97,13 @@ export const httpInterceptorProviders = [
     TableAccountComponent,
     EditAccountComponent,
     UsernavComponent,
-    TablePackComponent
+    TablePackComponent,
+    StatusTaskComponent,
+    MyClientsComponent,
+    TableClientComponent,
+    CreateClientComponent,
+    CreateAccountComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -99,8 +122,14 @@ export const httpInterceptorProviders = [
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatFileUploadModule
-    // MatSort,
+    MatFileUploadModule,
+    MatExpansionModule,
+    MatDividerModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [
     ProjectsService,
@@ -111,7 +140,11 @@ export const httpInterceptorProviders = [
     TasksService,
     AccountService,
     ClientService,
-    PackService
+    PackService,
+    DatePipe,
+    ActivateGuard,
+    SureExit,
+    CheckFormsService
   ],
   bootstrap: [AppComponent]
 })

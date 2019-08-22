@@ -1,225 +1,60 @@
-import {Injectable} from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { AuthorizationService } from './authorization.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+
 
 @Injectable()
 export class ProjectsService {
-  // projectsArray = [
-  //   {
-  //   id: 1,
-  //   alias: 'Blog WP',
-  //   UrlDominio: 'htpp://www.miblog.com',
-  //   UrlAdministracion: 'htpp://www.miblog.com/wp-admin',
-  //   tareasRealizadas: 2,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.hostalia.com',
-  //   usuarioH: 'pepitoRodriz',
-  //   passH: 'arroba123'
-  //  },
-  // {
-  //   id: 2,
-  //   alias: 'Web WP',
-  //   UrlDominio: 'htpp://www.miblogyotrascosas.com',
-  //   UrlAdministracion: 'htpp://www.miblogyotrascosas.com/wp-admin',
-  //   tareasRealizadas: 3,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   webH: 'http://www.arsys.com',
-  //   usuarioH: 'clarisaMzetg',
-  //   passH: 'asdf2123',
-  //   passAdmin: 'fghjfghjhs$%/53'
-  // }, {
-  //   id: 3,
-  //   alias: 'WP Woocommerce',
-  //   UrlDominio: 'htpp://www.mitiendaonline.com',
-  //   UrlAdministracion: 'htpp://www.mitiendaonline.com/wp-admin',
-  //   tareasRealizadas: 9,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.nominalia.com',
-  //   usuarioH: 'jasdfe333',
-  //   passH: 'arff00123'
-  // }, {
-  //   id: 4,
-  //   alias: 'Prestashop',
-  //   UrlDominio: 'htpp://www.mitiendaonlinepresta.com',
-  //   UrlAdministracion: 'htpp://www.mitiendaonlinepresta.com/admin234cnl',
-  //   tareasRealizadas: 2,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.hostalia.com',
-  //   usuarioH: 'pepitoRodriz',
-  //   passH: 'arroba123'
-  //  },
-  //  {
-  //   id: 5,
-  //   alias: 'Blog WP',
-  //   UrlDominio: 'htpp://www.miblog.com',
-  //   UrlAdministracion: 'htpp://www.miblog.com/wp-admin',
-  //   tareasRealizadas: 2,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.hostalia.com',
-  //   usuarioH: 'pepitoRodriz',
-  //   passH: 'arroba123'
-  //  },
-  // {
-  //   id: 6,
-  //   alias: 'Web WP',
-  //   UrlDominio: 'htpp://www.miblogyotrascosas.com',
-  //   UrlAdministracion: 'htpp://www.miblogyotrascosas.com/wp-admin',
-  //   tareasRealizadas: 3,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   webH: 'http://www.arsys.com',
-  //   usuarioH: 'clarisaMzetg',
-  //   passH: 'asdf2123',
-  //   passAdmin: 'fghjfghjhs$%/53'
-  // }, {
-  //   id: 7,
-  //   alias: 'WP Woocommerce',
-  //   UrlDominio: 'htpp://www.mitiendaonline.com',
-  //   UrlAdministracion: 'htpp://www.mitiendaonline.com/wp-admin',
-  //   tareasRealizadas: 9,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.nominalia.com',
-  //   usuarioH: 'jasdfe333',
-  //   passH: 'arff00123'
-  // }, {
-  //   id: 8,
-  //   alias: 'Prestashop',
-  //   UrlDominio: 'htpp://www.mitiendaonlinepresta.com',
-  //   UrlAdministracion: 'htpp://www.mitiendaonlinepresta.com/admin234cnl',
-  //   tareasRealizadas: 2,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.hostalia.com',
-  //   usuarioH: 'pepitoRodriz',
-  //   passH: 'arroba123'
-  //  },{
-  //   id: 9,
-  //   alias: 'Blog WP',
-  //   UrlDominio: 'htpp://www.miblog.com',
-  //   UrlAdministracion: 'htpp://www.miblog.com/wp-admin',
-  //   tareasRealizadas: 2,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.hostalia.com',
-  //   usuarioH: 'pepitoRodriz',
-  //   passH: 'arroba123'
-  //  },
-  // {
-  //   id: 10,
-  //   alias: 'Web WP',
-  //   UrlDominio: 'htpp://www.miblogyotrascosas.com',
-  //   UrlAdministracion: 'htpp://www.miblogyotrascosas.com/wp-admin',
-  //   tareasRealizadas: 3,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   webH: 'http://www.arsys.com',
-  //   usuarioH: 'clarisaMzetg',
-  //   passH: 'asdf2123',
-  //   passAdmin: 'fghjfghjhs$%/53'
-  // }, {
-  //   id: 11,
-  //   alias: 'WP Woocommerce',
-  //   UrlDominio: 'htpp://www.mitiendaonline.com',
-  //   UrlAdministracion: 'htpp://www.mitiendaonline.com/wp-admin',
-  //   tareasRealizadas: 9,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.nominalia.com',
-  //   usuarioH: 'jasdfe333',
-  //   passH: 'arff00123'
-  // }, {
-  //   id: 12,
-  //   alias: 'Prestashop',
-  //   UrlDominio: 'htpp://www.mitiendaonlinepresta.com',
-  //   UrlAdministracion: 'htpp://www.mitiendaonlinepresta.com/admin234cnl',
-  //   tareasRealizadas: 2,
-  //   host: '212.234.567',
-  //   puerto: 22,
-  //   cifrado: 'tls',
-  //   usuario: 'blog.com',
-  //   pass: 'arroba123',
-  //   userAdmin: 'admin',
-  //   passAdmin: 'F3nfjase$%/53',
-  //   webH: 'http://www.hostalia.com',
-  //   usuarioH: 'pepitoRodriz',
-  //   passH: 'arroba123'
-  //  }
-  // ]
+  userActive;
+  datos;
+  stepOne;
+  user;
+  id;
+  constructor(private httpClient: HttpClient, private authorization: AuthorizationService) {
+  
+  
+  this.authorization.userActive.subscribe(data => {
+    this.user = data;
+  });
+}
 
-// projectsArray;
+ngDoCheck(): void {
+  //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+  //Add 'implements DoCheck' to the class.
+  //this.id = this.userActive.value;
+  this.authorization.userActive.subscribe(data => {
+    this.user = data;
+  });
+}
 
-constructor(private httpClient: HttpClient){}
 
-  // traerProject(){
-  //   this.getProjects().then((data) => {
-  //     return data;
-  //   });
-  // }
-   async getProjects() {
-   // console.log(this.httpClient.get(`${environment.apiUrl}/projects`).toPromise());
-    return this.httpClient.get(`${environment.apiUrl}/projects`).toPromise();
+  //client = this.authorization.getId();// esto es lo que hace que se pinte el ID de cliente, por eso se lo paso en la llamada a la API.
+  // Si no, hay que refrescar antes para que aparezcan de nuevo los datos. Esta línea se lee nada más abrir.
+
+
+  getProjectsByClient(client: number): Observable<any>{
+    //return this.httpClient.get(`${environment.apiUrl}/projects/client/${this.authorization.getId()}`)
+    return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
+    //return this.httpClient.get(`${environment.apiUrl}/projects/${this.client}/`) 
   }
 
-    // this.projectsArray = await this.httpClient.get(`${environment.apiUrl}/projects`);
-    // return this.projectsArray;
+  getProjectsByClientAdmin(client: number): Observable<any>{
+
+    return this.httpClient.get(`${environment.apiUrl}/projects/client/${client}/`)
+    //return this.httpClient.get(`${environment.apiUrl}/projects/${client}/`) 
+  }
+  
+  getProjectsByAlias(alias: String): Observable<any>{
+    return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/${alias}`) 
+  }
+
+  getProjects() {
+    // console.log(this.httpClient.get(`${environment.apiUrl}/projects`).toPromise());
+    return this.httpClient.get(`${environment.apiUrl}/projects/`);
+  }
 
   async deleteProject(id: number) {
 
@@ -227,28 +62,30 @@ constructor(private httpClient: HttpClient){}
     //this.projectsArray = this.projectsArray.filter(b => b.id !== id);
   }
 
-  async editProject(id: number, body){
-    return this.httpClient.put(`${environment.apiUrl}/projects/${id}`, body ).toPromise();
+  async editProject(id: number, body) {
+    console.log('soy id', id);
+    return this.httpClient.put(`${environment.apiUrl}/projects/${id}`, body).toPromise();
 
-  //  this.projectsArray = this.projectsArray.map(b => {
-  //    if(b.id === id){
-  //      return {...b, ...body};
-  //    }
-  //    return b;
-  //  });
+    //  this.projectsArray = this.projectsArray.map(b => {
+    //    if(b.id === id){
+    //      return {...b, ...body};
+    //    }
+    //    return b;
+    //  });
   }
 
-  async addProject(project) {
-    return this.httpClient.post(`${environment.apiUrl}/projects/`, project ).toPromise();
-
-    // project.id = Date.now();
-    // this.projectsArray.push(project);
+  async addProject(project, client) {
+    return this.httpClient.post(`${environment.apiUrl}/projects/create/`, project, client).toPromise();
   }
 
-  async getProjectById(id){
-    return this.httpClient.get(`${environment.apiUrl}/projects/${id}`).toPromise();
-
+  // async getProjectById(id) {
+  //   return this.httpClient.get(`${environment.apiUrl}/projects/${this.user}/${id}`).toPromise();
+  //   //return this.projectsArray.find(elem => elem.id === id);
+  // }
+  async getProjectById(id) {
+    return this.httpClient.get(`${environment.apiUrl}/projects/edit/${id}`).toPromise();
     //return this.projectsArray.find(elem => elem.id === id);
   }
-}
 
+
+}

@@ -1,9 +1,12 @@
-import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ProjectsService } from '../../../services/project.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { Router } from '@angular/router';
+import { CheckFormsService } from 'src/app/services/check-forms.service';
 
 
-@Component ({
+@Component({
   selector: 'app-form-project',
   templateUrl: 'form-project.component.html',
   styleUrls: ['form-project.component.scss']
@@ -11,72 +14,88 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, Valid
 
 export class FormProjectComponent implements OnInit, OnChanges {
 
-
   // ngOnChanges(changes: SimpleChanges): void {
   //   if(changes && changes.projectToEdit && changes.projectToEdit.currentValue){
   //     console.log(changes);
   //   }
   // }
-  @Input () projectToEdit;
+  @Input() client;
+  @Input() projectToEdit;
   @Output() saveProject = new EventEmitter();
+  isAdmin : boolean;
+  myForm;
+  projectCopy;
 
-myForm;
-projectCopy;
+  alias = [
+    'Wordpress',
+    'Woocommerce',
+    'Prestashop',
+    'Blog',
+    'Html5',
+    'Joomla'
+  ];
 
-alias = [
-  'alias 7',
-  'alias 8',
-  'Blog',
-  'Html5'
-];
+  constructor(private fb: FormBuilder, private checkService : CheckFormsService,  private router: Router, private projectsService: ProjectsService, private authorization: AuthorizationService) { 
 
-  constructor(private fb: FormBuilder, private projectsService: ProjectsService ) {}
+    this.authorization.userActive.subscribe(data => {
+      this.client = data;
+      console.log('vengo de authorization y soy data', data) // OK. Trae id de usuario (0, 1, 2)
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.projectCopy = {...changes.projectToEdit.currentValue};
+    });
+    
   }
 
-  ngOnInit(){
+  ngOnChanges(changes: SimpleChanges) {
+    this.projectCopy = { ...changes.projectToEdit.currentValue };
+  }
+
+  ngOnInit() {
+
+    this.checkService.checking.next(false); // aquí seteamos a false el valor de checking 
+    // de la guarda exit, para que no tenga el último valor recibido.
+
+    if (this.client == 3) {
+      this.isAdmin = true;
+    }else{
+      this.isAdmin = false;
+    }
 
     this.myForm = this.fb.group({
-
-    alias: [''
-    ],
-    UrlDominio: [''
-    ],
-    UrlAdministracion: [''
-    ],
-    tareasRealizadas: [''
-    ],
-    host: [''
-    ],
-    puerto: [''
-    ],
-    cifrado: [''
-    ],
-    usuario: [''
-    ],
-    pass: [''
-    ],
-    userAdmin: [''
-    ],
-    passAdmin: [''
-    ],
-    webH: [''
-    ],
-    usuarioH: [''
-  ],
-    passH: [''
-  ]
+      client: this.client,
+      alias: [''
+      ],
+      UrlDominio: [''
+      ],
+      UrlAdministracion: [''
+      ],
+      tareasRealizadas: [''
+      ],
+      host: [''
+      ],
+      puerto: [''
+      ],
+      cifrado: [''
+      ],
+      usuario: [''
+      ],
+      pass: [''
+      ],
+      userAdmin: [''
+      ],
+      passAdmin: [''
+      ],
+      webH: [''],
+      usuarioH: [''],
+      passH: ['']
 
     }
-    // { validators: identityRevealedValidator }
+      // { validators: identityRevealedValidator }
     );
 
 
-    if (this.projectToEdit){
+    if (this.projectToEdit) {
 
-      this.myForm.setValue({
+      this.myForm.patchValue({
         alias: this.projectToEdit.alias,
         UrlDominio: this.projectToEdit.UrlDominio,
         UrlAdministracion: this.projectToEdit.UrlAdministracion,
@@ -95,16 +114,21 @@ alias = [
     }
 
   }
-
-  public submit(e, form){
+  cambio(ca){
+    if(ca.dirty){
+      this.checkService.checking.next(true); // seteo a true el behaviourSubject
+    }
+  }
+  
+  public submit(_id, form) {
     if (form.valid) {
-      if(this.projectToEdit){
-        this.projectsService.editProject(this.projectToEdit.id, form.value);
-      }else{
-        this.projectsService.addProject(form.value);
+      if (this.projectToEdit) {
+        //console.log('editando projecto', this.projectToEdit._id)
+        this.projectsService.editProject(this.projectToEdit._id, form.value);
+       this.router.navigate(["/proyectos"])
+      } else {
+        this.projectsService.addProject(form.value, this.client);
       }
     }
   }
-
-
 }

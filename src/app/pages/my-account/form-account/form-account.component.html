@@ -1,56 +1,127 @@
 <main class="main">
         <div class="main__top">
                 <div class="main__nav">
-                        <div class="main__title">Modificar datos</div>
+                        <div *ngIf="isAdmin && !accountToEdit" class="main__title">Añadir cuenta</div>
+                        <div *ngIf="isAdmin && accountToEdit" class="main__title">Editar cuenta</div>
+                        <div *ngIf="!isAdmin" class="main__title">Modificar datos</div>
                         <div class="controls">
                         </div>
                 </div>
         </div>
+
         <div class="content">
+
+                <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                                <div class="modal-header">
+                                        <button type="button" class="close" id="close">&times;</button>
+                                        <!-- <h2>Modal Header</h2> -->
+                                </div>
+                                <div class="modal-body">
+                                        <p>Cambios guardados correctamente!</p>
+                                </div>
+                        </div>
+                </div>
+
                 <div class="table">
                         <form [formGroup]="myForm" class="form-class">
+                                <div class="form-section">Datos de Usuario</div>
+                                <mat-form-field *ngIf="isAdmin">
+                                        <input matInput type="text" formControlName="client">
+                                        <mat-label>Nº de Cliente </mat-label>
+                                        <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                                </mat-form-field>
                                 <mat-form-field>
-                                        <input matInput type="text" formControlName="name" required>
-                                        <mat-label>Nombre </mat-label>
+                                        <input matInput type="text" formControlName="username" required>
+                                        <mat-label>Usuario </mat-label>
+                                        <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                                </mat-form-field>
+                                <mat-form-field>
+                                        <input matInput formControlName="password" [type]="hide ? 'text' : 'password'">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide"
+                                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                </mat-form-field>
+                                <mat-form-field>
+                                        <input matInput type="text" formControlName="email" required>
+                                        <mat-label>Email </mat-label>
                                         <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
                                 </mat-form-field>
 
+                                <div formGroupName="data_contact">
+                                        <div class="form-section">Datos de Contacto</div>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="name" required>
+                                                <mat-label>Nombre y apellidos </mat-label>
+                                                <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="emailc" required>
+                                                <mat-label>Email</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="tel" required>
+                                                <mat-label>Tel. </mat-label>
+                                                <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="cp" required>
+                                                <mat-label>Código Postal </mat-label>
+                                                <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="city" required>
+                                                <mat-label>Ciudad</mat-label>
+                                        </mat-form-field>
+                                </div>
+                                <div formGroupName="data_invoice">
+                                        <div class="form-section">Datos de Facturación</div>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="company" required>
+                                                <mat-label>Empresa</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="cif" required>
+                                                <mat-label>CIF</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="emaili" required>
+                                                <mat-label>Email</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="teli" required>
+                                                <mat-label>Tel.</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="addressi" required>
+                                                <mat-label>Dirección</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="cpi" required>
+                                                <mat-label>Código Postal</mat-label>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <input matInput type="text" formControlName="cityi" required>
+                                                <mat-label>Ciudad</mat-label>
+                                        </mat-form-field>
+                                </div>
                                 <mat-form-field>
-                                        <input matInput type="text" formControlName="nif" required>
-                                        <mat-label>NIF</mat-label>
+                                        <span class="form-txt">Logotipo</span><br><br>
+                                        <input type="file" accept=".jpg, .png" (change)="onUpload($event)" />
+                                        <br>
+                                        <input matInput type="text" hidden formControlName="logo" #imageUser>
+                                        <img *ngIf="logo" src="logo" #imageUser>
                                 </mat-form-field>
 
-                                <mat-form-field>
-                                        <input matInput type="text" formControlName="email" required>
-                                        <mat-label>Email</mat-label>
-                                </mat-form-field>
-                                <mat-form-field>
-                                        <input matInput type="text" formControlName="phone" required>
-                                        <mat-label>Teléfono</mat-label>
-                                </mat-form-field>
 
-                               
-                                        <!-- <input matInput type="text" formControlName="avatar" required>
-                                        <mat-label>Logotipo</mat-label>
-                                        <input id="singleFile" formControlName="avatar" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
-                                        -->
-                                        <br>                                
 
-                                <label for="singleFile">Upload file</label>
-                                <input id="singleFile" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
                                 <br>
-                                 
-                                <mat-file-upload-queue  #fileUploadQueue
-                                    [fileAlias]="'file'"
-                                    [httpUrl]="'http://localhost:4200/'">
-                                 
-                                    <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
-                                </mat-file-upload-queue>
-
 
 
                                 <button matButton type="button" class="btn btn--success"
-                                        (click)="submit($event, myForm)">Guardar</button>
+                                        (click)="submit($event, myForm)" id="myBtn">Guardar</button>
                                 <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
 
                         </form>

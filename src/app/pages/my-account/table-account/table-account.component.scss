@@ -2,47 +2,14 @@
 @import '../../../../assets/styles/tables';
 @import '../../../../assets/styles/main-comun';
 
-.mat-cell{
-    height: rem(35px);
-    text-align: center;
-    vertical-align: middle;
-}
-tr.mat-header-row {
-    height: 30px;
-    text-align: center;
-}
 
-th.mat-header-cell{
-    padding: 0 20px 0 20px;
-}
-tr.mat-row{
-    height: 35px;
-}
-
-th .mat-calendar-table-header {
-    background-color: white;
-  }
-  
-  thead th {
-    background-color: white;
-  }
-  .rounded{
-    border-top-right-radius: 20px;
-}
-  .avatar{
-     width: 80px;
+.mat-cell {
+  //   height: rem(35px);
+     text-align: center;
+ }
+ 
+ .logo {
+     width: 250px;
      padding: 10px;
-  }
-//   .mat-column-avatar {
-//      display: flex;
-//      justify-content: center;
-//      align-items: center;  
-//   }
-  th.mat-header-cell:first-of-type {
-      padding-left: 10px;
-      padding-right: 10px
-  }
-
-td .iedit {
-   height: 100%;
-}
+ }
+ 

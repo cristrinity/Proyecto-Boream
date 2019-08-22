@@ -7,16 +7,22 @@
   justify-content: center;
   align-items: center;
   height: auto;
-  margin-top: rem(200px);
+  margin-top: rem(130px);
   z-index: 51;
+  padding-left: 20px;
+
   &__link{
-      text-transform: uppercase;
-      color:#426c6f;
+    text-transform: uppercase;
+    color: #333;
+    border-bottom: 1px solid #666;
+    width: 100%;
+    padding: 11px;
+
       &:hover, &:active, &:focus{
-          color: var(--green-hover);
+          color: var(--green-dark);
       }
       &--active{
-          color: var(--green-hover);
+          color: var(--green-dark);
       }
   }
   &__link + &__link {
@@ -24,7 +30,12 @@
   }
 }
 
-
+.clock--admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px
+}
 .hide {
   visibility: hidden;
 }
@@ -54,11 +65,14 @@
   bottom: 0;
   left: 0;
   height: 100vh;
-  box-shadow:  1px 0 0 rgba(173, 249, 243, .1);
+  box-shadow:  1px 2px 11px rgba(225, 216, 207, 0.7);
   z-index: 10;
+  background-color: #fff;
   //background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-  background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
+  //background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
   transition: left 250ms ease;
+  //border-right: 3px solid #333;
+ 
 }
 @media (max-width: 768px){
   .aside {

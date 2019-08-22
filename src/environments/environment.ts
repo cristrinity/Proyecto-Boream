@@ -4,8 +4,20 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://5cff8739d691540014b0dd80.mockapi.io',
-  apiClient: 'http://www.mocky.io/v2/5d08f3193400005300d82c9b'
+  apiUrl: 'http://localhost:3000',
+  //apiUrl: 'http://5cff8739d691540014b0dd80.mockapi.io',
+  //apiClient: 'http://www.mocky.io/v2/5d08f3193400005300d82c9b'
+  apiClient: 'http://www.mocky.io/v2/5d21cd472f00002101c4633f',
+   
+  firebase: {
+    apiKey: "AIzaSyA_d3gP-DURX81v9O_6Q87GiPZmp7w32L0",
+    authDomain: "mi-proyect-f5708.firebaseapp.com",
+    databaseURL: "https://mi-proyect-f5708.firebaseio.com",
+    projectId: "mi-proyect-f5708",
+    storageBucket: "mi-proyect-f5708.appspot.com",
+    messagingSenderId: "794170836017",
+    appId: "1:794170836017:web:888a3159f4089349"
+  }
 };
 
 /*

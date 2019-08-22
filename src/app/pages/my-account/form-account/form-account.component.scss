@@ -1,2 +1,14 @@
 @import '../../../../assets/styles/rem';
 @import '../../../../assets/styles/main-comun';
+@import "../../../../assets/styles/modal";
+
+.form-section {
+    margin: rem(20px) 0;
+    font-size: 18px;
+    color: var(--green-dark);
+}
+
+input:-internal-autofill-selected {
+    background-color: rgb(255, 255, 255) !important;
+   // background-color: #fff;
+}

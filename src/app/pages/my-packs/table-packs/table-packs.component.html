@@ -1,37 +1,82 @@
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
 
 <div class="content">
+
+    <mat-form-field class="filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+    </mat-form-field>
+    
     <div class="table">
-        <table mat-table [dataSource]="dataSource" matSort class="">
+        <table mat-table
+        [dataSource]="dataSource" multiTemplateDataRows
+        matSort class="">
  
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                <td mat-cell *matCellDef="let element"> {{element["name"]}} </td>
             </ng-container>
             <ng-container matColumnDef="type">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo  </th>
-                <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+                <td mat-cell *matCellDef="let element"> {{element["type"]}} </td>
             </ng-container>
             <ng-container matColumnDef="lefttime">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiempo restante </th>
-                <td mat-cell *matCellDef="let row"> {{row.lefttime}} </td>
+                <td mat-cell *matCellDef="let element"> {{element["lefttime"]}} </td>
             </ng-container>
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                <td mat-cell *matCellDef="let row" > {{row.date}} </td>
+                <td mat-cell *matCellDef="let element" > {{element["date"]}} </td>
             </ng-container>
             <ng-container matColumnDef="tasks">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Tareas</th>
-                <td mat-cell *matCellDef="let row"> {{row.tasks}} </td>
+                <td mat-cell *matCellDef="let element"> {{element["tasks"]}} <i class="fas fa-sort-down"></i></td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;">
-            </tr>
-        </table>
+                       <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+           <ng-container matColumnDef="expandedDetail">
+             <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+               <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                 <div class="example-element-diagram">
+                   <span class="table--subtitle"> </span>
+                   <div class="table__element--data"> </div>
+                     <!-- <div class="table__element--data">Puerto:  {{element.puerto}} </div>
+                   <div class="table__element--data">Cifrado:  {{element.cifrado}} </div>
+                   <div class="table__element--data">Usuario:  {{element.usuario}} </div>
+                   <div class="table__element--data">Contraseña:  {{element.pass}} </div>
+                     --></div>
+            <!--
+                <div class="example-element-diagram">
+                  <span class="table--subtitle">Backend Acceso </span>
+                  <div class="table__element--data">Usuario: {{element.userAdmin}} </div>
+                  <div class="table__element--data">Contraseña: {{element.passAdmin}} </div>
+                </div>
+                <div class="example-element-diagram">
+                    <span class="table--subtitle">Datos Acceso Hosting</span>
+                    <div class="table__element--data">Web: {{element.webH}}</div>
+                    <div class="table__element--data">Usuario:  {{element.usuarioH}} </div>
+                    <div class="table__element--data">Contraseña:  {{element.passH}} </div>
+                </div>--> 
+
+                <!-- <div class="example-element-diagram iedit">
+                    <span class="iedit__write"><i class="fas fa-eye"></i></span>
+                    <span class="iedit__write" (click)="onEdit(element)" [routerLink]="['/edit-project', element.id]"><i class="fas fa-edit"></i></span>
+                    <span class="iedti__delete" (click)="onDelete(element)"><i class="far fa-trash-alt"></i></span>
+                </div> -->
+               
+            </div>
+             </td>
+           </ng-container>
+
+           <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+           <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+               class="example-element-row "
+               [class.example-expanded-row]="expandedElement === element"
+               (click)="expandedElement = expandedElement === element ? null : element">
+           </tr>
+           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row row-special"></tr>
+         </table>
+
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
     </div>
 </div>

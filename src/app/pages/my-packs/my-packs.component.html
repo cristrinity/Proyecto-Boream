@@ -1,17 +1,20 @@
 <main class="main">
     <div class="main__top">
         <div class="main__nav">
-            <div class="main__title">Mis packs</div>
+            <div *ngIf="!isAdmin" class="main__title">Mis packs</div>
+            <div *ngIf="isAdmin" class="main__title">Packs de clientes</div>
             <div class="controls">
                 <button type="button" (click)="onClick()" class="controls__add">
                     <i class="fas fa-plus-circle"></i>
-                    <span>Comprar Pack</span>
+                    <span *ngIf="isAdmin">Asignar Pack</span>
+                    <span *ngIf="!isAdmin">Comprar Pack</span>
+                
                 </button>
             </div>
         </div>
     </div>
 <app-modal-payment [event]="show"></app-modal-payment>
-<app-table-pack [packs]="packs | async"></app-table-pack>
+<app-table-pack [packs]="packs"></app-table-pack>
 
 
 </main>

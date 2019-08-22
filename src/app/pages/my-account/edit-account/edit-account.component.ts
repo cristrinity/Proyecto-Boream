@@ -21,7 +21,7 @@ ngOnInit() {
   this.activatedRoute.params.subscribe((data) => {
     this.accountService.getAccountById(data.id).then(account => {
       this.accountSelected = account;
-      console.log(this.accountSelected)
+      console.log('soy la accountSelected', this.accountSelected)
      });
     });
   }

@@ -1,10 +1,13 @@
-import {Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, ViewChild, OnChanges, DoCheck} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { DataSource } from '@angular/cdk/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {ProjectsService } from '../../../services/project.service';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ProjectsService } from '../../../services/project.service';
+import { ClientService } from 'src/app/services/client.service';
+import { Observable } from 'rxjs';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
 @Component({
   selector: 'app-table-projects',
@@ -19,40 +22,59 @@ import {ProjectsService } from '../../../services/project.service';
   ]
 })
 
-export class MyProjectsComponent implements OnInit, OnChanges{
+export class MyProjectsComponent implements OnInit, OnChanges, DoCheck{
 
-
+  isLoggedIn : Observable<boolean>;
   @Input() projects;
+  @Input() client;
   @Input() nuevo;
+  @Input() datos;
 
-  constructor() {
-    // Create 100 users
-   // const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  
+  //client;
 
-    // Assign the data to the data source for the table to render
-    //debugger
-    this.dataSource = new MatTableDataSource(this.projects);
-    // this.dataSource = this.projects;
-
+  constructor(private projectService: ProjectsService, private authorization: AuthorizationService) {
+   // this.dataSource = this.projectService.getProjectsByClient(this.client);
   }
-
-ngOnChanges(){
-  if(Array.isArray(this.projects)){
-    this.dataSource = new MatTableDataSource(this.projects);
-    this.dataSource.paginator = this.paginator;
-  }
-}
 
   @Output() delete = new EventEmitter();
   @Output() edit = new EventEmitter();
   dataSource;
-
+  
   @ViewChild(MatPaginator)  paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    //this.id = this.userActive.value;
+    this.authorization.userActive.subscribe(data => {
+      this.client = data;
+    });
+    if(Array.isArray(this.projects)){
+      console.log(this.projects);
+      this.dataSource = new MatTableDataSource(this.projects);
+        this.dataSource.paginator = this.paginator;
+      }
+  }
 
 
-ngOnInit() {
-  this.dataSource.paginator = this.paginator;
+  ngOnChanges(){
+   
+    if(Array.isArray(this.projects)){
+
+    this.dataSource = new MatTableDataSource(this.projects);
+      this.dataSource.paginator = this.paginator;
+    }
+  }
+  
+  ngOnInit() {
+
+    this.dataSource = new MatTableDataSource(this.projects);
+
+    console.log('datos?', this.projectService.datos); //aquí está el array con el objeto dentro del usuario
+    //console.log(this.projects); // aquí no hay nada
+    this.dataSource.paginator = this.paginator;
 
    }
 
@@ -70,7 +92,6 @@ columnsToDisplay = ['alias', 'UrlDominio', 'UrlAdministracion', 'tareasRealizada
 
 expandedElement: any;
 
-// constructor(private projectsArray:ProjectsService) {}
 
 }
 
@@ -90,68 +111,3 @@ export interface ProjectElement {
   usuarioH: any,
   passH: any
 }
-
- //const ELEMENT_DATA = this.dataSource;
-//   {
-//     alias: 'Blog WP',
-//     UrlDominio: 'htpp://www.miblog.com',
-//     UrlAdministracion: 'htpp://www.miblog.com/wp-admin',
-//     tareasRealizadas: 2,
-//     host: '212.234.567',
-//     puerto: 22,
-//     cifrado: 'tls',
-//     usuario: 'blog.com',
-//     pass: 'arroba123',
-//     userAdmin: 'admin',
-//     passAdmin: 'F3nfjase$%/53',
-//     webH: 'http://www.hostalia.com',
-//     usuarioH: 'pepitoRodriz',
-//     passH: 'arroba123'
-//     },
-//   {
-//     alias: 'Web WP',
-//     UrlDominio: 'htpp://www.miblogyotrascosas.com',
-//     UrlAdministracion: 'htpp://www.miblogyotrascosas.com/wp-admin',
-//     tareasRealizadas: 3,
-//     host: '212.234.567',
-//     puerto: 22,
-//     cifrado: 'tls',
-//     usuario: 'blog.com',
-//     pass: 'arroba123',
-//     userAdmin: 'admin',
-//     webH: 'http://www.arsys.com',
-//     usuarioH: 'clarisaMzetg',
-//     passH: 'asdf2123',
-//     passAdmin: 'fghjfghjhs$%/53'
-// }, {
-//     alias: 'WP Woocommerce',
-//     UrlDominio: 'htpp://www.mitiendaonline.com',
-//     UrlAdministracion: 'htpp://www.mitiendaonline.com/wp-admin',
-//     tareasRealizadas: 9,
-//     host: '212.234.567',
-//     puerto: 22,
-//     cifrado: 'tls',
-//     usuario: 'blog.com',
-//     pass: 'arroba123',
-//     userAdmin: 'admin',
-//     passAdmin: 'F3nfjase$%/53',
-//     webH: 'http://www.nominalia.com',
-//     usuarioH: 'jasdfe333',
-//     passH: 'arff00123'
-//    }, {
-//     alias: 'Prestashop',
-//     UrlDominio: 'htpp://www.mitiendaonlinepresta.com',
-//     UrlAdministracion: 'htpp://www.mitiendaonlinepresta.com/admin234cnl',
-//     tareasRealizadas: 2,
-//     host: '212.234.567',
-//     puerto: 22,
-//     cifrado: 'tls',
-//     usuario: 'blog.com',
-//     pass: 'arroba123',
-//     userAdmin: 'admin',
-//     passAdmin: 'F3nfjase$%/53',
-//     webH: 'http://www.hostalia.com',
-//     usuarioH: 'pepitoRodriz',
-//     passH: 'arroba123'
-//     }
-// ];

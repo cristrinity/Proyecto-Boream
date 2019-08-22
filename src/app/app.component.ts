@@ -1,29 +1,32 @@
 import { Component, OnChanges, OnInit, Input } from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NavbarLeftComponent } from './shared/components/navbar-left/navbar-left.component';
+import { AuthorizationService } from './services/authorization.service';
+import { ProjectsService } from './services/project.service';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnChanges{
+export class AppComponent implements OnChanges {
   title = 'ProyectoPersonalNG';
   url;
   hideComponent;
+  userActive;
   @Input() userId;
   @Input() userName;
-
-ngOnChanges(){
-}
-
-  constructor(private router: Router) {
+  @Input() client;
+  @Input() datos;
+  ngOnChanges() {
   }
 
-nombres = this.userId;
+  constructor(private router: Router, private authorizationService: AuthorizationService, private projectservice: ProjectsService) {
+  }
   ngOnInit() {
-  console.log(this.userName, 'desde app component')
-    console.log(this.router)
+    this.authorizationService.getUser();
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         console.log(this.router.url)
@@ -32,8 +35,6 @@ nombres = this.userId;
         } else {
           this.hideComponent = true;
         }
-  console.log(this.userName, 'desde app component')
-
       }
     })
   }

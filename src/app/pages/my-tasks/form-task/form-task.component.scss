@@ -1,2 +1,37 @@
 @import '../../../../assets/styles/rem';
 @import '../../../../assets/styles/main-comun';
+@import "../../../../assets/styles/modal";
+
+.status-task{
+    width: 100%;
+    //height: 40px;
+}
+
+.status-wait::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: rgb(204, 204, 33);
+}
+.status-done::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: rgb(57, 138, 57);
+}
+.status-cancel::after{
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: rgb(163, 29, 29);
+}
+.status-active::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: rgb(216, 158, 34);
+}

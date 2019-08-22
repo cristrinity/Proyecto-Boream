@@ -1,21 +1,25 @@
 <main class="main">
              <div class="main__top">
                 <div class="main__nav">
-                    <div class="main__title">Mis proyectos</div>
+                    <div *ngIf="!isAdmin" class="main__title">Mis proyectos</div>
+                    <div *ngIf="isAdmin" class="main__title">Proyectos de clientes</div>
                     <div class="controls">
-                        <a [routerLink]="['/create-project']"><button type="button" class="controls__add">
+                        <a [routerLink]="['/proyectos/create-project']"><button type="button" class="controls__add">
                             <i class="fas fa-plus-circle"></i>
                             <span>Añadir proyecto</span>
                         </button></a>
                     </div>
                 </div>
             </div>
-            <app-table-projects
-            [nuevo]="nuevo"
-            [projects]="projects | async"
-            (delete)="onDelete($event)"
-            (edit)="onEdit($event)"
-            >
+           
+                <app-table-projects
+                [projects]="projects"
+                [client]="client"
+                [datos]="datos"
+                [nuevo]="nuevo"
+                (delete)="onDelete($event)"
+                (edit)="onEdit($event)"
+                >
             </app-table-projects>
-
+        
 </main>

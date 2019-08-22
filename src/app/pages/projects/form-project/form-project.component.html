@@ -1,37 +1,38 @@
 <main class="main">
-    <div class="main__top">
-        <div class="main__nav">
-            <div class="main__title">Nuevo Proyecto</div>
-            <div class="controls">
-            </div>
-        </div>
+  <div class="main__top">
+    <div class="main__nav">
+      <div *ngIf="!this.projectToEdit" class="main__title">Nuevo Proyecto</div>
+      <div *ngIf="this.projectToEdit" class="main__title">Editar Proyecto</div>
+      <div class="controls">
+      </div>
     </div>
-    <div class="content">
-            <div class="table">
+  </div>
+  <div class="content">
+    <div class="table">
 
-<form [formGroup]="myForm" class="form-class">
-      <mat-form-field>
-        <mat-label>Alias</mat-label>
+      <form [formGroup]="myForm" (change)="cambio(myForm)" class="form-class">
+        <mat-form-field>
+          <mat-label>Alias</mat-label>
           <mat-select formControlName="alias">
-          <mat-option *ngFor="let proj of alias" [value]="proj">{{proj}}
+            <mat-option *ngFor="let proj of alias" [value]="proj">{{proj}}
             </mat-option>
-        <!-- <mat-error *ngIf="myForm.controls.genre.errors?.required">Campo Requerido</mat-error> -->
+            <!-- <mat-error *ngIf="myForm.controls.genre.errors?.required">Campo Requerido</mat-error> -->
           </mat-select>
-            </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="text" formControlName="UrlDominio" required>
-        <mat-label>UrlDominio</mat-label>
-        <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text" formControlName="UrlAdministracion" required>
-        <mat-label>UrlAdministracion</mat-label>
-      </mat-form-field>
+        </mat-form-field>
 
         <mat-form-field>
-        <input matInput type="text" formControlName="tareasRealizadas" required>
-        <mat-label>Tareas</mat-label>
+          <input matInput type="text" formControlName="UrlDominio" required>
+          <mat-label>UrlDominio</mat-label>
+          <!-- <mat-error *ngIf="myForm.controls.author.errors?.required">Campo Requerido</mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="UrlAdministracion" required>
+          <mat-label>UrlAdministracion</mat-label>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="isAdmin">
+          <input matInput type="text" formControlName="tareasRealizadas" >
+          <mat-label>Tareas</mat-label>
         </mat-form-field>
 
         <mat-form-field>
@@ -40,54 +41,61 @@
         </mat-form-field>
 
         <mat-form-field>
-        <input matInput type="text" formControlName="puerto" required>
-        <mat-label>Puerto</mat-label>
+          <input matInput type="text" formControlName="puerto" required>
+          <mat-label>Puerto</mat-label>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" formControlName="cifrado" required>
+          <mat-label>Cifrado</mat-label>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" formControlName="usuario" required>
+          <mat-label>Usuario</mat-label>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="pass"  [type]="hide ? 'text' : 'password'">
+          <mat-label>Contraseña</mat-label>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
       </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="userAdmin" required>
+          <mat-label>Usuario Admin</mat-label>
+        </mat-form-field>
 
-      <mat-form-field>
-      <input matInput type="text" formControlName="cifrado" required>
-      <mat-label>Cifrado</mat-label>
-    </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="passAdmin"  [type]="hide ? 'text' : 'password'">
+            <mat-label>Contraseña</mat-label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
 
-    <mat-form-field>
-    <input matInput type="text" formControlName="usuario" required>
-    <mat-label>Usuario</mat-label>
-  </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="webH" required>
+          <mat-label>Web Hosting</mat-label>
+        </mat-form-field>
 
-  <mat-form-field>
-  <input matInput type="text" formControlName="pass" required>
-  <mat-label>Contraseña</mat-label>
-</mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" formControlName="usuarioH" required>
+          <mat-label>Usuario de acceso</mat-label>
+        </mat-form-field>
 
-<mat-form-field>
-<input matInput type="text" formControlName="userAdmin" required>
-<mat-label>Usuario Admin</mat-label>
-</mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="passH"  [type]="hide ? 'text' : 'password'">
+            <mat-label>Contraseña</mat-label>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
 
-<mat-form-field>
-<input matInput type="text" formControlName="passAdmin" required>
-<mat-label>Pass Admin</mat-label>
-</mat-form-field>
-
-<mat-form-field>
- <input matInput type="text" formControlName="webH" required>
-<mat-label>Web Hosting</mat-label>
-</mat-form-field>
-
-<mat-form-field>
-<input matInput type="text" formControlName="usuarioH" required>
-<mat-label>Usuario de acceso</mat-label>
-</mat-form-field>
-
-<mat-form-field>
-<input matInput type="text" formControlName="passH" required>
-<mat-label>Contraseña</mat-label>
-</mat-form-field>
-
- <button matButton type="button" class="btn btn--success" (click)="submit($event, myForm)">Guardar</button>
-          <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
-
-    </form>
-</div>
-</div>
+        <button matButton type="button" class="btn btn--success" (click)="submit($event, myForm)">Guardar</button>
+        <!-- <button matButton type="button" (click)="submit($event, myForm)">Guardar</button> -->
+      </form>
+    </div>
+  </div>
 </main>

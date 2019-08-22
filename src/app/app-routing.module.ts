@@ -14,14 +14,28 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { CreateTaskComponent } from './pages/my-tasks/create-task/create-task.component';
 import { TableAccountComponent } from './pages/my-account/table-account/table-account.component';
 import { EditAccountComponent } from './pages/my-account/edit-account/edit-account.component';
+import { EditTaskComponent } from './pages/my-tasks/edit-task/edit-task.component';
+import { MyClientsComponent } from './pages/my-clients/my-clients.component';
+import { CreateAccountComponent } from './pages/my-account/create-account/create-account.component';
+import { ActivateGuard } from './services/can-activate.service';
+import { SureExit } from './services/sure-exit.service';
 
 
 const routes: Routes = [{
 
-  path: 'create-task',
-  component: CreateTaskComponent
+  path: 'create-account',
+  component: CreateAccountComponent
 },
-
+{
+  path: 'create-task',
+  component: CreateTaskComponent,
+  canDeactivate: [SureExit]
+},
+{
+path: 'edit-task/:id',
+  component: EditTaskComponent,
+  // canDeactivate: [SureExit]
+},
 {
   path: 'login',
   component: LoginComponent
@@ -40,14 +54,16 @@ const routes: Routes = [{
 },
 {
   path: 'datos',
-  component: MyAccountComponent
+  component: MyAccountComponent, canActivate: [ActivateGuard]
 },
 {
-  path: 'create-project',
-  component: CreateProjectComponent
+  path: 'proyectos/create-project', 
+  component: CreateProjectComponent, 
+  // canActivate: [ActivateGuard],
+  canDeactivate: [SureExit]
 },
 {
-  path: 'edit-project/:id',
+  path: 'proyectos/edit-project/:id',
   component: EditProjectComponent
 },
 {
@@ -55,12 +71,20 @@ path: 'edit-account/:id',
 component: EditAccountComponent
 },
 {
+path: 'clientes',
+component: MyClientsComponent
+},
+{
   path: '',
-  component: LoginComponent
+  component: LoginComponent,
+  // canActivate: [ActivateGuard],
+  // canDeactivate: [SureExit]
 },
 {
   path: '**',
-  component: NotFoundComponent
+  component: NotFoundComponent,
+    // canActivate: [ActivateGuard],
+    // canDeactivate: [SureExit]
 }
 
 // {

@@ -22,7 +22,7 @@ ngOnInit(): void {
   this.myForm = this.fb.group({
     name: ['', Validators.compose([Validators.required, Validators.minLength(4)])
   ],
-    password: ['', Validators.compose([Validators.required, Validators.minLength(4)])
+    pass: ['', Validators.compose([Validators.required, Validators.minLength(4)])
     ]
   }
   );
@@ -30,7 +30,7 @@ ngOnInit(): void {
 
 submit(event, form){
   if(form.valid){
-    return this.authorization.login(form.value.name, form.value.password).then(() => {
+    return this.authorization.login(form.value.name, form.value.pass).then(() => {
       this.userName = form.value.name;
       console.log(`ha hecho login! ${form.value.name}`);
       this.router.navigate(['/proyectos']);

@@ -2,11 +2,40 @@
 @import "../../../../assets/styles/main-comun";
 
 
+.container-login {
+    background-color: #ecffff;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+
+    &::before {
+        content: '';
+        position: absolute;
+        background: repeating-linear-gradient(-45deg, #0000 40px, #0000 48px, #fff 40px, #fff 50px);
+        top: 0;
+        width: 100vw;
+        height: 112px;
+      }
+}
+
+.logotipo {
+    margin-bottom: 55px;
+    margin-top: -26px;
+}
+
 .mat-form-field-infix  {
-    min-width: 300px;
+    width: 100%;
     border-radius: 10px;
     border: .030rem solid #999;
     padding: 10px;
     margin: 5px;
+}
 
+.mat-form-field {
+    padding-right: 0;
+}
+
+.remember {
+    text-align: left;
+    color: var(--grey-default) ;
 }

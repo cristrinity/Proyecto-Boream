@@ -1,3 +1,18 @@
 @import "../../../../assets/styles/rem";
 @import "../../../../assets/styles/main-comun";
 @import "../../../../assets/styles/tables";
+
+.hidden {
+    display: none;
+}
+
+td.mat-cell {
+    padding: 0 0;
+}
+tr.mat-row {
+    height: 3.1875rem
+}
+
+tr.row-special {
+    height: 0;
+}

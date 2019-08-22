@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {ProjectsService} from '../../../services/project.service';
 
 @Component({
@@ -8,7 +8,7 @@ import {ProjectsService} from '../../../services/project.service';
 
 export class CreateProjectComponent {
   projectInfo: any;
-
+  @Input() client;
 
   constructor(private projectsService: ProjectsService) {}
 
@@ -18,7 +18,7 @@ export class CreateProjectComponent {
       this.projectsService.editProject(this.projectInfo.id, project);
       this.projectInfo = null;
     }else{
-      this.projectsService.addProject(project);
+      this.projectsService.addProject(project, this.client);
     }
   }
 

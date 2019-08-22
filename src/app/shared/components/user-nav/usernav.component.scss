@@ -65,7 +65,10 @@
   }
 
 
-.clock--admin {
+div .clock--admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   top: rem(42px);
   left: rem(-30px);
@@ -165,7 +168,7 @@
   position: fixed;
   top: 0;
   z-index: 2;
-  background-color: #333;
+  background-color: #fff;
 
   &::after {
     content: '';
@@ -185,7 +188,7 @@
 .topbar__container--admin {
   display: flex;
   justify-content: flex-end;
-  color: #fff;
+  color: #333;
   padding: 10px 0;
 }
 
@@ -218,8 +221,9 @@
 }
 
 .user__name::before {
-  content: 'Hola,';
+  content: ' ';
   font-size: .7rem;
+  right: 0;
   display: block;
   font-weight: var(--font-b);
   padding-bottom: rem(2px);
@@ -236,12 +240,23 @@
   position: absolute;
   bottom: 0;
   height: 100%;
-  top: 17px;
-  right: 37px;
+  top: rem(17px);
+  left: 45px;
   cursor: pointer;
   &:hover{
     color: var(--grey-default);
-  
+  }
+}
+.user__checkout--admin{
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  top: rem(17px);
+  left: 45px;
+  color: #333;
+  cursor: pointer;
+  &:hover{
+    color: var(--grey-default);
   }
 }
 .user__image {
@@ -249,15 +264,27 @@
   display: inline-flex;
   align-items: center;
   margin-right: rem(11px);
-  width: (40px);
-  height: (40px);
-  border-radius: (30px);
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  width: rem(40px);
+  height: rem(40px);
+  border-radius: rem(30px);
+  //background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-color: #ff568c;
 }
 
+.user__image2 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: rem(11px);
+  width: rem(40px);
+  height: rem(40px);
+  border-radius: rem(30px);
+  //background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-color: #009f4d;
+}
 .user__capitals {
   color: #fff;
   margin: 0 auto;
-  text-shadow: 0px 0px 2px var(--green-hover);
+  //text-shadow: 0px 0px 2px var(--green-hover);
 }
 

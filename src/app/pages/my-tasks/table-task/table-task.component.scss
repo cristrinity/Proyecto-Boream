@@ -1,29 +1,99 @@
-@import '../../../../assets/styles/reset';
-@import '../../../../assets/styles/tables';
-@import '../../../../assets/styles/main-comun';
+@import "../../../../assets/styles/rem";
+@import "../../../../assets/styles/main-comun";
+@import "../../../../assets/styles/tables";
 
-.mat-cell{
-    height: rem(35px);
+
+.iedit {
+    padding-left: 0;
+    width: 100%;
+}
+
+
+
+tr.mat-header-row,
+tr.mat-header-row:first-of-type {
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.mat-cell {
+   // height: 2.8125rem;
     text-align: center;
+    padding: 0;
     vertical-align: middle;
 }
+
 tr.mat-header-row {
-    height: 30px;
+    height: rem(30px);
     text-align: center;
 }
 
-th.mat-header-cell{
-    padding: 0 20px 0 20px;
+th.mat-header-cell {
+    padding: 0 10px 0 10px;
 }
-tr.mat-row{
-    height: 35px;
 
+tr.mat-row {
+    height: 35px;
 }
 
 th .mat-calendar-table-header {
     background-color: white;
-  }
-  
-  thead th {
+}
+
+thead th {
     background-color: white;
-  }
+}
+// .rounded{
+//     border-top-right-radius: 15px;
+// }
+
+.balls{
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+}
+
+
+.status-done img{
+    width: 25px;
+    height: 25px;
+}
+.checkOk{
+    color: #34bf49;
+    fill: #34bf49;
+    stroke: #34bf49
+}
+.status-done {
+    width: 30px;
+    height: 30px;
+    border-radius: 40px;
+    margin-right: 10px;
+    margin-right: 10px;
+    background: url('../../../../assets/images/check.png');
+    background-size: cover;
+}
+.status-waiting {
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: #fbb034;
+    display: inline-block;
+    margin-right: 10px;
+}
+.status-cancel {
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: rgb(163, 29, 29);
+    display: inline-block;
+    margin-right: 10px;
+
+}
+.status-active {
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: #00bce4;
+    margin-right: 10px;
+    color: #00bce4;
+}
