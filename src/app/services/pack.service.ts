@@ -29,8 +29,8 @@ export class PackService {
         return this.httpClient.get(`${environment.apiUrl}/packs/status/${id}`);
     }
 
-    updatePack(id: number, body){
-        return this.httpClient.put(`${environment.apiUrl}/packs/${id}`, body);
+    async updatePack(id: number, body){
+        return this.httpClient.put(`${environment.apiUrl}/packs/${id}`, body).toPromise();
     }
     // getPacksById(id: number) {
     //     return this.httpClient.get(`${environment.apiUrl}/packs/:id`);

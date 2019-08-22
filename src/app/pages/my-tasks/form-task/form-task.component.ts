@@ -197,26 +197,38 @@ export class FormTaskComponent implements OnInit, OnChanges {
 //.subscribe(data => {this.mivariable = data}); 
 //esto cambiaría porque está suscrito a lo de arriba, behaviourSubject.
 
-  ejecution(e, resta){
+  ejecution(e, form){
     debugger
-    this.packs[0].lefttime = this.packs[0].lefttime - resta
-    this.packService.updatePack(this.packs[0]._id, this.packs[0])
+    
+    // this.packs[0].lefttime = this.packs[0].lefttime - resta
+    // this.packService.updatePack(this.packs[0]._id, this.packs[0])
+    if(this.original !== form.value.timespent){
+      let resta = form.value.timespent - this.original;
+      //this.ejecution(form, resta);
+      this.packs[0].lefttime = this.packs[0].lefttime - resta;
+      this.packService.updatePack(this.packs[0]._id, this.packs[0]);
+     // console.log('currentvalue', this.packs[0], 'packsdata', this.packs);
+    
+  }
   }
 
   public submit(e, form) {
     if (form.valid) {
       
       if (this.taskToEdit) {
+        this.ejecution(e, form);
+        this.tasksService.editTask(this.taskToEdit._id, form.value);
         //debugger
-        if(this.original !== form.value.timespent){
-          let resta = form.value.timespent - this.original;
-          //this.ejecution(form, resta);
-          this.packs[0].lefttime = this.packs[0].lefttime - resta
-          this.packService.updatePack(this.packs[0]._id, this.packs[0])
-          this.tasksService.editTask(this.taskToEdit._id, form.value);
-        }else{
-          this.tasksService.editTask(this.taskToEdit._id, form.value);
-        }
+        // if(this.original !== form.value.timespent){
+        //   let resta = form.value.timespent - this.original;
+        //   //this.ejecution(form, resta);
+        //   this.packs[0].lefttime = this.packs[0].lefttime - resta;
+        //   this.packService.updatePack(this.packs[0]._id, this.packs[0]);
+        //  // console.log('currentvalue', this.packs[0], 'packsdata', this.packs);
+        //   this.tasksService.editTask(this.taskToEdit._id, form.value);
+        // }else{
+        //   this.tasksService.editTask(this.taskToEdit._id, form.value);
+        // }
       } else {
         form.value.pack_id = this.packActive;
         //this.packActive.next(this.packActive);
